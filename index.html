@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WishTale · Where Every Moment Becomes a Memory.</title>
+  <meta name="description" content="WishTale: Where Every Moment Becomes a Memory. Digital wedding invitations, birthday pages, love letters, festival greetings and custom celebration websites.">
+  <meta name="theme-color" content="#FFF9F3">
+  <meta property="og:title" content="WishTale · Where Every Moment Becomes a Memory.">
+  <meta property="og:description" content="Digital invitations, greeting cards and personalised pages for every occasion.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#templates">Skip to templates</a>
+
+  <div class="announce">Make someone's day extra special ♡</div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="logo" aria-label="WishTale home">Wish<span>Tale</span> ♡</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="menu" class="menu" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#occasions">Occasions</a>
+        <a href="#templates">Templates</a>
+        <a href="#how">How It Works</a>
+        <a href="#request">Custom Websites</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#templates" class="btn btn-small">Explore Templates</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="pill">✿ Digital invitations &amp; greetings</span>
+          <h1>Turn every moment into a <em>little page</em> to remember</h1>
+          <p class="tagline">“Where Every Moment Becomes a Memory.”</p>
+          <p class="lead">Wedding invitations, birthday surprises, love letters, baby announcements and festival greetings, all in one sweet place.</p>
+          <div class="hero-cta">
+            <a href="#templates" class="btn">Explore Templates</a>
+            <a href="#how" class="btn btn-ghost">How It Works</a>
+          </div>
+        </div>
+        <div class="hero-art reveal" aria-hidden="true">
+          <div class="blob"></div>
+          <div class="hcard h-a"><div class="art-box" id="hero-a"></div></div>
+          <div class="hcard h-b"><div class="art-box" id="hero-b"></div></div>
+          <div class="hcard h-c"><div class="art-box" id="hero-c"></div></div>
+          <span class="float f1">♡</span><span class="float f2">✿</span><span class="float f3">✦</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BROWSE BY OCCASION -->
+    <section id="occasions" class="section tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Browse by Occasion</h2>
+          <p>Start with the moment you want to celebrate.</p>
+        </div>
+        <div class="occasions">
+          <a href="#templates" class="occ reveal" data-cat="wedding"><span class="occ-ico">💍</span><h3>Wedding</h3><p>Invitations · Save the Date · Haldi · Sangeet</p></a>
+          <a href="#templates" class="occ reveal" data-cat="birthday"><span class="occ-ico">🎂</span><h3>Birthday</h3><p>Invitations · Surprises · Milestones</p></a>
+          <a href="#templates" class="occ reveal" data-cat="love"><span class="occ-ico">💌</span><h3>Love</h3><p>Anniversary · Proposals · Love letters</p></a>
+          <a href="#templates" class="occ reveal" data-cat="family"><span class="occ-ico">🏡</span><h3>Family</h3><p>Housewarming · Baby shower · Naming</p></a>
+          <a href="#templates" class="occ reveal" data-cat="friends"><span class="occ-ico">🌸</span><h3>Friends</h3><p>Best friends · Farewell · Thank you</p></a>
+          <a href="#templates" class="occ reveal" data-cat="festival"><span class="occ-ico">🪔</span><h3>Festivals</h3><p>Greetings · Parties · Seasonal cards</p></a>
+          <a href="#templates" class="occ reveal" data-cat="websites"><span class="occ-ico">✨</span><h3>Personalised Websites</h3><p>Scrapbooks · Timelines · Celebration pages</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section id="templates" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Find Your Perfect Template</h2>
+          <p>Browse sweet designs for every occasion, preview them, and make one yours.</p>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="field grow">
+            <label for="search">Search designs</label>
+            <input id="search" type="search" placeholder="Try “haldi”, “baby”, “proposal”…" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sort">Sort by</label>
+            <select id="sort">
+              <option value="recommended">Recommended</option>
+              <option value="low">Price: Low to High</option>
+              <option value="high">Price: High to Low</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filters reveal" id="filters" role="group" aria-label="Filter designs by occasion">
+          <button type="button" class="chip active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-filter="wedding" aria-pressed="false">Wedding</button>
+          <button type="button" class="chip" data-filter="birthday" aria-pressed="false">Birthday</button>
+          <button type="button" class="chip" data-filter="love" aria-pressed="false">Love</button>
+          <button type="button" class="chip" data-filter="family" aria-pressed="false">Family</button>
+          <button type="button" class="chip" data-filter="friends" aria-pressed="false">Friends</button>
+          <button type="button" class="chip" data-filter="festival" aria-pressed="false">Festivals</button>
+          <button type="button" class="chip" data-filter="websites" aria-pressed="false">Personalised Websites</button>
+        </div>
+
+        <div class="grid" id="grid" aria-live="polite"></div>
+        <noscript><p class="empty">Please enable JavaScript to browse our designs.</p></noscript>
+
+        <div class="empty" id="empty" hidden>
+          <p>No designs found. Try another search or occasion.</p>
+          <button type="button" class="btn btn-small" id="reset-filters">Clear filters</button>
+        </div>
+        <div class="more-wrap"><button type="button" class="btn btn-ghost" id="more" hidden>Show more designs</button></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="section tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>How It Works</h2>
+          <p>Three gentle steps from idea to surprise.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal"><span class="num">1</span><h3>Choose a design</h3><p>Browse by occasion and preview the ones you love.</p></div>
+          <div class="step reveal"><span class="num">2</span><h3>Add your details</h3><p>Share your names, dates, photos and message.</p></div>
+          <div class="step reveal"><span class="num">3</span><h3>Share your page</h3><p>Send the link to family and friends on any phone.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Why You'll Love It</h2>
+          <p>Made to feel thoughtful, not templated.</p>
+        </div>
+        <div class="benefits">
+          <div class="benefit reveal"><span class="ico">🎀</span><h3>Beautiful designs</h3><p>Soft colours and thoughtful details in every layout.</p></div>
+          <div class="benefit reveal"><span class="ico">🪷</span><h3>Many traditions</h3><p>Regional motifs, ceremony styles and languages.</p></div>
+          <div class="benefit reveal"><span class="ico">📱</span><h3>Mobile-friendly</h3><p>Designed to look lovely on phones first.</p></div>
+          <div class="benefit reveal"><span class="ico">🔗</span><h3>Easy sharing</h3><p>One simple link for chat, email or social.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM WEBSITE REQUEST -->
+    <section id="request" class="section tint">
+      <div class="container request-grid">
+        <div class="request-text reveal">
+          <span class="pill">✨ Made just for you</span>
+          <h2>Request a Custom Website</h2>
+          <p>Have an idea no template covers? Tell us about it and we'll shape a page around your story.</p>
+          <ul class="checks">
+            <li>Digital scrapbooks</li>
+            <li>Memory timelines</li>
+            <li>Celebration pages</li>
+            <li>Wedding &amp; invitation websites</li>
+            <li>Birthday surprise websites</li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal">
+          <form id="request-form" novalidate>
+            <div class="row">
+              <div class="field"><label for="f-name">Your name *</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>
+              <div class="field"><label for="f-contact">Email or WhatsApp *</label><input id="f-contact" name="contact" type="text" required autocomplete="email"></div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="f-type">What would you like?</label>
+                <select id="f-type" name="type">
+                  <option>Digital scrapbook</option>
+                  <option>Memory timeline</option>
+                  <option>Celebration page</option>
+                  <option>Wedding website</option>
+                  <option>Invitation website</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field"><label for="f-date">Occasion date</label><input id="f-date" name="date" type="date"></div>
+            </div>
+            <div class="field"><label for="f-details">Tell us about your idea *</label><textarea id="f-details" name="details" rows="4" required placeholder="Who is it for? What should it feel like? Any songs, colours or memories to include?"></textarea></div>
+            <button type="submit" class="btn">Prepare My Request</button>
+          </form>
+          <div class="req-out" id="req-out" hidden>
+            <h3>Your request is ready</h3>
+            <pre id="req-summary"></pre>
+            <div class="out-actions">
+              <a class="btn btn-small" id="req-mail" href="#">Send by Email</a>
+              <button type="button" class="btn btn-small btn-ghost" id="req-copy">Copy summary</button>
+              <span class="copy-msg" id="req-copy-msg" role="status"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section">
+      <div class="container">
+        <div class="section-head reveal"><h2>Kind Words</h2></div>
+        <div class="reviews">
+          <figure class="review reveal">
+            <span class="sample">Sample review</span>
+            <blockquote>"I loved how cute and simple everything looked. Perfect for a birthday surprise!"</blockquote>
+            <figcaption><span class="avatar">A</span> Aanya</figcaption>
+          </figure>
+          <figure class="review reveal">
+            <span class="sample">Sample review</span>
+            <blockquote>"The invitation felt so warm and personal. Our families opened it easily."</blockquote>
+            <figcaption><span class="avatar">R</span> Rohan</figcaption>
+          </figure>
+          <figure class="review reveal">
+            <span class="sample">Sample review</span>
+            <blockquote>"Such a lovely way to say thank you to a best friend. Looks great on my phone."</blockquote>
+            <figcaption><span class="avatar">M</span> Meera</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section tint">
+      <div class="container">
+        <div class="cta reveal">
+          <h2>Ready to make someone smile?</h2>
+          <p>Pick a design and start creating a page they'll remember.</p>
+          <a href="#templates" class="btn btn-light">Explore Templates</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container narrow">
+        <div class="section-head reveal"><h2>Questions, Answered</h2></div>
+        <details class="faq reveal"><summary>What is a digital invitation or greeting page?</summary><p>A shareable web page designed for an occasion, with your message, photos and little surprises, opened with a single link.</p></details>
+        <details class="faq reveal"><summary>How do I choose and order a design?</summary><p>Browse by occasion, preview any design, then tap Buy Now to start your order.</p></details>
+        <details class="faq reveal"><summary>Can I personalise a design?</summary><p>Yes. Add your names, dates, photos and message to make any design your own.</p></details>
+        <details class="faq reveal"><summary>Are regional languages available?</summary><p>Many designs come with regional-language options. You can switch the language in the preview.</p></details>
+        <details class="faq reveal"><summary>Can I get something fully custom?</summary><p>Yes. Use the Custom Websites form to tell us your idea.</p></details>
+        <details class="faq reveal"><summary>Will it work on phones?</summary><p>Yes. Every design is made to look lovely on phones, tablets and computers.</p></details>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section tint">
+      <div class="container narrow">
+        <div class="contact-card reveal">
+          <h2>Say Hello</h2>
+          <p>Questions about a design or an idea? We'd love to hear from you.</p>
+          <ul class="contact-list">
+            <li><strong>Email</strong> <span data-config="email"></span></li>
+            <li><strong>WhatsApp</strong> <span data-config="phone"></span></li>
+            <li><strong>Based in</strong> <span data-config="city"></span></li>
+          </ul>
+          <a href="#request" class="btn btn-small">Request a Custom Website</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot-grid">
+      <div>
+        <a href="#home" class="logo">Wish<span>Tale</span> ♡</a>
+        <p class="foot-tag">“Where Every Moment Becomes a Memory.”</p>
+      </div>
+      <nav aria-label="Footer">
+        <h4>Explore</h4>
+        <a href="#occasions">Occasions</a>
+        <a href="#templates">Templates</a>
+        <a href="#how">How It Works</a>
+      </nav>
+      <nav aria-label="Footer help">
+        <h4>Help</h4>
+        <a href="#request">Custom Websites</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div>
+        <h4>Contact</h4>
+        <p><span data-config="email"></span><br><span data-config="phone"></span></p>
+      </div>
+    </div>
+    <p class="copy">© <span id="year">2026</span> WishTale. All rights reserved.</p>
+  </footer>
+
+  <!-- PREVIEW MODAL -->
+  <dialog id="preview" aria-labelledby="pv-title">
+    <div class="pv-wrap">
+      <button type="button" class="pv-close" id="pv-close" aria-label="Close preview">✕</button>
+      <div class="pv-stage">
+        <div class="device is-phone" id="pv-device"><div class="art-box pv-art" id="pv-art"></div></div>
+      </div>
+      <div class="pv-side">
+        <span class="tag" id="pv-tag"></span>
+        <h3 id="pv-title"></h3>
+        <p class="pv-price"><span class="price" id="pv-price"></span></p>
+        <p class="pv-blurb">Add your own names, date and message to make this design yours.</p>
+        <div class="pv-controls">
+          <div class="seg" role="group" aria-label="Preview device">
+            <button type="button" class="chip active" data-device="phone" aria-pressed="true">Phone</button>
+            <button type="button" class="chip" data-device="desktop" aria-pressed="false">Desktop</button>
+          </div>
+          <div class="field"><label for="pv-lang">Language</label><select id="pv-lang"></select></div>
+          <div class="field"><label for="pv-input">Try your own names or title</label><input id="pv-input" type="text" maxlength="40"></div>
+        </div>
+        <div class="pv-actions">
+          <button type="button" class="btn" id="pv-buy">Buy Now</button>
+          <button type="button" class="btn btn-ghost" id="pv-dismiss">Close</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- CHECKOUT MODAL -->
+  <dialog id="checkout" class="narrow-dialog" aria-labelledby="co-title">
+    <div class="co-wrap">
+      <button type="button" class="pv-close" id="co-close" aria-label="Close order summary">✕</button>
+
+      <div id="co-step1">
+        <h3 id="co-title">Order summary</h3>
+        <div class="co-item">
+          <div class="co-thumb"><div class="art-box" id="co-art"></div></div>
+          <div>
+            <span class="tag" id="co-occ"></span>
+            <h4 id="co-name"></h4>
+          </div>
+        </div>
+        <div class="co-total"><span>Total</span><span id="co-total"></span></div>
+        <p class="fine" id="co-note" hidden>Custom pages are quoted once we hear your idea. The final price is confirmed with you.</p>
+        <form id="co-form" novalidate>
+          <div class="field"><label for="co-fname">Your name *</label><input id="co-fname" name="name" type="text" required autocomplete="name"></div>
+          <div class="field"><label for="co-contact">Email or WhatsApp *</label><input id="co-contact" name="contact" type="text" required autocomplete="email"></div>
+          <div class="row">
+            <div class="field"><label for="co-date">Occasion date</label><input id="co-date" name="date" type="date"></div>
+            <div class="field"><label for="co-notes">Notes</label><input id="co-notes" name="notes" type="text" placeholder="Names, language, anything else"></div>
+          </div>
+          <button type="submit" class="btn btn-block">Continue</button>
+        </form>
+      </div>
+
+      <div id="co-step2" hidden>
+        <h3>Your selection is ready</h3>
+        <p>Thank you, <strong id="co-who"></strong>. Here is your summary.</p>
+        <pre id="co-summary"></pre>
+        <p class="fine">Online payment will be available soon. For now, send this summary to us to confirm your choice.</p>
+        <div class="out-actions">
+          <a class="btn btn-small" id="co-mail" href="#">Send by Email</a>
+          <button type="button" class="btn btn-small btn-ghost" id="co-copy">Copy summary</button>
+          <button type="button" class="btn btn-small btn-ghost" id="co-back">Back to designs</button>
+          <span class="copy-msg" id="co-copy-msg" role="status"></span>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
