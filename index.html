@@ -9,6 +9,15 @@
   <meta property="og:title" content="WishTale · Where Every Moment Becomes a Memory.">
   <meta property="og:description" content="Digital invitations, greeting cards and personalised pages for every occasion.">
   <meta property="og:type" content="website">
+  <script>
+    (function (d) {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      d.documentElement.classList.add("wt-intro-pending");
+      window.setTimeout(function () {
+        d.documentElement.classList.remove("wt-intro-pending", "wt-intro-mounted");
+      }, 12000);
+    })(document);
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +30,7 @@
 
   <header class="site-header">
     <div class="container nav">
-      <a href="#home" class="logo" aria-label="WishTale home">Wish<span>Tale</span> ♡</a>
+      <a href="#home" class="logo" data-wt-logo aria-label="WishTale home"><span class="wt-wish">Wish</span><span class="wt-tale">Tale</span><svg class="wt-heart" viewBox="0 0 24 22" aria-hidden="true" focusable="false"><path d="M12 20.2C5.2 15 2 11.6 2 7.9 2 4.9 4.3 2.7 7.1 2.7c1.9 0 3.7 1 4.9 2.9 1.2-1.9 3-2.9 4.9-2.9C19.7 2.7 22 4.9 22 7.9c0 3.7-3.2 7.1-10 12.3z"/></svg></a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu">
         <span></span><span></span><span></span>
       </button>
@@ -306,20 +315,23 @@
     <div class="pv-wrap">
       <button type="button" class="pv-close" id="pv-close" aria-label="Close preview">✕</button>
       <div class="pv-stage">
-        <div class="device is-phone" id="pv-device"><div class="art-box pv-art" id="pv-art"></div></div>
+        <div class="device is-phone" id="pv-device">
+          <div class="art-box pv-art" id="pv-art"></div>
+          <iframe class="proposal-frame" id="pv-frame" title="Will You Marry Me proposal experience" hidden></iframe>
+        </div>
       </div>
       <div class="pv-side">
         <span class="tag" id="pv-tag"></span>
         <h3 id="pv-title"></h3>
         <p class="pv-price"><span class="price" id="pv-price"></span></p>
-        <p class="pv-blurb">Add your own names, date and message to make this design yours.</p>
+        <p class="pv-blurb" id="pv-blurb">Add your own names, date and message to make this design yours.</p>
         <div class="pv-controls">
           <div class="seg" role="group" aria-label="Preview device">
             <button type="button" class="chip active" data-device="phone" aria-pressed="true">Phone</button>
             <button type="button" class="chip" data-device="desktop" aria-pressed="false">Desktop</button>
           </div>
-          <div class="field"><label for="pv-lang">Language</label><select id="pv-lang"></select></div>
-          <div class="field"><label for="pv-input">Try your own names or title</label><input id="pv-input" type="text" maxlength="40"></div>
+          <div class="field" data-proposal-control><label for="pv-lang">Language</label><select id="pv-lang"></select></div>
+          <div class="field" data-proposal-control><label for="pv-input">Try your own names or title</label><input id="pv-input" type="text" maxlength="40"></div>
         </div>
         <div class="pv-actions">
           <button type="button" class="btn" id="pv-buy">Buy Now</button>
@@ -372,5 +384,6 @@
   </dialog>
 
   <script src="script.js"></script>
+  <script src="intro.js"></script>
 </body>
 </html>

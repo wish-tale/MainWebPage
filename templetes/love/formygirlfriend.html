@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For My Girlfriend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+.for-my-girlfriend{--rose:#c98a8f;--cherry:#8f1d33;--ivory:#faf3e8;--blush:#f1d3cf;--burg:#4a0f1d;--peach:#f6cdb4;--gold:#b8975a;
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--hand:'Caveat','Segoe Script',cursive;
+position:fixed;inset:0;overflow:hidden;background:var(--ivory);color:var(--burg);font-family:var(--sans)}
+.for-my-girlfriend *{box-sizing:border-box}
+.for-my-girlfriend button{font:inherit;cursor:pointer;color:inherit}
+.for-my-girlfriend :focus-visible{outline:3px solid var(--cherry);outline-offset:3px}
+.for-my-girlfriend .grain{position:absolute;inset:0;pointer-events:none;z-index:50;opacity:.18;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.for-my-girlfriend .scene{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;visibility:hidden;opacity:0;pointer-events:none;
+background:radial-gradient(120% 90% at 20% 0%,var(--blush),transparent 60%),radial-gradient(90% 80% at 100% 100%,var(--peach),transparent 60%),var(--ivory);
+padding:clamp(56px,9vh,84px) clamp(16px,5vw,64px) 40px;transition:opacity .6s,visibility 0s .6s}
+.for-my-girlfriend .scene.on{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .6s;animation:frame 1.1s cubic-bezier(.7,0,.2,1)}
+@keyframes frame{from{clip-path:inset(8% 12% 8% 12%)}to{clip-path:inset(0)}}
+.for-my-girlfriend .inner{min-height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1100px;margin:0 auto;gap:22px}
+.for-my-girlfriend h1,.for-my-girlfriend h2{font-family:var(--serif);font-weight:500;line-height:.98;margin:0;letter-spacing:-.01em;color:var(--burg)}
+.for-my-girlfriend h1{font-size:clamp(2.6rem,8.5vw,6.4rem)}
+.for-my-girlfriend h2{font-size:clamp(2rem,5.5vw,3.8rem)}
+.for-my-girlfriend h1:focus,.for-my-girlfriend h2:focus{outline:none}
+.for-my-girlfriend em{font-style:italic;color:var(--cherry)}
+.for-my-girlfriend p{margin:0;line-height:1.6}
+.for-my-girlfriend .hand{font-family:var(--hand);font-size:clamp(1.3rem,3vw,1.7rem);color:var(--cherry)}
+.for-my-girlfriend .sub{max-width:34ch;font-family:var(--serif);font-size:clamp(1.15rem,2.4vw,1.5rem);font-style:italic}
+.for-my-girlfriend .btn{align-self:flex-start;border:0;padding:16px 30px;border-radius:2px;background:var(--cherry);color:var(--ivory);font-family:var(--serif);font-size:1.25rem;letter-spacing:.03em;
+box-shadow:0 0 0 1px var(--gold) inset,0 0 0 5px var(--cherry) inset,0 0 0 6px var(--gold) inset,0 10px 24px -8px rgba(74,15,29,.6);transition:transform .25s,box-shadow .25s}
+.for-my-girlfriend .btn:hover{transform:translateY(-3px) rotate(-1deg)}
+.for-my-girlfriend .btn[disabled]{opacity:.55;cursor:default;transform:none}
+/* photos */
+.for-my-girlfriend .pic{position:relative;display:block;width:100%;height:100%;overflow:hidden;background:linear-gradient(135deg,var(--blush),var(--rose))}
+.for-my-girlfriend .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) sepia(.12)}
+.for-my-girlfriend .pol{position:relative;background:#fffaf2;padding:8px 8px 34px;box-shadow:0 2px 3px rgba(74,15,29,.2),0 18px 30px -12px rgba(74,15,29,.45);transform:rotate(var(--r,0deg))}
+.for-my-girlfriend .pol::before{content:"";position:absolute;top:-12px;left:50%;width:70px;height:22px;margin-left:-35px;background:rgba(246,205,180,.75);transform:rotate(var(--t,-3deg));z-index:2}
+.for-my-girlfriend .pol .pic{height:100%}
+.for-my-girlfriend .pol .cap{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:var(--hand);font-size:1.15rem;color:var(--burg)}
+/* scene 1 */
+.for-my-girlfriend .s1 .inner{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:clamp(16px,4vw,50px)}
+.for-my-girlfriend .stack{position:relative;height:min(62vh,520px);min-height:340px}
+.for-my-girlfriend .stack .pol{position:absolute;width:var(--w);aspect-ratio:3/4;left:var(--x);top:var(--y);opacity:0}
+.for-my-girlfriend .s1.on .stack .pol{animation:land .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.28s + .3s)}
+@keyframes land{from{opacity:0;transform:translateY(60px) rotate(calc(var(--r) + 14deg))}to{opacity:1;transform:rotate(var(--r))}}
+.for-my-girlfriend .note{position:absolute;z-index:3}
+.for-my-girlfriend .float{animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(3deg)}}
+/* wall */
+.for-my-girlfriend .wall{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(110px,15vw,170px);gap:clamp(14px,2.4vw,28px);padding:14px 0}
+.for-my-girlfriend .wall button{border:0;background:none;padding:0;text-align:left;opacity:0;transform:translateY(40px) scale(.94)}
+.for-my-girlfriend .wall button .pol{height:100%;transition:transform .35s,box-shadow .35s}
+.for-my-girlfriend .wall button:hover .pol,.for-my-girlfriend .wall button:focus-visible .pol{transform:rotate(0) scale(1.05);z-index:5}
+.for-my-girlfriend .s2.on .wall button{animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.1s + .3s)}
+@keyframes rise{to{opacity:1;transform:none}}
+.for-my-girlfriend .wall button:nth-child(1){grid-column:1/4;grid-row:span 2}
+.for-my-girlfriend .wall button:nth-child(2){grid-column:4/6}
+.for-my-girlfriend .wall button:nth-child(3){grid-column:6/7;grid-row:span 2}
+.for-my-girlfriend .wall button:nth-child(4){grid-column:4/6;grid-row:span 1}
+.for-my-girlfriend .wall button:nth-child(5){grid-column:1/3;grid-row:span 2}
+.for-my-girlfriend .wall button:nth-child(6){grid-column:3/5;grid-row:span 2}
+.for-my-girlfriend .wall button:nth-child(7){grid-column:5/7;grid-row:span 2}
+.for-my-girlfriend .wall button:nth-child(8){grid-column:1/7;grid-row:span 1;display:none}
+.for-my-girlfriend .modal{position:absolute;inset:0;z-index:60;display:grid;place-items:center;padding:14px;background:rgba(74,15,29,.72);backdrop-filter:blur(4px);visibility:hidden;opacity:0;transition:opacity .35s,visibility 0s .35s}
+.for-my-girlfriend .modal.on{visibility:visible;opacity:1;transition:opacity .35s}
+.for-my-girlfriend .sheet{width:min(920px,100%);max-height:100%;overflow:auto;background:var(--ivory);display:grid;grid-template-columns:1.3fr 1fr;box-shadow:0 30px 60px rgba(0,0,0,.5);transform:translateY(30px) rotate(-1.5deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.for-my-girlfriend .modal.on .sheet{transform:none}
+.for-my-girlfriend .sheet .big{min-height:clamp(240px,50vh,520px)}
+.for-my-girlfriend .sheet .txt{padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:14px;justify-content:center;position:relative}
+.for-my-girlfriend .x{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:1px solid var(--cherry);background:var(--ivory);font-size:1.3rem;z-index:3}
+/* nav */
+.for-my-girlfriend .dots{position:absolute;top:18px;left:clamp(16px,5vw,64px);z-index:40;display:flex;gap:8px}
+.for-my-girlfriend .dots i{width:22px;height:3px;background:rgba(74,15,29,.2);transition:.4s}
+.for-my-girlfriend .dots i.on{background:var(--cherry);width:36px}
+.for-my-girlfriend .music{position:absolute;top:8px;right:clamp(10px,4vw,56px);z-index:40;width:44px;height:44px;border-radius:50%;border:1px solid var(--cherry);background:var(--ivory)}
+.for-my-girlfriend .music[hidden]{display:none}
+/* scene 3 */
+.for-my-girlfriend .notes{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;align-items:start}
+.for-my-girlfriend .n{padding:20px 22px;position:relative;box-shadow:0 14px 24px -14px rgba(74,15,29,.5);transform:rotate(var(--r))}
+.for-my-girlfriend .n.a{grid-column:1/8;background:#fffaf2;font-family:var(--serif);font-size:clamp(1.5rem,3.6vw,2.6rem);line-height:1.1}
+.for-my-girlfriend .n.b{grid-column:8/13;background:var(--peach);font-family:var(--hand);font-size:clamp(1.5rem,3vw,2rem);margin-top:30px}
+.for-my-girlfriend .n.c{grid-column:2/8;background:var(--burg);color:var(--ivory);font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.8rem)}
+.for-my-girlfriend .n.d{grid-column:8/13;border:1px dashed var(--cherry);background:transparent;font-family:var(--hand);font-size:1.6rem}
+.for-my-girlfriend .n .dot{width:64px;height:64px;border-radius:50%;overflow:hidden;position:absolute;right:-12px;top:-22px;border:3px solid #fffaf2}
+.for-my-girlfriend .seal{border:0;width:84px;height:84px;border-radius:50%;background:var(--cherry);color:var(--ivory);font-family:var(--hand);font-size:1.15rem;box-shadow:0 0 0 3px var(--gold) inset,0 8px 16px rgba(74,15,29,.4);transition:transform .3s}
+.for-my-girlfriend .seal:hover{transform:rotate(-8deg) scale(1.06)}
+.for-my-girlfriend .hid{max-height:0;overflow:hidden;opacity:0;transition:max-height .8s,opacity .8s;font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,3vw,2rem);max-width:36ch}
+.for-my-girlfriend .hid.on{max-height:300px;opacity:1}
+/* scene 4 */
+.for-my-girlfriend .tl{position:relative;display:grid;gap:26px;padding-left:34px}
+.for-my-girlfriend .tl::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;border-left:2px dashed var(--rose)}
+.for-my-girlfriend .ti{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:18px;align-items:center;position:relative;max-height:0;opacity:0;overflow:hidden;transform:translateX(-24px);transition:all .8s cubic-bezier(.2,.8,.2,1)}
+.for-my-girlfriend .ti.on{max-height:300px;opacity:1;transform:none;overflow:visible}
+.for-my-girlfriend .ti::before{content:"";position:absolute;left:-30px;top:50%;width:14px;height:14px;border-radius:50%;background:var(--cherry);box-shadow:0 0 0 4px var(--blush)}
+.for-my-girlfriend .ti.nopic{grid-template-columns:1fr}
+.for-my-girlfriend .ti .pol{aspect-ratio:1;padding-bottom:8px}
+.for-my-girlfriend .ti h3{font-family:var(--serif);font-size:1.8rem;font-weight:500;margin:0}
+/* scene 5 */
+.for-my-girlfriend .keep{position:relative;width:min(340px,86vw);height:min(440px,60vh);margin:30px auto 0;flex:none}
+.for-my-girlfriend .print{position:absolute;left:6%;right:6%;top:30%;height:62%;transition:transform 1.4s cubic-bezier(.3,.8,.2,1)}
+.for-my-girlfriend .print .pol{height:100%}
+.for-my-girlfriend .keep.open .print{transform:translateY(-34%) rotate(-3deg)}
+.for-my-girlfriend .sleeve{position:absolute;left:0;right:0;bottom:0;height:56%;background:linear-gradient(160deg,var(--cherry),var(--burg));box-shadow:0 20px 30px -12px rgba(74,15,29,.6);z-index:3;display:grid;place-items:center;color:var(--ivory);font-family:var(--hand);font-size:1.5rem}
+.for-my-girlfriend .ribbon{position:absolute;z-index:4;left:-4%;right:-4%;bottom:20%;height:46px;border:0;background:var(--gold);color:var(--burg);font-family:var(--serif);font-size:1.15rem;box-shadow:0 6px 12px rgba(0,0,0,.3);transition:transform 1s cubic-bezier(.6,0,.2,1),opacity .8s}
+.for-my-girlfriend .keep.open .ribbon{transform:translateX(120%);opacity:0;pointer-events:none}
+.for-my-girlfriend .reveal{text-align:center;opacity:0;transform:translateY(16px);transition:all 1s .9s;max-width:48ch;margin:0 auto;display:grid;gap:10px}
+.for-my-girlfriend .reveal.on{opacity:1;transform:none}
+.for-my-girlfriend .glint{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0;pointer-events:none;z-index:6;animation:gl 4s ease-out forwards}
+@keyframes gl{0%{opacity:0;transform:translateY(0)}30%{opacity:.9}100%{opacity:0;transform:translateY(-120px)}}
+/* scene 6 */
+.for-my-girlfriend .s6 .inner{text-align:center;align-items:center}
+.for-my-girlfriend .s6.on .inner{animation:slow 2.4s ease-out}
+@keyframes slow{from{transform:scale(1.06);filter:blur(6px)}to{transform:none;filter:none}}
+.for-my-girlfriend .row{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;padding:14px}
+.for-my-girlfriend .row .pol{width:clamp(110px,24vw,190px);aspect-ratio:3/4}
+.for-my-girlfriend .row .pol.hero{width:clamp(150px,34vw,260px)}
+.for-my-girlfriend .msg{font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.9rem);max-width:36ch;font-style:italic}
+.for-my-girlfriend .s6 .btn{align-self:center}
+@media(max-width:720px){
+.for-my-girlfriend .s1 .inner{grid-template-columns:1fr}
+.for-my-girlfriend .stack{order:-1;height:300px;min-height:0}
+.for-my-girlfriend .wall{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(150px,42vw,230px)}
+.for-my-girlfriend .wall button{grid-column:auto!important;grid-row:auto!important}
+.for-my-girlfriend .wall button:nth-child(1),.for-my-girlfriend .wall button:nth-child(8){grid-column:1/3!important}
+.for-my-girlfriend .wall button:nth-child(8){display:block}
+.for-my-girlfriend .sheet{grid-template-columns:1fr}
+.for-my-girlfriend .notes{display:flex;flex-direction:column}
+.for-my-girlfriend .n.b{margin-top:10px}
+.for-my-girlfriend .ti{grid-template-columns:100px 1fr}}
+@media(prefers-reduced-motion:reduce){.for-my-girlfriend *,.for-my-girlfriend *::before{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important;transition-delay:0s!important}}
+</style>
+</head>
+<body style="margin:0">
+<div class="for-my-girlfriend" id="app"></div>
+<script>
+/* ===== CONFIGURATION — edit this object to personalise everything =====
+   Photos: replace "src" with your own image URL or a relative file like "photos/us1.jpg".
+   Sample photos are stock images from Unsplash (hotlinked, not downloaded). Check their licence before commercial use.
+   Any empty text field is skipped automatically. */
+const U=id=>"https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w=900&q=70";
+const CONFIG={
+  herName:"Aanya", yourName:"Rohan",
+  headline:"For the Girl Who Makes My World Beautiful",
+  subtitle:"A little collection of moments, feelings, and everything I want you to know.",
+  openLabel:"Open Our Story",
+  audioUrl:"", // optional: direct URL to an mp3. Leave empty to hide the music button.
+  photos:[ // up to 8 photos. title / caption / date are shown in the detail view
+    {src:U("1502602898657-3e91760cbb34"),title:"Sample: City lights",caption:"Sample caption. Write the story of this picture here.",date:"Sample date"},
+    {src:U("1470252649378-9c29740c9fa8"),title:"Sample: Golden hour",caption:"Sample caption. The sky had nothing on you.",date:""},
+    {src:U("1490750967868-88aa4486c946"),title:"Sample: Little flowers",caption:"Sample caption. Something small I remembered you loved.",date:"Sample date"},
+    {src:U("1476514525535-07fb3b4ae5f1"),title:"Sample: The trip",caption:"Sample caption. Let's go back someday.",date:""},
+    {src:U("1507525428034-b723cf961d3e"),title:"Sample: Salt air",caption:"Sample caption. Your laugh over the waves.",date:"Sample date"},
+    {src:U("1518199266791-5375a83190b7"),title:"Sample: Us",caption:"Sample caption. My favourite kind of ordinary day.",date:""},
+    {src:U("1494774157365-9e04c6720e47"),title:"Sample: Soft light",caption:"Sample caption. Quiet mornings with you.",date:"Sample date"}
+  ],
+  notes:[
+    "The way you make ordinary days feel special.",
+    "Your smile, especially when you don't realize I'm looking.",
+    "How you remember the tiny details I forget I told you.",
+    "The little things about you that stay with me."
+  ],
+  hiddenLabel:"Tap the seal", hiddenMessage:"And the biggest thing: with you, I feel like I'm exactly where I'm meant to be.",
+  timeline:[ // 3 to 5 milestones. photo = index of a photo above (0 = first) or leave out. Sample content only.
+    {date:"Sample: The beginning",title:"We met",caption:"Replace with how it began.",photo:0},
+    {date:"Sample: The first date",title:"Our first date",caption:"Replace with what you remember most.",photo:2},
+    {date:"Sample: A big day",title:"A favourite trip",caption:"Replace with a memory only you two share.",photo:3},
+    {date:"Sample: Today",title:"Still choosing you",caption:"Replace with where you are now."}
+  ],
+  surprise:{hint:"Slide the ribbon away",title:"One more thing",message:"Thank you for being patient with me, laughing at my jokes, and loving me on the quiet days. I'm so grateful it's you.",photo:5, image:""},
+  closing:{title:"My favourite person",message:"Whatever comes next, I want to keep making memories with you.",photo:1},
+  replayLabel:"Read Our Story Again"
+};
+/* ===== END CONFIGURATION ===== */
+(()=>{
+const root=document.getElementById('app');
+const ok=v=>typeof v==='string'&&v.trim()!=='';
+const E=(t,c,x,a)=>{const e=document.createElement(t);if(c)e.className=c;if(ok(x))e.textContent=x;if(a)for(const k in a)e.setAttribute(k,a[k]);return e};
+const GR=['#e8b4b8,#c98a8f','#f6cdb4,#e0a39a','#f1d3cf,#b9606c','#e3b7a0,#8f1d33'];
+const P=CONFIG.photos.filter(p=>p&&typeof p==='object');
+const big=s=>ok(s)?s.replace('w=900','w=1600'):'';
+function pic(src,i){const f=E('span','pic');f.style.background='linear-gradient(135deg,'+GR[(i||0)%4]+')';
+ if(ok(src)){const m=new Image();m.alt='';m.decoding='async';m.onerror=()=>m.remove();m.src=src;f.append(m)}return f}
+const photo=(i,r,cap)=>{const p=P[i];const d=E('div','pol');d.style.setProperty('--r',r);d.append(pic(p&&p.src,i));if(ok(cap))d.append(E('span','cap',cap));return d};
+let cur=0,lock=false,tlCount=0,scenes=[],dots,audio=null,music,modal,lastFocus,timers=[];
+const later=(f,ms)=>{const t=setTimeout(f,ms);timers.push(t)};
+const nextBtn=l=>{const b=E('button','btn',l,{type:'button'});b.onclick=next;return b};
+const wrap=(cls,html)=>{const s=E('section','scene '+cls);const i=E('div','inner');s.append(i);return{s,i}};
+function next(){if(lock||cur>=5||modal.classList.contains('on'))return;lock=true;show(cur+1);later(()=>lock=false,900)}
+function show(n){cur=n;scenes.forEach((s,i)=>{const on=i===n;s.classList.toggle('on',on);if(on){s.removeAttribute('inert');s.setAttribute('aria-hidden','false');s.scrollTop=0}else{s.setAttribute('inert','');s.setAttribute('aria-hidden','true')}});
+ [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===n));const h=scenes[n].querySelector('h1,h2');if(h)later(()=>h.focus({preventScroll:true}),150)}
+function build(){
+ timers.forEach(clearTimeout);timers=[];lock=false;tlCount=0;root.textContent='';scenes=[];
+ const c=CONFIG;
+ /* S1 */
+ let {s,i}=wrap('s1');const left=E('div');left.style.cssText='display:grid;gap:22px;position:relative;z-index:2';
+ if(ok(c.herName))left.append(E('p','hand','for '+c.herName+', with love'));
+ const h1=E('h1','',c.headline,{tabindex:'-1'});left.append(h1);left.append(E('p','sub',c.subtitle));left.append(nextBtn(c.openLabel||'Open Our Story'));
+ const st=E('div','stack');[['0%','4%','46%','-6deg'],['34%','0%','44%','4deg'],['16%','38%','48%','-2deg']].forEach((a,k)=>{const d=photo(k%Math.max(P.length,1),a[3]);d.style.cssText+=`--x:${a[0]};--y:${a[1]};--w:${a[2]};--i:${k}`;d.classList.add('par');st.append(d)});
+ const an=E('span','note hand float','that smile ↓');an.style.cssText='right:2%;bottom:6%';st.append(an);i.append(left,st);
+ s.addEventListener('mousemove',e=>{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);st.querySelectorAll('.par').forEach((p,k)=>p.style.translate=`${x*(k+1)*10}px ${y*(k+1)*10}px`)});
+ scenes.push(s);
+ /* S2 */
+ ({s,i}=wrap('s2'));i.append(E('h2','','Our Photo Wall',{tabindex:'-1'}),E('p','hand','tap a photo to open the memory'));
+ const wall=E('div','wall');const rots=['-3deg','2deg','4deg','-2deg','3deg','-4deg','1.5deg','-1deg'];
+ P.slice(0,8).forEach((p,k)=>{const b=E('button','',null,{type:'button','aria-label':'Open memory: '+(ok(p.title)?p.title:'Photo '+(k+1))});b.style.setProperty('--i',k);b.append(photo(k,rots[k]));b.onclick=()=>openPhoto(k,b);wall.append(b)});
+ i.append(wall,nextBtn('Continue'));scenes.push(s);
+ /* S3 */
+ ({s,i}=wrap('s3'));i.append(E('h2','','Little things I love about you',{tabindex:'-1'}));
+ const nw=E('div','notes');const N=c.notes.filter(ok).slice(0,4);['a','b','c','d'].forEach((cl,k)=>{if(!N[k])return;const n=E('div','n '+cl,N[k]);n.style.setProperty('--r',['-1.5deg','2deg','1deg','-2.5deg'][k]);if(k===0&&P[2]){const d=E('span','dot');d.append(pic(P[2].src,2));n.append(d)}nw.append(n)});
+ const hidWrap=E('div');hidWrap.style.cssText='display:grid;gap:12px;justify-items:start';
+ const hid=E('p','hid',c.hiddenMessage,{id:'hid','aria-live':'polite'});
+ if(ok(c.hiddenMessage)){const sb=E('button','seal',c.hiddenLabel||'Tap me',{type:'button','aria-expanded':'false','aria-controls':'hid'});sb.onclick=()=>{const o=hid.classList.toggle('on');sb.setAttribute('aria-expanded',o)};hidWrap.append(sb,hid)}
+ i.append(nw,hidWrap,nextBtn('Continue'));scenes.push(s);
+ /* S4 */
+ ({s,i}=wrap('s4'));i.append(E('h2','','Our Timeline',{tabindex:'-1'}));
+ const tl=E('div','tl');const T=c.timeline.filter(t=>t&&(ok(t.title)||ok(t.caption))).slice(0,5);
+ const items=T.map(t=>{const it=E('div','ti');const ph=Number.isInteger(t.photo)&&P[t.photo];if(ph){const d=photo(t.photo,'-2deg');it.append(d)}else it.classList.add('nopic');
+  const tx=E('div');tx.append(...[E('p','hand',t.date),E('h3','',t.title),E('p','',t.caption)].filter(e=>e.textContent));it.append(tx);tl.append(it);return it});
+ const rb=E('button','btn','',{type:'button'});const nb=nextBtn('Continue');nb.hidden=true;
+ const lab=()=>{rb.textContent=tlCount<items.length?'Reveal a memory ('+tlCount+'/'+items.length+')':'All memories revealed';rb.disabled=tlCount>=items.length};
+ rb.onclick=()=>{if(tlCount<items.length){items[tlCount].classList.add('on');items[tlCount].scrollIntoView({behavior:'smooth',block:'center'});tlCount++;lab();if(tlCount>=items.length)nb.hidden=false}};
+ if(!items.length)nb.hidden=false;lab();
+ const br=E('div');br.style.cssText='display:flex;gap:14px;flex-wrap:wrap';br.append(items.length?rb:'',nb);i.append(tl,br);scenes.push(s);
+ /* S5 */
+ ({s,i}=wrap('s5'));const sp=c.surprise||{};i.style.alignItems='center';i.style.textAlign='center';i.append(E('h2','',sp.title||'A little surprise for you',{tabindex:'-1'}));
+ const keep=E('div','keep');const pr=E('div','print');const si=Number.isInteger(sp.photo)?sp.photo:0;
+ const sd=photo(si,'0deg','for '+(ok(c.herName)?c.herName:'you'));if(ok(sp.image)){sd.querySelector('.pic').replaceWith(pic(sp.image,1))}pr.append(sd);
+ const sl=E('div','sleeve','keep this safe');const rib=E('button','ribbon',sp.hint||'Slide the ribbon',{type:'button'});
+ const rv=E('div','reveal');rv.setAttribute('aria-live','polite');if(ok(sp.message))rv.append(E('p','msg',sp.message));if(ok(c.yourName))rv.append(E('p','hand','— '+c.yourName));
+ const n5=nextBtn('Continue');n5.hidden=true;n5.style.alignSelf='center';
+ rib.onclick=()=>{if(keep.classList.contains('open'))return;keep.classList.add('open');rv.classList.add('on');
+  for(let g=0;g<14;g++){const d=E('span','glint');d.style.cssText=`left:${10+Math.random()*80}%;top:${30+Math.random()*60}%;animation-delay:${Math.random()*2}s`;keep.append(d)}
+  later(()=>{n5.hidden=false},1800)};
+ keep.append(pr,sl,rib);i.append(keep,rv,n5);scenes.push(s);
+ /* S6 */
+ ({s,i}=wrap('s6'));const cl=c.closing||{};const row=E('div','row');const ci=Number.isInteger(cl.photo)?cl.photo:0;
+ [[(ci+2)%Math.max(P.length,1),'-5deg',''],[ci,'2deg','hero'],[(ci+4)%Math.max(P.length,1),'5deg','']].forEach(a=>{const d=photo(a[0],a[1]);if(a[2])d.classList.add('hero');row.append(d)});
+ i.append(E('p','hand','for '+(ok(c.herName)?c.herName:'you')),E('h2','',cl.title||'My favorite person',{tabindex:'-1'}),row,E('p','msg',cl.message));
+ if(ok(c.yourName))i.append(E('p','hand','Forever yours, '+c.yourName));
+ const rp=E('button','btn',c.replayLabel||'Read Our Story Again',{type:'button'});rp.onclick=build;i.append(rp);scenes.push(s);
+ /* chrome */
+ dots=E('div','dots');dots.setAttribute('aria-hidden','true');for(let k=0;k<6;k++)dots.append(E('i'));
+ music=E('button','music','♪',{type:'button','aria-label':'Play music','aria-pressed':'false'});music.hidden=!ok(c.audioUrl);music.onclick=toggleAudio;
+ modal=E('div','modal',null,{role:'dialog','aria-modal':'true','aria-label':'Photo memory'});modal.onclick=e=>{if(e.target===modal)closePhoto()};
+ root.append(...scenes,dots,music,modal,E('div','grain'));show(0);
+}
+function openPhoto(k,from){lastFocus=from;const p=P[k];modal.textContent='';const sh=E('div','sheet');const bg=E('div','big');const pc=pic(big(p.src),k);pc.style.height='100%';pc.style.minHeight='inherit';bg.append(pc);
+ const tx=E('div','txt');const x=E('button','x','×',{type:'button','aria-label':'Close photo'});x.onclick=closePhoto;
+ tx.append(x);if(ok(p.date))tx.append(E('p','hand',p.date));tx.append(E('h2','',ok(p.title)?p.title:'A memory'));if(ok(p.caption))tx.append(E('p','sub',p.caption));
+ sh.append(bg,tx);modal.append(sh);modal.classList.add('on');x.focus()}
+function closePhoto(){modal.classList.remove('on');if(lastFocus&&document.contains(lastFocus))lastFocus.focus()}
+function toggleAudio(){try{if(!audio){audio=new Audio(CONFIG.audioUrl);audio.loop=true;audio.volume=.5;audio.onerror=()=>{music.hidden=true}}
+ if(audio.paused){const r=audio.play();if(r&&r.catch)r.catch(()=>{music.hidden=true});music.setAttribute('aria-pressed','true');music.setAttribute('aria-label','Pause music')}
+ else{audio.pause();music.setAttribute('aria-pressed','false');music.setAttribute('aria-label','Play music')}}catch(e){music.hidden=true}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal&&modal.classList.contains('on'))closePhoto();
+ if(e.key==='Tab'&&modal&&modal.classList.contains('on')){const f=[...modal.querySelectorAll('button')];if(f.length&&document.activeElement===f[f.length-1]&&!e.shiftKey){e.preventDefault();f[0].focus()}}});
+build();
+})();
+</script>
+</body>
+</html>

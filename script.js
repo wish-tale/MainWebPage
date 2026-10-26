@@ -70,66 +70,68 @@ const INVITE_CATS = ["wedding", "birthday", "family", "festival"];
    m      emoji motif          t, s  main text and small text shown on the design
    l      optional languages, e.g. "en hi ta" (default: English + Hindi)
    img    optional image path, e.g. "images/w01.jpg" (replaces the CSS design)
+   demoUrl optional interactive experience URL, shown in an isolated preview iframe
+   offerBadge optional visual demo badge (does not change the template price)
    ===================================================================== */
 const TEMPLATES = [
   // ---------- Wedding ----------
   { id: "w01", cat: "wedding", occ: "Save the Date", name: "Blossom Save the Date", price: 99, added: "2026-09-18", v: "floral", p: "blush", m: "🌸", t: "Aarav & Meera", s: "14 · 02 · 2027" },
   { id: "w02", cat: "wedding", occ: "Wedding Invitation", name: "Royal Arch Invitation", price: 449, added: "2026-06-10", v: "arch", p: "sand", m: "🪷", t: "Aarav & Meera", s: "Saturday · 14 February", l: "en hi ur pa" },
-  { id: "w03", cat: "wedding", occ: "Haldi", name: "Marigold Haldi", price: 249, added: "2026-08-02", v: "circle", p: "marigold", m: "🌼", t: "Haldi Ceremony", s: "Morning of 13 February", l: "en hi mr gu" },
+  { id: "w03", cat: "wedding", occ: "Haldi", name: "Marigold Haldi", price: 249, offerBadge: "20% OFF", added: "2026-08-02", v: "circle", p: "marigold", m: "🌼", t: "Haldi Ceremony", s: "Morning of 13 February", l: "en hi mr gu" },
   { id: "w04", cat: "wedding", occ: "Mehendi", name: "Henna Mehendi Afternoon", price: 249, added: "2026-07-21", v: "frame", p: "honey", m: "🌿", t: "Mehendi Afternoon", s: "Songs · Henna · Chai", l: "en hi mr te" },
   { id: "w05", cat: "wedding", occ: "Sangeet", name: "Sangeet Night", price: 299, added: "2026-10-05", v: "confetti", p: "coral", m: "🎶", t: "Sangeet Night", s: "Music · Dance · Dinner", l: "en hi pa" },
-  { id: "w06", cat: "wedding", occ: "Engagement", name: "Ring Ceremony", price: 199, added: "2026-07-05", v: "heart", p: "rose", m: "💍", t: "Aarav ♡ Meera", s: "Our engagement" },
+  { id: "w06", cat: "wedding", occ: "Engagement", name: "Ring Ceremony", price: 199, offerBadge: "40% OFF", added: "2026-07-05", v: "heart", p: "rose", m: "💍", t: "Aarav ♡ Meera", s: "Our engagement" },
   { id: "w07", cat: "wedding", occ: "Wedding Invitation", name: "Alpona Border Invitation", price: 279, added: "2026-09-02", v: "frame", p: "peach", m: "🪷", t: "Aarav & Meera", s: "শুভ বিবাহ", l: "en bn hi" },
   { id: "w08", cat: "wedding", occ: "Wedding Invitation", name: "Jasmine & Silk Invitation", price: 399, added: "2026-08-24", v: "stripe", p: "blush", m: "🌺", t: "Aarav & Meera", s: "Wedding · 9:30 AM", l: "en ta te kn ml" },
   { id: "w09", cat: "wedding", occ: "Reception", name: "Reception Evening", price: 349, added: "2026-10-12", v: "lantern", p: "wine", m: "✨", t: "Wedding Reception", s: "Dinner · Dancing · 7 PM" },
   { id: "w10", cat: "wedding", occ: "Wedding RSVP", name: "Wedding RSVP Card", price: 149, added: "2026-06-28", v: "ticket", p: "peach", m: "💌", t: "Will you join us?", s: "Kindly reply by 10 January", l: "en hi ta te kn ml" },
   { id: "w11", cat: "wedding", occ: "Wedding Invitation", name: "Simple Floral Invitation", price: 149, added: "2026-06-02", v: "minimal", p: "cream", m: "🌷", t: "Aarav & Meera", s: "14 · 02 · 2027", l: "en hi mr gu" },
-  { id: "w12", cat: "wedding", occ: "Couple Story", name: "Our Story & Wedding Day", price: 499, added: "2026-10-18", v: "timeline", p: "blush", m: "💞", t: "How we met", s: "Then, now, forever", l: "en hi bn gu" },
+  { id: "w12", cat: "wedding", occ: "Couple Story", name: "Our Story & Wedding Day", price: 499, offerBadge: "60% OFF", added: "2026-10-18", v: "timeline", p: "blush", m: "💞", t: "How we met", s: "Then, now, forever", l: "en hi bn gu" },
   { id: "w13", cat: "wedding", occ: "Save the Date", name: "Palace Save the Date", price: 129, added: "2026-09-26", v: "arch", p: "honey", m: "🏰", t: "Save the Date", s: "14 · 02 · 2027" },
 
   // ---------- Birthday ----------
-  { id: "b01", cat: "birthday", occ: "Birthday Invitation", name: "Confetti Cake", price: 79, added: "2026-08-15", v: "confetti", p: "peach", m: "🎂", t: "Priya turns 25!", s: "Saturday · 7 PM" },
+  { id: "b01", cat: "birthday", occ: "Birthday Invitation", name: "Confetti Cake", price: 79, offerBadge: "20% OFF", added: "2026-08-15", v: "confetti", p: "peach", m: "🎂", t: "Priya turns 25!", s: "Saturday · 7 PM" },
   { id: "b02", cat: "birthday", occ: "Surprise Birthday", name: "Surprise Reveal", price: 149, added: "2026-10-09", v: "ribbon", p: "coral", m: "🎁", t: "A surprise for you", s: "Tap to unwrap" },
   { id: "b03", cat: "birthday", occ: "Milestone Birthday", name: "Golden Milestone", price: 129, added: "2026-07-30", v: "frame", p: "honey", m: "🥂", t: "Fifty & Fabulous", s: "Join the celebration" },
-  { id: "b04", cat: "birthday", occ: "First Birthday", name: "Little One's First", price: 99, added: "2026-09-09", v: "baby", p: "blush", m: "🧸", t: "Aanya is ONE", s: "Tea party · 4 PM" },
+  { id: "b04", cat: "birthday", occ: "First Birthday", name: "Little One's First", price: 99, offerBadge: "60% OFF", added: "2026-09-09", v: "baby", p: "blush", m: "🧸", t: "Aanya is ONE", s: "Tea party · 4 PM" },
   { id: "b05", cat: "birthday", occ: "Birthday Greeting", name: "Balloon Wishes", price: 49, added: "2026-06-18", v: "circle", p: "peach", m: "🎈", t: "Happy Birthday!", s: "Wishing you joy" },
   { id: "b06", cat: "birthday", occ: "Birthday Greeting", name: "Birthday Letter", price: 69, added: "2026-10-20", v: "letter", p: "blush", m: "💌", t: "Dear You,", s: "A little note for your day" },
-  { id: "b07", cat: "birthday", occ: "Birthday Page", name: "Birthday Scrapbook", price: 129, added: "2026-08-08", v: "polaroid", p: "sand", m: "📸", t: "Twenty-One Memories", s: "A year in pictures" },
+  { id: "b07", cat: "birthday", occ: "Birthday Page", name: "Birthday Scrapbook", price: 129, offerBadge: "40% OFF", added: "2026-08-08", v: "polaroid", p: "sand", m: "📸", t: "Twenty-One Memories", s: "A year in pictures" },
 
   // ---------- Love ----------
-  { id: "l01", cat: "love", occ: "Anniversary", name: "Anniversary Timeline", price: 199, added: "2026-09-14", v: "timeline", p: "cream", m: "💑", t: "Our Story So Far", s: "Together since 2019", l: "en hi ta mr" },
-  { id: "l02", cat: "love", occ: "Proposal", name: "Will You Marry Me?", price: 179, added: "2026-10-01", v: "heart", p: "rose", m: "💍", t: "Will you marry me?", s: "A question for you", l: "en hi pa" },
-  { id: "l03", cat: "love", occ: "Love Letter", name: "Secret Love Letter", price: 99, added: "2026-07-12", v: "letter", p: "peach", m: "💌", t: "To my love,", s: "Open with care", l: "en hi ur bn" },
-  { id: "l04", cat: "love", occ: "Romantic Greeting", name: "Rose Garden Greeting", price: 59, added: "2026-06-22", v: "floral", p: "rose", m: "🌹", t: "Forever Yours", s: "Happy Anniversary" },
-  { id: "l05", cat: "love", occ: "For Her", name: "For My Girlfriend", price: 149, added: "2026-08-28", v: "polaroid", p: "blush", m: "🎀", t: "My Favourite Person", s: "Made for you", l: "en hi bn" },
-  { id: "l06", cat: "love", occ: "For Him", name: "For My Boyfriend", price: 149, added: "2026-09-21", v: "stripe", p: "honey", m: "🧡", t: "Reasons I Love You", s: "Ten little reasons" },
-  { id: "l07", cat: "love", occ: "Long Distance", name: "Miles Apart, One Link", price: 129, added: "2026-07-26", v: "ticket", p: "cream", m: "✈️", t: "See you soon", s: "12 days to go" },
-  { id: "l08", cat: "love", occ: "Couple Page", name: "Our Couple Page", price: 249, added: "2026-10-14", v: "browser", p: "blush", m: "💞", t: "Aarav + Meera", s: "Our little corner" },
+  { id: "l01", cat: "love", occ: "Anniversary", name: "Anniversary Timeline", price: 199, offerBadge: "40% OFF", added: "2026-09-14", v: "timeline", p: "cream", m: "💑", t: "Our Story So Far", s: "Together since 2019", l: "en hi ta mr", demoUrl: "templetes/anniversarytimeline.html" },
+  { id: "l02", cat: "love", occ: "Proposal", name: "Will You Marry Me", price: 179, offerBadge: "20% OFF", added: "2026-10-01", v: "heart", p: "rose", m: "💍", t: "Will you marry me?", s: "A question for you", l: "en hi pa", demoUrl: "templetes/willyoumarryme.html", description: "Experience eight interactive chapters, from a heartfelt letter to the proposal and celebration. Add your own names, memories, photos and licensed music." },
+  { id: "l03", cat: "love", occ: "Love Letter", name: "Secret Love Letter", price: 99, added: "2026-07-12", v: "letter", p: "peach", m: "💌", t: "To my love,", s: "Open with care", l: "en hi ur bn", demoUrl: "templetes/secretloveletter.html" },
+  { id: "l04", cat: "love", occ: "Romantic Greeting", name: "Rose Garden Greeting", price: 59, added: "2026-06-22", v: "floral", p: "rose", m: "🌹", t: "Forever Yours", s: "Happy Anniversary", demoUrl: "templetes/rosegardengreeting.html" },
+  { id: "l05", cat: "love", occ: "For Her", name: "For My Girlfriend", price: 149, offerBadge: "60% OFF", added: "2026-08-28", v: "polaroid", p: "blush", m: "🎀", t: "My Favourite Person", s: "Made for you", l: "en hi bn", demoUrl: "templetes/formygirlfriend.html" },
+  { id: "l06", cat: "love", occ: "For Him", name: "For My Boyfriend", price: 149, added: "2026-09-21", v: "stripe", p: "honey", m: "🧡", t: "Reasons I Love You", s: "Ten little reasons", demoUrl: "templetes/formyboyfriend.html" },
+  { id: "l07", cat: "love", occ: "Long Distance", name: "Miles Apart, One Link", price: 129, added: "2026-07-26", v: "ticket", p: "cream", m: "✈️", t: "See you soon", s: "12 days to go", demoUrl: "templetes/milesapartonelink.html" },
+  { id: "l08", cat: "love", occ: "Couple Page", name: "Our Couple Page", price: 249, added: "2026-10-14", v: "browser", p: "blush", m: "💞", t: "Aarav + Meera", s: "Our little corner", demoUrl: "templetes/ourcouplepage.html" },
 
   // ---------- Family ----------
   { id: "fa01", cat: "family", occ: "Housewarming", name: "Griha Pravesh", price: 149, added: "2026-08-19", v: "arch", p: "honey", m: "🏡", t: "Griha Pravesh", s: "Join us in our new home", l: "en hi mr gu ta te kn ml" },
-  { id: "fa02", cat: "family", occ: "Baby Shower", name: "Baby Shower Bloom", price: 129, added: "2026-07-17", v: "baby", p: "peach", m: "🍼", t: "Baby Shower", s: "Sweet wishes for mum-to-be" },
+  { id: "fa02", cat: "family", occ: "Baby Shower", name: "Baby Shower Bloom", price: 129, offerBadge: "20% OFF", added: "2026-07-17", v: "baby", p: "peach", m: "🍼", t: "Baby Shower", s: "Sweet wishes for mum-to-be" },
   { id: "fa03", cat: "family", occ: "Naming Ceremony", name: "Naming Ceremony", price: 149, added: "2026-09-05", v: "circle", p: "blush", m: "🧸", t: "Welcome, Little One", s: "Naming ceremony", l: "en hi bn ta te" },
   { id: "fa04", cat: "family", occ: "Baby Announcement", name: "Hello, Little One", price: 99, added: "2026-10-07", v: "polaroid", p: "cream", m: "👶", t: "She's here!", s: "Meet our little star" },
   { id: "fa05", cat: "family", occ: "Family Celebration", name: "Family Get-Together", price: 89, added: "2026-06-30", v: "confetti", p: "honey", m: "🍽️", t: "Family Day", s: "Sunday lunch · 1 PM" },
-  { id: "fa06", cat: "family", occ: "Housewarming", name: "Housewarming Glow", price: 129, added: "2026-10-16", v: "lantern", p: "terracotta", m: "🪔", t: "Our New Home", s: "Come celebrate with us" },
+  { id: "fa06", cat: "family", occ: "Housewarming", name: "Housewarming Glow", price: 129, offerBadge: "40% OFF", added: "2026-10-16", v: "lantern", p: "terracotta", m: "🪔", t: "Our New Home", s: "Come celebrate with us" },
 
   // ---------- Friends ----------
-  { id: "fr01", cat: "friends", occ: "Best Friends", name: "Bestie Scrapbook", price: 79, added: "2026-08-11", v: "polaroid", p: "peach", m: "🌸", t: "Best Friends Forever", s: "Our favourite moments" },
+  { id: "fr01", cat: "friends", occ: "Best Friends", name: "Bestie Scrapbook", price: 79, offerBadge: "40% OFF", added: "2026-08-11", v: "polaroid", p: "peach", m: "🌸", t: "Best Friends Forever", s: "Our favourite moments" },
   { id: "fr02", cat: "friends", occ: "Friendship", name: "Friendship Greeting", price: 49, added: "2026-06-14", v: "floral", p: "blush", m: "🌼", t: "Friends Like You", s: "Happy Friendship Day" },
   { id: "fr03", cat: "friends", occ: "Farewell", name: "Farewell Memories", price: 99, added: "2026-09-30", v: "ticket", p: "sand", m: "👋", t: "Until We Meet Again", s: "Farewell wishes" },
   { id: "fr04", cat: "friends", occ: "Congratulations", name: "Big Congratulations", price: 59, added: "2026-08-26", v: "confetti", p: "coral", m: "🎉", t: "Congratulations!", s: "So proud of you" },
-  { id: "fr05", cat: "friends", occ: "Graduation", name: "Graduation Day", price: 129, added: "2026-07-08", v: "frame", p: "cream", m: "🎓", t: "Class of 2026", s: "Congratulations, graduate" },
+  { id: "fr05", cat: "friends", occ: "Graduation", name: "Graduation Day", price: 129, offerBadge: "20% OFF", added: "2026-07-08", v: "frame", p: "cream", m: "🎓", t: "Class of 2026", s: "Congratulations, graduate" },
   { id: "fr06", cat: "friends", occ: "Apology", name: "I'm Really Sorry", price: 49, added: "2026-09-12", v: "minimal", p: "peach", m: "🥺", t: "I'm sorry", s: "Let me make it right" },
   { id: "fr07", cat: "friends", occ: "Thank You", name: "Thank You Note", price: 49, added: "2026-10-03", v: "letter", p: "cream", m: "🌷", t: "Thank you", s: "From the bottom of my heart" },
 
   // ---------- Festivals & celebrations ----------
-  { id: "fe01", cat: "festival", occ: "Festival of Lights", name: "Lamps & Lanterns", price: 69, added: "2026-10-10", v: "lantern", p: "wine", m: "🪔", t: "Festival of Lights", s: "Warm wishes to you", l: "en hi gu mr" },
+  { id: "fe01", cat: "festival", occ: "Festival of Lights", name: "Lamps & Lanterns", price: 69, offerBadge: "20% OFF", added: "2026-10-10", v: "lantern", p: "wine", m: "🪔", t: "Festival of Lights", s: "Warm wishes to you", l: "en hi gu mr" },
   { id: "fe02", cat: "festival", occ: "Harvest Festival", name: "Harvest Greetings", price: 69, added: "2026-07-14", v: "circle", p: "marigold", m: "🌾", t: "Happy Harvest", s: "Joy, thanks & sunshine", l: "en ta pa ml" },
-  { id: "fe03", cat: "festival", occ: "Festival of Colours", name: "Spring Colours", price: 79, added: "2026-08-04", v: "confetti", p: "rose", m: "🎨", t: "Happy Colours!", s: "Let the fun begin" },
+  { id: "fe03", cat: "festival", occ: "Festival of Colours", name: "Spring Colours", price: 79, offerBadge: "60% OFF", added: "2026-08-04", v: "confetti", p: "rose", m: "🎨", t: "Happy Colours!", s: "Let the fun begin" },
   { id: "fe04", cat: "festival", occ: "Seasonal Greeting", name: "Season's Greetings", price: 59, added: "2026-10-19", v: "frame", p: "sand", m: "❄️", t: "Season's Greetings", s: "Warmest wishes" },
   { id: "fe05", cat: "festival", occ: "Festival Greeting", name: "Lantern Night", price: 69, added: "2026-09-27", v: "lantern", p: "terracotta", m: "🏮", t: "Lantern Night", s: "Light up the evening" },
-  { id: "fe06", cat: "festival", occ: "Party Invitation", name: "Party Invitation", price: 99, added: "2026-06-26", v: "ribbon", p: "honey", m: "🥳", t: "You're invited!", s: "Party · Music · Cake" },
+  { id: "fe06", cat: "festival", occ: "Party Invitation", name: "Party Invitation", price: 99, offerBadge: "40% OFF", added: "2026-06-26", v: "ribbon", p: "honey", m: "🥳", t: "You're invited!", s: "Party · Music · Cake" },
   { id: "fe07", cat: "festival", occ: "Business Invitation", name: "Business Invitation", price: 249, added: "2026-08-30", v: "minimal", p: "sand", m: "💼", t: "Annual Gathering", s: "An evening of connection" },
 
   // ---------- Personalised websites (quoted separately, shown as "From ₹…") ----------
@@ -189,7 +191,10 @@ function cardHTML(t) {
       <span class="tag">${esc(t.occ)}</span>
       <h3>${esc(t.name)}</h3>
       <div class="card-foot">
-        <span class="price">${priceText(t)}</span>
+        <div class="card-price-row">
+          <span class="price">${priceText(t)}</span>
+          ${t.offerBadge ? `<span class="offer-badge" title="Visual demo badge; price remains unchanged" aria-label="${esc(t.offerBadge)} - visual demo only; displayed price unchanged">${esc(t.offerBadge)}</span>` : ""}
+        </div>
         <div class="actions">
           <button type="button" class="btn btn-small btn-ghost" data-action="preview" aria-label="Preview ${esc(t.name)}">Preview</button>
           <button type="button" class="btn btn-small" data-action="buy" aria-label="Buy ${esc(t.name)} now">Buy Now</button>
@@ -256,25 +261,93 @@ grid.addEventListener("click", e => {
 });
 
 /* =====================================================================
-   PREVIEW MODAL: shows the selected design larger.
-   FUTURE: load a real preview page from the template (e.g. t.demoUrl).
+   PREVIEW MODAL: shows the selected design or its interactive demo larger.
    ===================================================================== */
 const dialog = $("#preview");
 const pv = { t: null, lang: "English", device: "phone" };
+const previewFrame = $("#pv-frame");
+
+function installTemplateWatermark() {
+  if (previewFrame.hidden || !pv.t?.demoUrl) return;
+
+  try {
+    const previewDocument = previewFrame.contentDocument;
+    const expectedUrl = new URL(pv.t.demoUrl, document.baseURI).href;
+    if (!previewDocument || previewFrame.contentWindow.location.href !== expectedUrl) return;
+    if (previewDocument.getElementById("wishtale-template-watermark")) return;
+
+    const style = previewDocument.createElement("style");
+    style.id = "wishtale-template-watermark-style";
+    style.textContent = `
+      #wishtale-template-watermark {
+        position: fixed !important;
+        z-index: 2147483647 !important;
+        right: max(10px, env(safe-area-inset-right, 0px)) !important;
+        bottom: max(10px, env(safe-area-inset-bottom, 0px)) !important;
+        display: grid !important;
+        gap: 2px !important;
+        max-width: calc(100vw - 20px) !important;
+        padding: 6px 9px !important;
+        border: 1px solid rgba(255, 255, 255, .2) !important;
+        border-radius: 7px !important;
+        background: rgba(20, 12, 16, .78) !important;
+        color: #fff !important;
+        font: 500 10px/1.3 system-ui, sans-serif !important;
+        letter-spacing: .02em !important;
+        text-align: right !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, .55) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .2) !important;
+        backdrop-filter: blur(6px) !important;
+        pointer-events: none !important;
+        user-select: none !important;
+      }
+      #wishtale-template-watermark span:last-child {
+        color: rgba(255, 255, 255, .78) !important;
+        font-size: 9px !important;
+      }
+    `;
+    previewDocument.head.appendChild(style);
+
+    const watermark = previewDocument.createElement("div");
+    watermark.id = "wishtale-template-watermark";
+    watermark.setAttribute("role", "note");
+    watermark.setAttribute("aria-label", "Made with WishTale. Watermark removed after purchase.");
+    watermark.innerHTML = "<span>Made with WishTale</span><span>Watermark removed after purchase</span>";
+    previewDocument.body.appendChild(watermark);
+  } catch (error) {
+    console.error("[WishTale preview] Could not add the template watermark:", error);
+  }
+}
+
+previewFrame.addEventListener("load", installTemplateWatermark);
 
 function lockScroll() { document.body.style.overflow = "hidden"; }
 function openDialog(d) { lockScroll(); if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open", ""); }
 $$("dialog").forEach(d => {
-  d.addEventListener("close", () => { if (!$$("dialog[open]").length) document.body.style.overflow = ""; });
+  d.addEventListener("close", () => {
+    if (d === dialog) {
+      $("#pv-frame").removeAttribute("src");
+      $("#pv-frame").hidden = true;
+      $("#pv-art").hidden = false;
+      dialog.classList.remove("proposal-preview");
+    }
+    if (!$$("dialog[open]").length) document.body.style.overflow = "";
+  });
   d.addEventListener("click", e => { if (e.target === d) d.close(); });
 });
 
 function renderPreview() {
   const t = pv.t;
-  const phrase = (PHRASES[pv.lang] || PHRASES.English)[INVITE_CATS.includes(t.cat) ? "invite" : "love"];
-  $("#pv-art").innerHTML = artHTML(t, { title: $("#pv-input").value.trim(), phrase, label: true });
-  const art = $("#pv-art .art");
-  if (art) art.setAttribute("dir", pv.lang === "Urdu" ? "rtl" : "ltr");
+  const hasExperience = Boolean(t.demoUrl);
+  $("#pv-art").hidden = hasExperience;
+  $("#pv-frame").hidden = !hasExperience;
+  if (!hasExperience) {
+    const phrase = (PHRASES[pv.lang] || PHRASES.English)[INVITE_CATS.includes(t.cat) ? "invite" : "love"];
+    $("#pv-art").innerHTML = artHTML(t, { title: $("#pv-input").value.trim(), phrase, label: true });
+    const art = $("#pv-art .art");
+    if (art) art.setAttribute("dir", pv.lang === "Urdu" ? "rtl" : "ltr");
+  }
+  $$("[data-proposal-control]").forEach(control => { control.hidden = hasExperience; });
   const dev = $("#pv-device");
   dev.classList.toggle("is-phone", pv.device === "phone");
   dev.classList.toggle("is-desktop", pv.device === "desktop");
@@ -290,9 +363,13 @@ function openPreview(t) {
   $("#pv-tag").textContent = CATEGORIES[t.cat].label + " · " + t.occ;
   $("#pv-title").textContent = t.name;
   $("#pv-price").textContent = priceText(t);
+  $("#pv-blurb").textContent = t.description || "Add your own names, date and message to make this design yours.";
   $("#pv-lang").innerHTML = langsOf(t).map(l => `<option>${esc(l)}</option>`).join("");
   $("#pv-input").value = "";
   $("#pv-input").placeholder = t.t;
+  dialog.classList.toggle("proposal-preview", Boolean(t.demoUrl));
+  if (t.demoUrl) $("#pv-frame").src = t.demoUrl;
+  else $("#pv-frame").removeAttribute("src");
   renderPreview();
   openDialog(dialog);
 }

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ever After — Our Story, Written in Stars</title>
+<style>
+:root{--bg:#070b1a;--bg2:#0d1430;--gold:#d9bc82;--ivory:#f4efe4;--rose:#c98b9b;--lav:#a79bd1;--mut:#a9aec4}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ivory);font:17px/1.6 "Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
+body.lock{overflow:hidden}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,footer{position:relative;z-index:2}
+section{min-height:100vh;padding:12vh 6vw;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+section h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:.4em}
+.sub{color:var(--mut);max-width:34em;margin-bottom:2rem}
+.btn{border:1px solid var(--gold);color:var(--gold);padding:.9em 2em;border-radius:99px;letter-spacing:.06em;min-height:48px;transition:.4s}
+.btn:hover{background:var(--gold);color:var(--bg)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1.2s,transform 1.2s}
+.rv.in{opacity:1;transform:none}
+/* A opening */
+#open{background:radial-gradient(ellipse at 30% 20%,rgba(167,155,209,.18),transparent 55%),radial-gradient(ellipse at 80% 90%,rgba(201,139,155,.14),transparent 50%)}
+#open .q{font-size:clamp(1.3rem,3.2vw,2rem);font-style:italic;line-height:1.5}
+#open .q span{display:block;opacity:0;animation:fi 2s forwards}
+#open .q span:nth-child(2){animation-delay:1.6s}
+.names{font-size:clamp(2.6rem,10vw,6.5rem);margin:.4em 0 .1em;opacity:0;animation:fi 2.4s 3.2s forwards;background:linear-gradient(90deg,var(--gold),var(--ivory),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;animation-name:fi,drift;animation-duration:2.4s,18s;animation-delay:3.2s,0s;animation-iteration-count:1,infinite;animation-direction:normal,alternate}
+.adate{color:var(--gold);letter-spacing:.2em;opacity:0;animation:fi 2s 4.4s forwards}
+#counter{display:flex;gap:clamp(.6rem,2.5vw,1.8rem);flex-wrap:wrap;justify-content:center;margin:2rem 0;opacity:0;animation:fi 2s 5s forwards}
+#counter div{min-width:68px}
+#counter b{display:block;font:400 clamp(1.6rem,4.5vw,2.6rem) Georgia,serif;color:var(--ivory)}
+#counter small{color:var(--mut);font-size:.75rem}
+#cmsg{color:var(--mut)}
+#enter{opacity:0;animation:fi 2s 5.6s forwards}
+@keyframes fi{to{opacity:1}}
+@keyframes drift{from{letter-spacing:0}to{letter-spacing:.04em}}
+/* B universe */
+#map{position:relative;width:min(100%,900px);height:min(68vh,560px);margin:1rem 0}
+#map svg{position:absolute;inset:0;width:100%;height:100%}
+#map line{stroke:rgba(217,188,130,.35);stroke-width:1;vector-effect:non-scaling-stroke}
+.star{position:absolute;width:44px;height:44px;margin:-22px;border-radius:50%;display:grid;place-items:center;transition:transform .5s}
+.star::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--ivory);box-shadow:0 0 18px 6px rgba(244,239,228,.55);transition:.5s}
+.star.seen::before{background:var(--gold);box-shadow:0 0 22px 8px rgba(217,188,130,.7)}
+.star:hover,.star:focus-visible{transform:scale(1.5)}
+.star i{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:.72rem;font-style:normal;white-space:nowrap;color:var(--mut);opacity:0;transition:.3s}
+.star:hover i,.star:focus-visible i{opacity:1}
+#map.dim .star:not(.on){opacity:.4}
+#map.dim line{stroke:rgba(217,188,130,.12)}
+/* C timeline */
+#tl{width:100%;max-width:1200px;position:relative;padding:1rem 0}
+#tl ol{list-style:none;padding:0;display:flex;flex-direction:column;gap:1.6rem;border-left:1px solid rgba(217,188,130,.4);margin-left:1rem;text-align:left}
+#tl li button{display:block;padding:.4rem 0 .4rem 2rem;position:relative;text-align:left;min-height:48px}
+#tl li button::before{content:"";position:absolute;left:-6px;top:1.1rem;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--gold);transition:.4s}
+#tl li button:hover::before{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+#tl small{color:var(--gold);display:block}
+#tl h3{font-size:1.2rem}
+@media(min-width:900px){
+#tl{overflow-x:auto;padding:3rem 2rem}
+#tl ol{flex-direction:row;border-left:0;border-top:1px solid rgba(217,188,130,.4);margin:0;gap:0;width:max-content}
+#tl li{width:230px;padding-right:1rem}
+#tl li:nth-child(even) button{margin-top:1.5rem}
+#tl li button{padding:1.6rem 0 0}
+#tl li button::before{left:0;top:-6px}
+}
+/* D vault */
+#filters{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.6rem}
+#filters button{border:1px solid rgba(217,188,130,.4);border-radius:99px;padding:.5em 1.2em;min-height:44px;color:var(--mut)}
+#filters button[aria-pressed=true]{background:var(--gold);color:var(--bg)}
+#grid{columns:3 220px;column-gap:1.2rem;width:min(100%,1100px)}
+.ph{break-inside:avoid;margin-bottom:1.2rem;display:block;width:100%;text-align:left;position:relative;overflow:hidden}
+.pic{width:100%;overflow:hidden;background:linear-gradient(135deg,#1a2147,#2a1f3d);display:grid;place-items:center;color:rgba(217,188,130,.5);font-size:2rem;position:relative}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph .pic{transition:transform .8s}
+.ph:hover .pic{transform:scale(1.04)}
+.ph span{position:absolute;left:0;right:0;bottom:0;padding:2rem 1rem .8rem;background:linear-gradient(transparent,rgba(7,11,26,.92));font-family:Georgia,serif}
+/* E capsules */
+#caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;width:min(100%,1000px)}
+.cap{padding:2rem 1.2rem;min-height:150px;border:1px solid rgba(201,139,155,.4);border-radius:60px 60px 14px 14px;background:linear-gradient(160deg,rgba(201,139,155,.12),rgba(167,155,209,.08));font-family:Georgia,serif;font-style:italic;transition:.5s;position:relative}
+.cap::before{content:"";display:block;width:26px;height:26px;margin:0 auto .8rem;border-radius:50%;border:1px solid var(--rose);box-shadow:0 0 14px rgba(201,139,155,.5)}
+.cap:hover{transform:translateY(-6px);border-color:var(--rose)}
+.cap.read{opacity:.6}
+.note{font-size:.85rem;color:var(--mut);margin-top:1.4rem}
+/* F future */
+#fmap{width:min(100%,520px);height:110px;margin-bottom:1.5rem}
+#fmap line{stroke:rgba(217,188,130,.5);stroke-width:1;vector-effect:non-scaling-stroke}
+#fmap circle{fill:#2a3159;transition:.8s}
+#fmap circle.lit{fill:var(--gold);filter:drop-shadow(0 0 6px var(--gold))}
+#fut{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;width:min(100%,1000px);text-align:left}
+.dream{padding:1.2rem;border-left:1px solid rgba(167,155,209,.5);min-height:80px;transition:.4s}
+.dream:hover,.dream.lit{background:rgba(167,155,209,.1)}
+.dream h3{font-size:1.15rem}
+.dream small{color:var(--lav);display:block}
+.dream p{max-height:0;overflow:hidden;transition:max-height .6s;color:var(--mut)}
+.dream.lit p{max-height:12em;margin-top:.5rem}
+/* G letter */
+.paper{background:#f3ecdc;color:#2b2430;padding:clamp(1.6rem,6vw,4rem);max-width:680px;width:100%;text-align:left;font:1.12rem/1.85 Georgia,serif;border-radius:3px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative}
+.paper p{margin-bottom:1em}
+.paper .hl{border-left:2px solid var(--rose);padding-left:1rem;font-style:italic}
+.sig{font:italic clamp(2rem,6vw,3rem) "Snell Roundhand","Brush Script MT","Segoe Script",cursive;color:#6b3a4d}
+.paper .pic{width:90px;height:90px;border-radius:50%;margin-top:1rem}
+/* H finale */
+#fin .big{font-size:clamp(1.6rem,4.5vw,3rem);font-style:italic;max-width:18em;margin-bottom:1rem}
+#fin svg{width:min(100%,700px);height:200px;margin:1rem 0}
+#fin line{stroke:var(--gold);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1}
+#fin line.on{stroke-dashoffset:0;transition:stroke-dashoffset 1s}
+#fin circle{fill:#2a3159;transition:.8s}
+#fin circle.lit{fill:var(--gold);filter:drop-shadow(0 0 8px var(--gold))}
+.row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.4rem}
+#datemsg{min-height:1.6em;color:var(--mut);font-size:.9rem;margin-top:.8rem}
+footer{padding:2rem;text-align:center}
+#egg{width:44px;height:44px;color:var(--mut);opacity:.5}
+/* chrome */
+#prog{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:10px}
+#prog a{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);display:block;transition:.4s;position:relative}
+#prog a::after{content:"";position:absolute;inset:-12px}
+#prog a.cur{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+#snd{position:fixed;left:14px;bottom:14px;z-index:20;min-width:44px;height:44px;padding:0 1rem;border:1px solid rgba(217,188,130,.4);border-radius:99px;font-size:.8rem;background:rgba(7,11,26,.6)}
+/* modal */
+dialog{border:0;background:rgba(10,15,36,.97);color:var(--ivory);width:min(92vw,720px);max-height:90vh;overflow:auto;border-radius:14px;padding:clamp(1.4rem,5vw,3rem);box-shadow:0 0 0 1px rgba(217,188,130,.3),0 40px 120px #000;margin:auto}
+dialog::backdrop{background:rgba(3,5,14,.8);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .5s}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.97)}}
+dialog.paperd{background:#f3ecdc;color:#2b2430;font-family:Georgia,serif}
+dialog.paperd .nv{color:#6b3a4d}
+.x{position:absolute;right:10px;top:10px;width:44px;height:44px;font-size:1.6rem}
+.nv{display:flex;justify-content:space-between;margin-top:1.6rem}
+.nv button{min-height:44px;padding:0 .6rem;color:var(--gold)}
+.nv button:disabled{opacity:.25;cursor:default}
+#mb h2{font-size:clamp(1.6rem,4vw,2.4rem);margin:.2em 0}
+#mb .k{color:var(--gold);font-size:.9rem}
+#mb .pic{aspect-ratio:4/3;margin:1rem 0;border-radius:6px}
+#mb .cp{font-family:Georgia,serif;font-style:italic;color:var(--mut)}
+#mb p{margin-top:.8rem}
+@media(max-width:600px){#prog{display:none}section{padding:10vh 5vw}#map{height:72vh}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<nav id="prog" aria-label="Story progress"></nav>
+<button id="snd" type="button" aria-pressed="false">Sound off</button>
+<main>
+<section id="open" aria-label="Opening">
+ <p class="q serif"><span id="q1"></span><span id="q2"></span></p>
+ <h1 class="names" id="names"></h1>
+ <p class="adate" id="adate"></p>
+ <div id="counter" role="timer" aria-live="off"></div>
+ <p id="cmsg"></p>
+ <button id="enter" class="btn" type="button">Enter Our Story</button>
+</section>
+<section id="universe" aria-labelledby="h-u">
+ <h2 id="h-u" class="rv">Our universe</h2>
+ <p class="sub rv">Every star is a moment. Choose one, or let one find you.</p>
+ <div id="map" class="rv"></div>
+ <button id="discover" class="btn" type="button">Discover a memory</button>
+</section>
+<section id="timeline" aria-labelledby="h-t">
+ <h2 id="h-t" class="rv">The way here</h2>
+ <p class="sub rv">Open each milestone to read what it meant.</p>
+ <div id="tl" class="rv"></div>
+</section>
+<section id="vault" aria-labelledby="h-v">
+ <h2 id="h-v" class="rv">The memory vault</h2>
+ <div id="filters" class="rv" role="group" aria-label="Filter memories"></div>
+ <div id="grid"></div>
+</section>
+<section id="capsules" aria-labelledby="h-c">
+ <h2 id="h-c" class="rv">Open when you miss us</h2>
+ <p class="sub rv">Sealed letters, each for a different kind of day.</p>
+ <div id="caps"></div>
+ <p class="note rv">Sample messages — replace them in CONFIG.capsules.</p>
+</section>
+<section id="future" aria-labelledby="h-f">
+ <h2 id="h-f" class="rv">Still unwritten</h2>
+ <p class="sub rv">Hopes, not promises. Choose one to light a new star.</p>
+ <svg id="fmap" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"></svg>
+ <div id="fut"></div>
+</section>
+<section id="letter" aria-labelledby="h-l">
+ <article class="paper rv" id="paper"></article>
+</section>
+<section id="fin" aria-labelledby="h-fin">
+ <h2 id="h-fin" class="big serif rv"></h2>
+ <p class="adate" id="fnames" style="opacity:1"></p>
+ <svg id="fcon" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"></svg>
+ <div class="row">
+  <button id="replay" class="btn" type="button">Replay Our Story</button>
+  <button id="visit" class="btn" type="button">Visit Our Memories</button>
+  <button id="save" class="btn" type="button">Save Our Date</button>
+ </div>
+ <p id="datemsg" role="status"></p>
+</section>
+</main>
+<footer><button id="egg" type="button" aria-label="Small constellation symbol">&#10022;</button></footer>
+<dialog id="modal" aria-labelledby="mt"><button class="x" id="mx" type="button" aria-label="Close">&times;</button><div id="mb"></div><div class="nv"><button id="mp" type="button">&larr; Previous</button><button id="mn" type="button">Next &rarr;</button></div></dialog>
+
+<script>
+/* ============================================================
+   CONFIG — edit everything here. You don't need to touch the code below.
+   Dates MUST be written as "YYYY-MM-DD" (e.g. "2022-02-14").
+   Photos: put a link or a file name like "photos/us.jpg" in any `img` field.
+   Leave img as "" and a tasteful placeholder is shown instead.
+   Categories for the vault: "Our Adventures", "Little Moments", "Celebrations".
+   ============================================================ */
+const CONFIG={
+ partnerA:"Aarav", partnerB:"Meera",
+ startDate:"2022-02-14",          // when your story began (drives the live counter)
+ anniversaryDate:"2026-02-14",    // shown on the opening and finale
+ saveDate:"2027-02-14",           // next anniversary: used by "Save Our Date" (must be in the future)
+ opening:["Some stories are written in books.","Ours is written in the little moments."],
+ finalMessage:"If I could find you in a thousand lifetimes, I'd still choose this story.",
+ audio:"",                        // optional: link to an mp3 for ambient sound. Leave "" for none.
+ signature:"Aarav",
+ letter:{
+  greeting:"My dearest Meera,",
+  paragraphs:[
+   "I wanted to write this down, because some things are too big to say quickly. Thank you for the ordinary days, the ones nobody photographs, which turned out to be the ones I'd keep.",
+   "You make me braver and softer at the same time, and I'm still learning how you do both. Whatever this year held, I was glad to have you in it.",
+   "Here is what I wish for us: more laughter than worry, more questions than assumptions, and a lot more evenings that go nowhere in particular."],
+  highlight:"A memory I return to: the small moment I realised I wanted to tell you everything first. (Replace with your own.)",
+  promise:"I promise to keep choosing you, on the easy days and the hard ones.",
+  date:"2026-02-14", img:""
+ },
+ memories:[ // x,y are positions on the map, 0–100
+  {t:"The day we met",d:"2022-02-14",x:12,y:62,s:"Neither of us knew it yet, but a small hello was about to become a lot more.",img:""},
+  {t:"First conversation",d:"2022-02-15",x:24,y:28,s:"We talked far longer than planned. I remember not wanting it to end.",img:""},
+  {t:"First picture together",d:"2022-03-01",x:36,y:70,s:"A slightly blurry photo, and still my favourite.",img:""},
+  {t:"First date",d:"2022-03-20",x:46,y:36,s:"Nervous laughter, shared dessert, and time that disappeared.",img:""},
+  {t:"Becoming official",d:"2022-05-08",x:58,y:78,s:"Nothing dramatic. Just certainty, quietly arriving.",img:""},
+  {t:"Our funniest moment",d:"2023-01-12",x:66,y:22,s:"We still laugh about it, and it never gets old.",img:""},
+  {t:"A hard stretch, together",d:"2023-09-03",x:76,y:60,s:"We didn't have the answers, but we had each other.",img:""},
+  {t:"Our favourite adventure",d:"2024-06-15",x:86,y:30,s:"Far from home, perfectly at home.",img:""},
+  {t:"Today",d:"2026-02-14",x:90,y:80,s:"Here we are, and there's so much still ahead.",img:""}],
+ timeline:[
+  {t:"The day we met",d:"2022-02-14",s:"A moment that looked ordinary and wasn't.",c:"Where it began.",img:""},
+  {t:"Our first conversation",d:"2022-02-15",s:"Easy words, and a feeling of being heard.",c:"",img:""},
+  {t:"Our first picture together",d:"2022-03-01",s:"Proof that we were there, and happy.",c:"Framed in my mind.",img:""},
+  {t:"Our first date",d:"2022-03-20",s:"I was nervous. You made it feel simple.",c:"",img:""},
+  {t:"We became official",d:"2022-05-08",s:"The easiest yes I've ever said.",c:"",img:""},
+  {t:"Our funniest memory",d:"2023-01-12",s:"The one we retell at every gathering.",c:"Still laughing.",img:""},
+  {t:"A challenge we overcame",d:"2023-09-03",s:"It tested us, and we came out closer.",c:"",img:""},
+  {t:"Our favourite adventure",d:"2024-06-15",s:"New places feel better with you beside me.",c:"",img:""},
+  {t:"Today, and everything ahead",d:"2026-02-14",s:"The best chapters are the ones we haven't written.",c:"",img:""}],
+ gallery:[
+  {t:"Golden hour",cat:"Our Adventures",r:"4/3",s:"The light was perfect, and so was the company.",img:""},
+  {t:"Lazy Sunday",cat:"Little Moments",r:"3/4",s:"Nothing planned, everything enjoyed.",img:""},
+  {t:"Candles and cake",cat:"Celebrations",r:"3/4",s:"Make a wish. I already got mine.",img:""},
+  {t:"The long road",cat:"Our Adventures",r:"4/3",s:"We got lost, and it was the best part.",img:""},
+  {t:"Chai for two",cat:"Little Moments",r:"4/3",s:"Small ritual, big comfort.",img:""},
+  {t:"Dressed up",cat:"Celebrations",r:"3/4",s:"You walked in and I forgot my words.",img:""}],
+ capsules:[
+  {l:"Open when you need a smile",m:"Remember the time we couldn't stop laughing? That's still us. Take a breath, and smile, because someone is utterly delighted that you exist."},
+  {l:"Open when you miss me",m:"Distance is only a pause. Look up: we're under the same sky. I'm thinking of you right now, and I'll see you soon."},
+  {l:"Open when you want to remember our beginning",m:"It began with a hello that felt like nothing and turned out to be everything. Go back to it whenever you like. It's still ours."},
+  {l:"Open when life feels difficult",m:"You don't have to be strong today. Rest. I'm on your side, always, and this will pass. We've been through hard things before."},
+  {l:"Open when you wonder about our future",m:"I don't know every detail, and I don't need to. I only know I want to find out with you."}],
+ dreams:[
+  {t:"A place to visit",d:"2027-06-01",n:"Somewhere with mountains and no schedule."},
+  {t:"A new tradition",d:"",n:"A yearly letter to each other, opened on our anniversary."},
+  {t:"A shared dream",d:"",n:"Build something together that we're both proud of."},
+  {t:"A meal to cook",d:"2026-12-25",n:"That complicated recipe we keep postponing."},
+  {t:"A place to call home",d:"",n:"Plants on the windowsill and room for friends."},
+  {t:"A future anniversary",d:"2027-02-14",n:"Same us, one more year of stories."}],
+ easter:"You found the secret star. Whatever happens, you are my favourite chapter. (Edit this in CONFIG.easter.)"
+};
+
+/* ---------- helpers (no need to edit) ---------- */
+const $=s=>document.querySelector(s);
+const h=(t,c,x,a)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;if(a)for(const k in a)e.setAttribute(k,a[k]);return e};
+const pd=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||"");if(!m)return null;const d=new Date(+m[1],m[2]-1,+m[3]);return d.getMonth()==m[2]-1?d:null};
+const fd=s=>{const d=pd(s);return d?d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}):(s||"")};
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const pic=(src,alt,ratio)=>{const p=h("div","pic","\u2726");if(ratio)p.style.aspectRatio=ratio;if(src){const i=h("img",null,null,{alt:alt||"",loading:"lazy"});i.onerror=()=>i.remove();i.src=src;p.appendChild(i)}return p};
+const names=CONFIG.partnerA+" & "+CONFIG.partnerB;
+
+/* ---------- opening ---------- */
+$("#q1").textContent=CONFIG.opening[0];$("#q2").textContent=CONFIG.opening[1];
+$("#names").textContent=names;$("#fnames").textContent=names+" \u00b7 "+fd(CONFIG.anniversaryDate);
+$("#adate").textContent=fd(CONFIG.anniversaryDate);
+$("#fin h2").textContent=CONFIG.finalMessage;
+const start=pd(CONFIG.startDate);
+function tick(){const c=$("#counter"),m=$("#cmsg");
+ if(!start){c.textContent="";m.textContent="Set a valid startDate in CONFIG (YYYY-MM-DD).";return}
+ const now=new Date();let a=start,b=now,fut=start>now;if(fut){a=now;b=start}
+ let y=b.getFullYear()-a.getFullYear(),t=new Date(a);t.setFullYear(a.getFullYear()+y);if(t>b){y--;t=new Date(a);t.setFullYear(a.getFullYear()+y)}
+ const ms=b-t,d=Math.floor(ms/864e5),H=Math.floor(ms/36e5)%24,M=Math.floor(ms/6e4)%60,S=Math.floor(ms/1e3)%60;
+ m.textContent=fut?"Our story begins soon.":"and still counting";
+ if(!c.children.length)["Years","Days","Hours","Minutes","Seconds"].forEach(k=>{const e=h("div");e.append(h("b",null,"0"),h("small",null,k));c.appendChild(e)});
+ [y,d,H,M,S].forEach((v,i)=>c.children[i].firstChild.textContent=v)}
+tick();setInterval(tick,1000);
+$("#enter").onclick=()=>$("#universe").scrollIntoView({behavior:RM?"auto":"smooth"});
+
+/* ---------- modal ---------- */
+const dlg=$("#modal");let list=[],idx=0,kind="";
+function render(){const it=list[idx],b=$("#mb");b.textContent="";dlg.classList.toggle("paperd",kind==="cap");
+ if(kind==="cap"){b.append(h("p","k",it.l,{id:"mt"}),h("h2",null,"A letter for you"),h("p",null,it.m))}
+ else if(kind==="egg"){b.append(h("h2",null,"A secret star",{id:"mt"}),h("p",null,it))}
+ else{b.append(h("p","k",it.d?fd(it.d):it.cat||""),h("h2",null,it.t,{id:"mt"}));
+  if(kind==="ph"||it.img!==undefined&&it.img!=="")b.appendChild(pic(it.img,it.t,kind==="ph"?it.r:null));
+  b.appendChild(h("p",null,it.s));if(it.c)b.appendChild(h("p","cp",it.c))}
+ $("#mp").disabled=idx<=0;$("#mn").disabled=idx>=list.length-1;$(".nv").style.display=list.length>1?"flex":"none";
+ if(kind==="mem"){seen.add(idx);paintMap()}if(kind==="cap")capRead.add(idx)}
+function openM(l,i,k){list=l;idx=i;kind=k;render();if(!dlg.open){dlg.showModal();document.body.classList.add("lock")}}
+dlg.addEventListener("close",()=>{document.body.classList.remove("lock");$("#map").classList.remove("dim");paintMap();paintCaps()});
+$("#mx").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+$("#mp").onclick=()=>{idx--;render()};$("#mn").onclick=()=>{idx++;render()};
+addEventListener("keydown",e=>{if(!dlg.open)return;if(e.key==="ArrowLeft"&&idx>0){idx--;render()}if(e.key==="ArrowRight"&&idx<list.length-1){idx++;render()}});
+
+/* ---------- B universe ---------- */
+const seen=new Set(),map=$("#map");
+const svgNS="http://www.w3.org/2000/svg";
+const svg=document.createElementNS(svgNS,"svg");svg.setAttribute("viewBox","0 0 100 100");svg.setAttribute("preserveAspectRatio","none");svg.setAttribute("aria-hidden","true");map.appendChild(svg);
+CONFIG.memories.forEach((m,i,a)=>{if(i){const l=document.createElementNS(svgNS,"line");l.setAttribute("x1",a[i-1].x);l.setAttribute("y1",a[i-1].y);l.setAttribute("x2",m.x);l.setAttribute("y2",m.y);svg.appendChild(l)}
+ const b=h("button","star",null,{type:"button","aria-label":m.t});b.append(h("i",null,m.t));b.style.left=m.x+"%";b.style.top=m.y+"%";
+ b.onclick=()=>{map.classList.add("dim");b.classList.add("on");openM(CONFIG.memories,i,"mem")};map.appendChild(b)});
+function paintMap(){map.querySelectorAll(".star").forEach((s,i)=>{s.classList.toggle("seen",seen.has(i));if(!dlg.open)s.classList.remove("on")})}
+$("#discover").onclick=()=>{const un=CONFIG.memories.map((_,i)=>i).filter(i=>!seen.has(i)),p=un.length?un:CONFIG.memories.map((_,i)=>i);
+ const i=p[Math.floor(Math.random()*p.length)],s=map.querySelectorAll(".star")[i];s.classList.add("on");map.classList.add("dim");setTimeout(()=>openM(CONFIG.memories,i,"mem"),RM?0:700)};
+
+/* ---------- C timeline ---------- */
+const ol=h("ol");CONFIG.timeline.forEach((m,i)=>{const li=h("li"),b=h("button",null,null,{type:"button"});b.append(h("small",null,fd(m.d)),h("h3",null,m.t));b.onclick=()=>openM(CONFIG.timeline,i,"tl");li.appendChild(b);ol.appendChild(li)});$("#tl").appendChild(ol);
+
+/* ---------- D vault ---------- */
+const cats=["All",...new Set(CONFIG.gallery.map(g=>g.cat))];let cur="All",vis=[];
+function drawGrid(){const g=$("#grid");g.textContent="";vis=CONFIG.gallery.filter(x=>cur==="All"||x.cat===cur);
+ vis.forEach((x,i)=>{const b=h("button","ph",null,{type:"button","aria-label":"View "+x.t});b.append(pic(x.img,x.t,x.r),h("span",null,x.t));b.onclick=()=>openM(vis,i,"ph");g.appendChild(b)});
+ $("#filters").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.textContent===cur))}
+cats.forEach(c=>{const b=h("button",null,c,{type:"button"});b.onclick=()=>{cur=c;drawGrid()};$("#filters").appendChild(b)});drawGrid();
+
+/* ---------- E capsules ---------- */
+const capRead=new Set();
+CONFIG.capsules.forEach((c,i)=>{const b=h("button","cap",c.l,{type:"button"});b.onclick=()=>openM(CONFIG.capsules,i,"cap");$("#caps").appendChild(b)});
+function paintCaps(){document.querySelectorAll(".cap").forEach((b,i)=>b.classList.toggle("read",capRead.has(i)))}
+
+/* ---------- F future ---------- */
+const fm=$("#fmap"),D=CONFIG.dreams,fpts=D.map((_,i)=>[8+i*(84/Math.max(D.length-1,1)),i%2?8:22]);
+fpts.forEach((p,i)=>{if(i){const l=document.createElementNS(svgNS,"line");l.setAttribute("x1",fpts[i-1][0]);l.setAttribute("y1",fpts[i-1][1]);l.setAttribute("x2",p[0]);l.setAttribute("y2",p[1]);fm.appendChild(l)}});
+fpts.forEach(p=>{const c=document.createElementNS(svgNS,"circle");c.setAttribute("cx",p[0]);c.setAttribute("cy",p[1]);c.setAttribute("r",2);fm.appendChild(c)});
+D.forEach((d,i)=>{const b=h("button","dream",null,{type:"button","aria-expanded":"false"});b.append(h("h3",null,d.t),h("small",null,d.d?fd(d.d):"Someday"),h("p",null,d.n));
+ b.onclick=()=>{const on=!b.classList.contains("lit");b.classList.toggle("lit",on);b.setAttribute("aria-expanded",on);fm.querySelectorAll("circle")[i].classList.toggle("lit",on)};$("#fut").appendChild(b)});
+
+/* ---------- G letter ---------- */
+(function(){const L=CONFIG.letter,p=$("#paper");p.appendChild(h("p",null,L.greeting));L.paragraphs.forEach(t=>p.appendChild(h("p",null,t)));
+ p.append(h("p","hl",L.highlight),h("p",null,L.promise),h("p","sig",CONFIG.signature),h("p",null,fd(L.date)));if(L.img)p.appendChild(pic(L.img,"Us"))})();
+
+/* ---------- H finale ---------- */
+const fc=$("#fcon"),fp=[[8,28],[22,10],[36,26],[50,8],[64,28],[78,12],[92,26]];let fdone=false,timers=[];
+fp.forEach((p,i)=>{if(i){const l=document.createElementNS(svgNS,"line");l.setAttribute("x1",fp[i-1][0]);l.setAttribute("y1",fp[i-1][1]);l.setAttribute("x2",p[0]);l.setAttribute("y2",p[1]);l.setAttribute("pathLength","1");fc.appendChild(l)}});
+fp.forEach(p=>{const c=document.createElementNS(svgNS,"circle");c.setAttribute("cx",p[0]);c.setAttribute("cy",p[1]);c.setAttribute("r",2.2);fc.appendChild(c)});
+function playFin(){if(fdone)return;fdone=true;const ls=fc.querySelectorAll("line"),cs=fc.querySelectorAll("circle");
+ cs.forEach((c,i)=>timers.push(setTimeout(()=>{c.classList.add("lit");if(ls[i-1])ls[i-1].classList.add("on");if(i===cs.length-1)setTimeout(burst,900)},i*(RM?50:900))))}
+function resetFin(){timers.forEach(clearTimeout);timers=[];fdone=false;fc.querySelectorAll(".lit,.on").forEach(e=>e.classList.remove("lit","on"))}
+$("#replay").onclick=()=>{resetFin();seen.clear();capRead.clear();paintMap();paintCaps();scrollTo({top:0,behavior:RM?"auto":"smooth"})};
+$("#visit").onclick=()=>$("#universe").scrollIntoView({behavior:RM?"auto":"smooth"});
+$("#save").onclick=()=>{const d=pd(CONFIG.saveDate),m=$("#datemsg");
+ if(!d||d<=new Date()){m.textContent="To save a date, set a future saveDate in CONFIG (YYYY-MM-DD).";return}
+ const p=n=>String(n).padStart(2,"0"),s=d.getFullYear()+p(d.getMonth()+1)+p(d.getDate()),e=new Date(d.getTime()+864e5),es=e.getFullYear()+p(e.getMonth()+1)+p(e.getDate());
+ const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Ever After//EN","BEGIN:VEVENT","UID:"+s+"@ever-after","DTSTAMP:"+new Date().toISOString().replace(/[-:]|\.\d{3}/g,""),"DTSTART;VALUE=DATE:"+s,"DTEND;VALUE=DATE:"+es,"SUMMARY:Our Anniversary \u2014 "+names.replace(/[,;]/g," "),"END:VEVENT","END:VCALENDAR"].join("\r\n");
+ const a=h("a",null,null,{href:URL.createObjectURL(new Blob([ics],{type:"text/calendar"})),download:"our-anniversary.ics"});document.body.appendChild(a);a.click();a.remove();m.textContent="Your calendar file is ready."};
+
+/* ---------- Easter egg ---------- */
+let eg=0,egt;$("#egg").onclick=()=>{clearTimeout(egt);eg++;egt=setTimeout(()=>eg=0,2500);if(eg>=5){eg=0;openM([CONFIG.easter],0,"egg")}};
+
+/* ---------- Sound (off by default) ---------- */
+let au=null;const sb=$("#snd");
+sb.onclick=()=>{if(!CONFIG.audio){sb.textContent="No audio set";return}
+ if(!au){au=new Audio(CONFIG.audio);au.loop=true;au.onerror=()=>{sb.textContent="Audio unavailable";sb.setAttribute("aria-pressed","false")}}
+ if(au.paused){au.play().then(()=>{sb.textContent="Sound on";sb.setAttribute("aria-pressed","true")}).catch(()=>{sb.textContent="Audio unavailable"})}else{au.pause();sb.textContent="Sound off";sb.setAttribute("aria-pressed","false")}};
+
+/* ---------- progress + reveals ---------- */
+const secs=[...document.querySelectorAll("main>section")],pr=$("#prog");
+secs.forEach(s=>pr.appendChild(h("a",null,null,{href:"#"+s.id,"aria-label":"Go to "+s.id})));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");const k=secs.indexOf(e.target);if(k>-1){pr.querySelectorAll("a").forEach((a,i)=>a.classList.toggle("cur",i===k));if(e.target.id==="fin")playFin()}}}),{threshold:.35});
+secs.forEach(s=>io.observe(s));document.querySelectorAll(".rv").forEach(e=>io.observe(e));
+
+/* ---------- starfield + golden burst ---------- */
+const cv=$("#sky"),cx=cv.getContext("2d");let W,Hh,st=[],ps=[];
+function size(){W=cv.width=innerWidth;Hh=cv.height=innerHeight;st=Array.from({length:Math.min(140,W/8)},()=>({x:Math.random()*W,y:Math.random()*Hh,r:Math.random()*1.3+.2,p:Math.random()*6}))}
+addEventListener("resize",size);size();
+function burst(){const r=$("#fcon").getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height/2;if(RM)return;
+ for(let i=0;i<150;i++){const a=Math.random()*6.283,v=Math.random()*5+1;ps.push({x:ox,y:oy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1,l:1,s:Math.random()*2+.8})}}
+function frame(t){cx.clearRect(0,0,W,Hh);
+ for(const s of st){cx.globalAlpha=.4+.5*Math.sin(t/1200+s.p);cx.fillStyle="#f4efe4";cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill()}
+ for(let i=ps.length-1;i>=0;i--){const p=ps[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.985;p.l-=.01;if(p.l<=0){ps.splice(i,1);continue}
+  cx.globalAlpha=p.l;cx.fillStyle="#d9bc82";cx.shadowColor="#d9bc82";cx.shadowBlur=10;cx.beginPath();cx.arc(p.x,p.y,p.s,0,6.283);cx.fill();cx.shadowBlur=0}
+ if(RM&&!ps.length)return;requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

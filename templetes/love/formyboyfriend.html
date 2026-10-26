@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LOVE.exe — A Little World Made for Him</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;0,900;1,500&family=Space+Grotesk:wght@400;600&display=swap">
+<style>
+.love-exe-experience{--ob:#09090B;--ch:#18181B;--bu:#520F22;--red:#FF304F;--si:#D7D7DF;--wh:#F5F2F0;--d:'Bodoni Moda','Didot',Georgia,serif;--s:'Space Grotesk',system-ui,Arial,sans-serif;position:fixed;inset:0;overflow:hidden;background:var(--ob);color:var(--wh);font:400 16px/1.5 var(--s)}
+.love-exe-experience *{box-sizing:border-box;margin:0}
+.love-exe-experience::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
+.love-exe-experience button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;touch-action:manipulation}
+.love-exe-experience :focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.stage{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:max(20px,env(safe-area-inset-top)) 22px max(24px,env(safe-area-inset-bottom));display:none;background:radial-gradient(120% 80% at 80% 0,var(--bu),transparent 60%),radial-gradient(80% 60% at 0 100%,#2a0712,transparent 70%),var(--ob)}
+.stage.on{display:block;animation:wipe .8s cubic-bezier(.7,0,.2,1)}
+@keyframes wipe{from{clip-path:inset(0 0 100% 0);filter:contrast(1.6) hue-rotate(-12deg)}to{clip-path:inset(0);filter:none}}
+.chrome{font-family:var(--d);font-weight:900;letter-spacing:-.03em;line-height:.9;background:linear-gradient(180deg,#fff 10%,var(--si) 45%,#6c6c78 52%,var(--si) 70%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(255,48,79,.35))}
+.hero{min-height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1000px;margin:auto}
+.hero h1{font-size:clamp(64px,19vw,190px)}
+.hero h1 i{color:var(--red);-webkit-text-fill-color:var(--red);font-style:italic}
+.sub{color:var(--si);margin:18px 0 28px;font-size:clamp(15px,2.4vw,20px)}
+.bar{height:3px;background:#2a2a30;max-width:420px;margin-bottom:10px}.bar b{display:block;height:100%;width:0;background:var(--red);box-shadow:0 0 14px var(--red)}
+.pct{font-variant-numeric:tabular-nums;color:var(--si);font-size:13px}
+.cta{display:inline-block;padding:16px 28px;border:1px solid var(--red);background:linear-gradient(90deg,var(--bu),#2a0712);font-weight:600;letter-spacing:.14em;transition:transform .15s,box-shadow .25s,background .25s}
+.cta:hover{box-shadow:0 0 30px rgba(255,48,79,.55);background:var(--red)}.cta:active{transform:scale(.96)}
+.lnk{color:var(--si);text-decoration:underline;padding:12px 4px;margin-top:8px;font-size:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.prog{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--si)}.prog i{width:22px;height:4px;background:#333;transition:.4s}.prog i.f{background:var(--red);box-shadow:0 0 10px var(--red)}
+.snd{border:1px solid #444;padding:8px 14px;font-size:13px}.snd[aria-pressed=true]{border-color:var(--red);color:var(--red)}
+.room{max-width:1100px;margin:auto}.room h2,.pg h2{font-family:var(--d);font-size:clamp(40px,9vw,92px);line-height:.95;margin-bottom:6px}
+.dest{display:grid;gap:14px;grid-template-columns:repeat(6,1fr);margin-top:22px}
+.d{position:relative;text-align:left;padding:22px;min-height:150px;border:1px solid #33333a;background:linear-gradient(135deg,rgba(82,15,34,.55),var(--ch));overflow:hidden;transition:transform .2s,border-color .2s}
+.d:hover{transform:translateY(-4px) rotate(-.4deg);border-color:var(--red)}.d:active{transform:scale(.97)}
+.d:nth-child(1){grid-column:span 4;min-height:230px}.d:nth-child(2){grid-column:span 2}.d:nth-child(3){grid-column:span 2}.d:nth-child(4){grid-column:span 4;background:linear-gradient(200deg,#000,var(--bu))}
+.d strong{display:block;font-family:var(--d);font-size:clamp(26px,4.5vw,44px);line-height:1}.d span{color:var(--si);font-size:14px}
+.d em{position:absolute;right:16px;top:14px;font-style:normal;font-size:12px;color:var(--si)}.d.f em{color:var(--red)}
+.ic{width:34px;height:34px;margin-bottom:14px;border:2px solid var(--red);position:relative;box-shadow:0 0 14px rgba(255,48,79,.5)}
+.ic.v{border-radius:3px}.ic.q{border-radius:50%}.ic.m{border-radius:50% 50% 0 0;border-bottom:0;height:20px;width:40px}.ic.s{transform:rotate(45deg);width:28px;height:28px}
+@media(max-width:700px){.dest{grid-template-columns:1fr}.d:nth-child(n){grid-column:auto;min-height:130px}}
+.egg{margin-top:26px;color:#6a6a74;font-size:12px;border-bottom:1px dotted #555}
+.pg{max-width:1100px;margin:auto}.back{padding:10px 0;color:var(--si);margin-bottom:10px}
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:20px}
+.fr{position:relative;border:8px solid #e9e5e0;border-bottom-width:30px;background:var(--ch);aspect-ratio:4/5;overflow:hidden;box-shadow:0 20px 40px #000a;transition:transform .25s;padding:0}
+.fr:nth-child(1){grid-column:span 3;transform:rotate(-2deg)}.fr:nth-child(2){grid-column:span 3;transform:rotate(1.5deg) translateY(24px)}.fr:nth-child(3){grid-column:span 2;transform:rotate(1deg)}.fr:nth-child(4){grid-column:span 2;transform:rotate(-1.5deg) translateY(-10px)}.fr:nth-child(5){grid-column:span 2;transform:rotate(2deg)}.fr:nth-child(6){grid-column:span 3;transform:rotate(-1deg)}
+.fr:hover{transform:scale(1.04) rotate(0);z-index:3}
+.ph{position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,var(--red),transparent 40%),linear-gradient(160deg,var(--bu),var(--ob));display:flex;align-items:flex-end;padding:12px;font-family:var(--d);font-style:italic;font-size:22px;text-align:left;color:var(--wh)}
+.ph img,.big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:sepia(.3) contrast(1.1) saturate(1.1)}
+.fr small{position:absolute;bottom:-26px;left:0;right:0;color:#222;font-size:12px}
+@media(max-width:700px){.wall{gap:26px 10px}.fr:nth-child(n){grid-column:span 3;transform:none}}
+dialog{border:0;padding:0;background:transparent;color:var(--wh);max-width:min(900px,94vw);width:100%;max-height:92vh;overflow:auto}
+dialog::backdrop{background:rgba(5,0,2,.88)}
+.dlg{display:grid;grid-template-columns:1.1fr 1fr;background:var(--ch);border:1px solid var(--red);animation:wipe .6s}
+.big{position:relative;min-height:320px;background:linear-gradient(160deg,var(--bu),var(--ob))}.dlg>div:last-child{padding:28px}
+.dlg h3{font-family:var(--d);font-size:36px;line-height:1;margin:6px 0 14px}.dlg p{color:var(--si)}
+@media(max-width:700px){.dlg{grid-template-columns:1fr}}
+.q{max-width:720px;margin:auto}.q h3{font-family:var(--d);font-size:clamp(28px,6vw,48px);line-height:1.05;margin:10px 0 20px}
+.opts{display:grid;gap:10px}.o{padding:16px;border:1px solid #3a3a42;background:var(--ch);text-align:left;transition:.2s}.o:hover:not(:disabled){border-color:var(--red)}
+.o.pick{border-color:var(--red);background:var(--bu);animation:pop .4s}.o:disabled{cursor:default;opacity:.85}
+@keyframes pop{50%{transform:scale(1.03)}}
+.fb{min-height:52px;margin:16px 0;color:var(--si);font-family:var(--d);font-style:italic;font-size:20px}
+.gauge{position:relative;width:min(70vw,320px);aspect-ratio:1;margin:20px 0}.gauge svg{width:100%;transform:rotate(-90deg)}
+.gauge b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--d);font-size:clamp(48px,14vw,84px);font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}@media(max-width:800px){.two{grid-template-columns:1fr}}
+.card{border-top:2px solid var(--red);padding:18px 0}.sy{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.sb{aspect-ratio:1;border:1px solid #444;background:var(--ch);display:grid;place-items:center;transition:.2s}.sb:hover{border-color:var(--red)}.sb[aria-pressed=true]{border-color:var(--red);background:var(--bu)}
+.sb i{width:34px;height:34px;background:var(--si);display:block}
+.s0{border-radius:50%}.s1{clip-path:polygon(50% 0,100% 100%,0 100%)}.s2{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}.s3{background:none!important;border:5px solid var(--si);border-radius:50%}.s4{width:12px!important;height:38px!important}.s5{clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.sel{min-height:24px;color:var(--red);letter-spacing:.2em}
+.hid{display:none;border:1px solid var(--red);padding:20px;margin-top:14px;font-family:var(--d);font-size:22px;background:linear-gradient(120deg,var(--bu),#000);animation:wipe .8s;box-shadow:0 0 40px rgba(255,48,79,.4)}.hid.on{display:block}
+.fin{display:flex;flex-direction:column;justify-content:center;min-height:100%;max-width:1000px;margin:auto}
+.fin h2{font-size:clamp(52px,15vw,150px)}.fin p{font-family:var(--d);font-style:italic;font-size:clamp(20px,3.6vw,32px);max-width:700px;margin:22px 0 10px;line-height:1.3}
+.fin .ln{opacity:0;transform:translateY(12px);animation:ln .9s forwards}@keyframes ln{to{opacity:1;transform:none}}
+.glow{position:absolute;width:60vmax;height:60vmax;right:-20vmax;top:-20vmax;background:radial-gradient(circle,rgba(255,48,79,.4),transparent 65%);pointer-events:none;animation:br 6s ease-in-out infinite alternate}@keyframes br{to{opacity:.5;transform:scale(1.1)}}
+.p{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:99;box-shadow:0 0 8px var(--red);animation:pf .8s ease-out forwards}
+@keyframes pf{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+.sr{position:absolute;left:-9999px}
+@media(prefers-reduced-motion:reduce){.love-exe-experience *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.p{display:none}}
+</style></head>
+<body>
+<main class="love-exe-experience" id="app">
+
+<section class="stage" id="s1" aria-label="Boot"><div class="hero">
+ <h1 class="chrome">LOVE<i>.</i>exe</h1>
+ <p class="sub" id="bootsub"></p>
+ <div class="bar" aria-hidden="true"><b id="bootbar"></b></div><div class="pct" id="bootpct" aria-live="off">0%</div>
+ <div style="margin-top:26px"><button class="cta" id="enter" hidden>[ ENTER HIS WORLD ]</button><button class="lnk" id="skip">Skip intro</button></div>
+</div></section>
+
+<section class="stage" id="s2" aria-label="Control room"><div class="room">
+ <div class="top"><div class="prog" aria-live="polite"><span id="progtxt"></span><i></i><i></i><i></i><i></i></div><button class="snd" id="snd" aria-pressed="false">Sound off</button></div>
+ <h2 class="chrome" id="roomT"></h2><p class="sub" id="roomSub"></p>
+ <div class="dest">
+  <button class="d" data-go="s3" data-k="vault"><em>unseen</em><div class="ic v"></div><strong>The Vault</strong><span>Private archive of moments</span></button>
+  <button class="d" data-go="s4" data-k="quiz"><em>unseen</em><div class="ic q"></div><strong>The Quiz</strong><span>Five questions about us</span></button>
+  <button class="d" data-go="s5" data-k="meter" data-t="meter"><em>unseen</em><div class="ic m"></div><strong>Love Meter</strong><span>Press to measure</span></button>
+  <button class="d" data-go="s5" data-k="secret" data-t="secret"><em>unseen</em><div class="ic s"></div><strong>The Secret</strong><span>Crack the code</span></button>
+ </div>
+ <button class="egg" id="egg">do not press</button>
+ <div style="margin-top:28px"><button class="cta" id="toFinal" disabled>OPEN THE FINAL TRANSMISSION</button> <span class="pct" id="lockhint"></span></div>
+</div></section>
+
+<section class="stage" id="s3" aria-label="Memory vault"><div class="pg">
+ <button class="back" data-go="s2">&larr; Control room</button>
+ <h2 class="chrome">The Vault</h2><p class="sub" id="vaultSub">Tap a frame to open it.</p><div class="wall" id="wall"></div>
+</div></section>
+
+<section class="stage" id="s4" aria-label="Quiz"><div class="q" id="quiz">
+ <button class="back" data-go="s2">&larr; Control room</button>
+ <div class="pct" id="qn"></div><h3 id="qq"></h3><div class="opts" id="qo"></div><div class="fb" id="qf" aria-live="polite"></div><button class="cta" id="qnext" hidden>NEXT</button>
+ <div id="qres" hidden><h2 class="chrome" id="qrt" style="font-size:clamp(44px,10vw,90px);padding-bottom:10px"></h2><p class="sub" id="qrm"></p><button class="cta" data-go="s2">BACK TO CONTROL ROOM</button></div>
+</div></section>
+
+<section class="stage" id="s5" aria-label="Love meter and secret"><div class="pg">
+ <button class="back" data-go="s2">&larr; Control room</button>
+ <div class="two">
+  <div class="card" id="meterBox"><h2 class="chrome" style="font-size:clamp(40px,7vw,70px)">Love Meter</h2>
+   <div class="gauge"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="#2a2a30" stroke-width="8"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#FF304F" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="filter:drop-shadow(0 0 6px #FF304F)"/></svg><b id="mval" role="status">0%</b></div>
+   <button class="cta" id="mgo">ACTIVATE</button><p class="fb" id="mmsg" aria-live="polite"></p></div>
+  <div class="card" id="secretBox"><h2 class="chrome" style="font-size:clamp(40px,7vw,70px)">The Secret</h2>
+   <p class="sub" id="clue" style="margin-bottom:0"></p>
+   <div class="sy" id="sy"></div><div class="sel" id="sel" aria-live="polite"></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px"><button class="cta" id="sgo">UNLOCK</button><button class="snd" id="shint">Hint</button><button class="snd" id="sclr">Retry</button></div>
+   <p class="fb" id="sfb" aria-live="polite"></p><div class="hid" id="hid" role="status"></div></div>
+ </div>
+</div></section>
+
+<section class="stage" id="s6" aria-label="Final transmission"><div class="glow"></div><div class="fin">
+ <div class="pct ln" id="finTo" style="animation-delay:.2s"></div>
+ <h2 class="chrome ln" id="finH" style="animation-delay:.6s"></h2>
+ <p class="ln" id="finMsg" style="animation-delay:1.4s"></p><p class="ln" id="finSign" style="animation-delay:2.2s;color:var(--red)"></p>
+ <div class="ln" style="animation-delay:3s"><button class="cta" id="replay">REPLAY FROM THE START</button></div>
+</div></section>
+
+<dialog id="dlg" aria-labelledby="dT"><div class="dlg"><div class="big" id="dImg"></div><div><div class="pct" id="dD"></div><h3 id="dT"></h3><p id="dC"></p><button class="cta" id="dX" style="margin-top:24px">CLOSE</button></div></div></dialog>
+<dialog id="edlg" aria-labelledby="eT"><div class="dlg" style="grid-template-columns:1fr"><div><h3 id="eT">Signal found</h3><p id="eC"></p><button class="cta" id="eX" style="margin-top:24px">CLOSE</button></div></div></dialog>
+</main>
+
+<script>
+/* ================= CONFIGURATION — EDIT THIS BLOCK ONLY =================
+   Leave any text as "" to hide it. Image URL "" = stylish gradient fallback.
+   Quiz: "pref" = index (0,1,2...) of the favourite/correct option.
+   Secret: "answer" = symbols in order. Symbols available: circle, triangle, diamond, ring, bar, star */
+const CONFIG={
+ recipient:"Alex", sender:"Sam",
+ intro:"Private access granted. One person only.",
+ roomTitle:"Control Room", roomSub:"Four doors. Explore them all.",
+ audioUrl:"",  // optional music file URL; sound stays off until the toggle is pressed
+ memories:[
+  {title:"The first night out",date:"Sample · Edit me",img:"",caption:"Replace this with the moment you first realised this was something special."},
+  {title:"That rainy walk",date:"Sample · Edit me",img:"",caption:"We got soaked and laughed the whole way home."},
+  {title:"The terrible movie",date:"Sample · Edit me",img:"",caption:"Best worst movie. You still quote the villain."},
+  {title:"Midnight snacks",date:"Sample · Edit me",img:"",caption:"A tiny ritual that somehow means everything."},
+  {title:"Your best laugh",date:"Sample · Edit me",img:"",caption:"The one that happens when you can't stop. I'd travel for that sound."}
+ ],
+ quiz:[
+  {q:"Where would we spend a perfect Sunday?",o:["Couch and snacks","A long drive","A new café","Anywhere with you"],pref:0,right:"Obviously. Blankets required.",wrong:"Interesting choice! But the couch still wins."},
+  {q:"Who falls asleep first during movies?",o:["Me","You","Both, honestly","Nobody admits it"],pref:1,right:"Caught. Adorably.",wrong:"Nice try. The snoring says otherwise."},
+  {q:"Pick our most likely habit.",o:["Sharing food","Inside jokes","Late texts","All of the above"],pref:3,right:"Correct. We are a lot.",wrong:"Close, but it is all of them."},
+  {q:"Our favourite shared activity?",o:["Food hunting","Music","Road trips","Doing nothing"],pref:1,right:"Soundtrack of us.",wrong:"Good one, but music edges it."},
+  {q:"Who said: \"I'm not hungry, just one bite\"?",o:["You","Me","Both of us","The fries did"],pref:2,right:"One bite. Always one bite.",wrong:"It was both of us. Always."}
+ ],
+ quizResults:[
+  {min:0,title:"Beautiful Chaos",msg:"You missed a few, but we make new answers together."},
+  {min:3,title:"Certified Soulmate",msg:"You know me well. Dangerous."},
+  {min:5,title:"Mind Reader",msg:"Perfect score. I am not even surprised."}
+ ],
+ meterValue:100, meterMessage:"Off the charts. Instruments gave up.",
+ secretClue:"Clue: the shape of a night sky, a heart that glows, and a path that never ends.",
+ secretHint:"Hint: stars first, then a circle, then a diamond.",
+ secretAnswer:["star","circle","diamond"],
+ hiddenMessage:"You found it. Every day with you feels like the good part of the movie.",
+ easterEgg:"You pressed the one thing I told you not to. Typical. I love that about you.",
+ final:{kicker:"Final transmission",headline:"Made for you",message:"Thank you for being my favourite person. This little world is small, but what I feel is not.",signoff:"Always yours,"}
+};
+/* ================= END CONFIGURATION ================= */
+(function(){
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const str=v=>(v==null?"":String(v));
+const C=CONFIG,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const KEYS=["vault","quiz","meter","secret"];
+const SYM=["circle","triangle","diamond","ring","bar","star"];
+let S,timers=[],raf=0,audio=null,ac=null;
+function fresh(){return{stage:"s1",found:{vault:false,quiz:false,meter:false,secret:false},qi:0,score:0,answered:false,meterDone:false,sel:[],unlocked:false,sound:false,eggClicks:0}}
+function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
+function clearTimers(){timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=str(txt);return e}
+function setT(sel,txt){const e=$(sel);e.textContent=str(txt);e.hidden=!txt&&e.dataset.h==="1"}
+/* sound */
+function blip(f,d){if(!S.sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.type="sine";g.gain.value=.05;g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function burst(x,y){blip(520+Math.random()*300,.15);if(reduce)return;for(let i=0;i<14;i++){const p=el("span","p"),a=Math.random()*6.28,r=30+Math.random()*60;p.style.left=x+"px";p.style.top=y+"px";p.style.setProperty("--x",Math.cos(a)*r+"px");p.style.setProperty("--y",Math.sin(a)*r+"px");document.body.appendChild(p);setTimeout(()=>p.remove(),850)}}
+document.addEventListener("click",e=>{const b=e.target.closest(".cta,.d,.fr,.sb,.o");if(b){const r=b.getBoundingClientRect();burst(e.clientX||r.left+r.width/2,e.clientY||r.top+r.height/2)}});
+/* stages */
+function go(id){S.stage=id;$$(".stage").forEach(s=>s.classList.toggle("on",s.id===id));const s=$("#"+id);s.scrollTop=0;if(id==="s2")renderRoom();if(id==="s6")renderFinal();const h=s.querySelector("h1,h2,h3,button");if(h&&id!=="s1")s.setAttribute("tabindex","-1"),s.focus({preventScroll:true})}
+function renderRoom(){let n=0;$$(".d").forEach(d=>{const f=S.found[d.dataset.k];d.classList.toggle("f",f);d.querySelector("em").textContent=f?"discovered":"unseen";if(f)n++});
+ $$(".prog i").forEach((i,k)=>i.classList.toggle("f",k<n));$("#progtxt").textContent=n+" / 4 discovered";
+ $("#toFinal").disabled=n<4;$("#lockhint").textContent=n<4?"Discover all four to unlock.":"";}
+function markFound(k){if(!S.found[k]){S.found[k]=true;blip(880,.3)}}
+/* boot */
+function boot(){$("#bootsub").textContent=str(C.intro)+(C.recipient?"  ·  "+str(C.recipient):"");$("#enter").hidden=true;$("#skip").hidden=false;let p=0;
+ const step=()=>{p=Math.min(100,p+4);$("#bootbar").style.width=p+"%";$("#bootpct").textContent=p+"%";if(p<100)later(step,50);else done()};
+ const done=()=>{$("#skip").hidden=true;$("#enter").hidden=false;$("#enter").focus()};
+ $("#skip").onclick=()=>{clearTimers();$("#bootbar").style.width="100%";$("#bootpct").textContent="100%";done()};
+ if(reduce){$("#skip").onclick()}else step()}
+/* vault */
+function buildVault(){const w=$("#wall");w.textContent="";const m=(C.memories||[]).slice(0,6);if(!m.length){w.appendChild(el("p","sub","No memories yet."));return}
+ m.forEach((x,i)=>{const b=el("button","fr");b.setAttribute("aria-label","Open memory: "+str(x.title));const ph=el("div","ph",str(x.title));addImg(ph,x.img);b.appendChild(ph);b.appendChild(el("small",null,x.date));b.onclick=()=>openMem(x);w.appendChild(b)})}
+function addImg(box,url){if(!str(url))return;const i=new Image();i.alt="";i.onload=()=>box.appendChild(i);i.src=url}
+function openMem(x){$("#dT").textContent=str(x.title)||"Memory";$("#dD").textContent=str(x.date);$("#dC").textContent=str(x.caption);const b=$("#dImg");b.textContent="";addImg(b,x.img);$("#dlg").showModal();markFound("vault");blip(300,.4)}
+/* quiz */
+function quizReset(){S.qi=0;S.score=0;S.answered=false;$("#qres").hidden=true;["#qn","#qq","#qo","#qf"].forEach(s=>$(s).hidden=false);showQ()}
+function showQ(){const Q=C.quiz||[];if(S.qi>=Q.length)return result();const q=Q[S.qi];S.answered=false;$("#qn").textContent="Question "+(S.qi+1)+" of "+Q.length;$("#qq").textContent=str(q.q);$("#qf").textContent="";$("#qnext").hidden=true;const o=$("#qo");o.textContent="";
+ (q.o||[]).forEach((t,i)=>{const b=el("button","o",t);b.onclick=()=>answer(i,b);o.appendChild(b)})}
+function answer(i,b){if(S.answered)return;S.answered=true;const q=C.quiz[S.qi],ok=i===q.pref;if(ok)S.score++;b.classList.add("pick");$$("#qo .o").forEach(x=>x.disabled=true);
+ $("#qf").textContent=str(ok?q.right:q.wrong)||(ok?"Yes!":"Nice try!");blip(ok?740:300,.3);const n=$("#qnext");n.textContent=S.qi+1>=C.quiz.length?"SEE RESULT":"NEXT";n.hidden=false;n.focus()}
+function result(){["#qn","#qq","#qo","#qf","#qnext"].forEach(s=>$(s).hidden=true);let r={title:"Done",msg:""};(C.quizResults||[]).forEach(x=>{if(S.score>=x.min)r=x});
+ $("#qrt").textContent=str(r.title);$("#qrm").textContent=str(r.msg)+" ("+S.score+"/"+C.quiz.length+")";$("#qres").hidden=false;markFound("quiz")}
+/* meter */
+function meterReset(){cancelAnimationFrame(raf);$("#arc").style.strokeDashoffset=326.7;$("#mval").textContent="0%";$("#mmsg").textContent="";$("#mgo").disabled=false;$("#mgo").textContent="ACTIVATE";S.meterDone=false}
+function meterRun(){const v=Math.max(0,Math.min(100,+C.meterValue||0));$("#mgo").disabled=true;const t0=performance.now(),D=reduce?1:2600;
+ const f=t=>{const k=Math.min(1,(t-t0)/D),e=1-Math.pow(1-k,3),n=Math.round(v*e);$("#mval").textContent=n+"%";$("#arc").style.strokeDashoffset=326.7*(1-n/100);if(k<1)raf=requestAnimationFrame(f);else{S.meterDone=true;$("#mmsg").textContent=str(C.meterMessage);$("#mgo").textContent="DONE";markFound("meter");blip(660,.5)}};raf=requestAnimationFrame(f)}
+/* secret */
+function secretReset(){S.sel=[];S.unlocked=false;$("#sfb").textContent="";$("#hid").classList.remove("on");$("#hid").textContent="";drawSel()}
+function buildSyms(){const g=$("#sy");g.textContent="";SYM.forEach((n,k)=>{const b=el("button","sb");b.setAttribute("aria-label",n);b.setAttribute("aria-pressed","false");b.dataset.n=n;b.appendChild(el("i","s"+k));b.onclick=()=>{if(S.unlocked)return;if(S.sel.length<3){S.sel.push(n);drawSel()}};g.appendChild(b)})}
+function drawSel(){$$(".sb").forEach(b=>b.setAttribute("aria-pressed",String(S.sel.includes(b.dataset.n))));$("#sel").textContent=S.sel.length?"Selected: "+S.sel.join(" → "):""}
+function secretTry(){if(S.unlocked)return;const a=(C.secretAnswer||[]).map(x=>str(x).toLowerCase());if(S.sel.length<3){$("#sfb").textContent="Choose three symbols in order.";return}
+ if(S.sel.join()===a.join()){S.unlocked=true;$("#sfb").textContent="Access granted.";const h=$("#hid");h.textContent=str(C.hiddenMessage)||"You did it.";h.classList.add("on");markFound("secret");const r=h.getBoundingClientRect();burst(r.left+r.width/2,r.top);burst(r.left+20,r.top+20);burst(r.right-20,r.top+20)}
+ else{$("#sfb").textContent="Not quite. Use Hint or Retry.";blip(200,.3)}}
+/* final */
+function renderFinal(){const f=C.final||{};$("#finTo").textContent=str(f.kicker)+(C.recipient?"  ·  for "+str(C.recipient):"");$("#finH").textContent=str(f.headline);$("#finMsg").textContent=str(f.message);$("#finSign").textContent=(str(f.signoff)+" "+str(C.sender)).trim();
+ $$("#s6 .ln").forEach(n=>{n.style.animation="none";void n.offsetWidth;n.style.animation=""})}
+/* easter egg */
+function egg(){$("#eC").textContent=str(C.easterEgg)||"Hello.";$("#edlg").showModal();blip(1000,.4)}
+/* replay */
+function replay(){clearTimers();["#dlg","#edlg"].forEach(s=>{if($(s).open)$(s).close()});const snd=S.sound;S=fresh();S.sound=snd;quizReset();meterReset();secretReset();renderRoom();go("s1");boot()}
+/* init */
+function init(){S=fresh();$("#roomT").textContent=str(C.roomTitle);$("#roomSub").textContent=str(C.roomSub);buildVault();buildSyms();$("#clue").textContent=str(C.secretClue);
+ $$("[data-go]").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.k,t=b.dataset.t;go(b.dataset.go);if(k==="quiz"&&(S.qi===0||!S.found.quiz))quizReset();if(t){$("#meterBox").style.opacity=t==="meter"?1:.45;$("#secretBox").style.opacity=t==="secret"?1:.45;$(t==="meter"?"#mgo":"#sy .sb").focus()}}));
+ $("#enter").onclick=()=>go("s2");$("#toFinal").onclick=()=>go("s6");$("#replay").onclick=replay;
+ $("#qnext").onclick=()=>{S.qi++;showQ()};$("#mgo").onclick=meterRun;$("#sgo").onclick=secretTry;
+ $("#shint").onclick=()=>{$("#sfb").textContent=str(C.secretHint)||"Think about the clue."};$("#sclr").onclick=()=>{S.sel=[];$("#sfb").textContent="";drawSel()};
+ $("#dX").onclick=()=>$("#dlg").close();$("#eX").onclick=()=>$("#edlg").close();$("#egg").onclick=egg;
+ ["#dlg","#edlg"].forEach(s=>$(s).addEventListener("click",e=>{if(e.target===$(s))$(s).close()}));
+ $("#snd").onclick=()=>{S.sound=!S.sound;const b=$("#snd");b.setAttribute("aria-pressed",String(S.sound));b.textContent=S.sound?"Sound on":"Sound off";
+  if(str(C.audioUrl)){try{audio=audio||new Audio(C.audioUrl);audio.loop=true;audio.onerror=()=>{audio=null};if(S.sound)audio.play().catch(()=>{});else audio.pause()}catch(e){}}blip(600,.2)};
+ quizReset();meterReset();go("s1");boot()}
+init();
+})();
+</script></body></html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Miles Apart, One Link</title>
+<meta name="theme-color" content="#050b1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+.miles-apart-experience{--navy:#050b1f;--indigo:#14174a;--violet:#4a3a8c;--silver:#e8edf8;--ice:#a5dcff;--gold:#d9bf8c;
+ --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+ position:fixed;inset:0;overflow:hidden;color:var(--silver);font-family:var(--sans);font-weight:300;
+ background:radial-gradient(120% 90% at 50% 100%,#2b2468 0%,#14174a 38%,#050b1f 100%);isolation:isolate}
+.miles-apart-experience *,.miles-apart-experience *::before,.miles-apart-experience *::after{box-sizing:border-box}
+.miles-apart-experience [hidden]{display:none!important}
+.miles-apart-experience button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.miles-apart-experience :focus-visible{outline:2px solid var(--ice);outline-offset:4px;border-radius:6px}
+
+/* ---------- atmosphere ---------- */
+.miles-apart-experience .sky{position:absolute;inset:-4%;z-index:0;pointer-events:none;
+ background:radial-gradient(60% 40% at 20% 15%,rgba(110,80,200,.28),transparent 70%),radial-gradient(50% 40% at 85% 30%,rgba(70,120,220,.18),transparent 70%)}
+.miles-apart-experience .layer{position:absolute;inset:-6%;z-index:0;pointer-events:none;
+ transform:translate3d(calc(var(--px,0)*var(--d)*1px),calc(var(--py,0)*var(--d)*1px),0);transition:transform .6s ease-out}
+.miles-apart-experience .layer i{position:absolute;border-radius:50%;background:#fff;opacity:var(--o);animation:tw var(--t) ease-in-out var(--dl) infinite alternate}
+.miles-apart-experience .drift{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.miles-apart-experience .drift i{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--ice);box-shadow:0 0 8px var(--ice);opacity:0;animation:rise var(--t) linear var(--dl) infinite}
+@keyframes tw{from{opacity:calc(var(--o)*.25);transform:scale(.8)}to{opacity:var(--o);transform:scale(1.15)}}
+@keyframes rise{0%{opacity:0;transform:translate3d(0,0,0)}15%{opacity:.8}100%{opacity:0;transform:translate3d(var(--dx),-105vh,0)}}
+.miles-apart-experience .grain{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(2,4,14,.55) 100%)}
+
+/* ---------- scenes ---------- */
+.miles-apart-experience .scene{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+ padding:max(28px,env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) max(28px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));
+ overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transform:scale(1.03);filter:blur(6px);
+ transition:opacity .9s ease,transform 1.1s ease,filter .9s ease,visibility 0s linear .9s}
+.miles-apart-experience .scene.on{opacity:1;visibility:visible;transform:none;filter:none;transition-delay:0s}
+.miles-apart-experience .scene>*{max-width:min(720px,100%)}
+.miles-apart-experience .eyebrow{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin:0 0 1.2rem}
+.miles-apart-experience h1,.miles-apart-experience h2{font-family:var(--serif);font-weight:300;line-height:1.08;margin:0 0 1.1rem;letter-spacing:.01em;
+ text-shadow:0 0 40px rgba(165,220,255,.35);outline:none}
+.miles-apart-experience h1{font-size:clamp(2.3rem,8.5vw,4.8rem)}
+.miles-apart-experience h2{font-size:clamp(1.9rem,6vw,3.3rem)}
+.miles-apart-experience h1 em,.miles-apart-experience h2 em{font-style:italic;color:var(--ice)}
+.miles-apart-experience p{margin:0 0 1rem;line-height:1.75;font-size:clamp(.98rem,2.6vw,1.12rem);color:rgba(232,237,248,.88)}
+.miles-apart-experience .lede{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,3.4vw,1.5rem);color:rgba(232,237,248,.9)}
+.miles-apart-experience .btn{margin-top:1.4rem;padding:1rem 2.4rem;min-height:52px;background:linear-gradient(135deg,rgba(217,191,140,.16),rgba(165,220,255,.1));
+ border:1px solid rgba(217,191,140,.65);border-radius:999px;letter-spacing:.22em;text-transform:uppercase;font-size:.78rem;font-weight:400;color:var(--silver);
+ box-shadow:0 0 30px rgba(217,191,140,.12),inset 0 0 18px rgba(255,255,255,.04);transition:box-shadow .4s,transform .4s,background .4s,opacity .4s}
+.miles-apart-experience .btn:hover:not(:disabled){box-shadow:0 0 44px rgba(217,191,140,.35);transform:translateY(-2px)}
+.miles-apart-experience .btn:disabled{opacity:.35;cursor:not-allowed}
+.miles-apart-experience .hint{font-size:.8rem;letter-spacing:.14em;color:rgba(165,220,255,.8);margin:.9rem 0 0;min-height:1.4em}
+
+/* scene 1 */
+.miles-apart-experience .moon{position:absolute;top:11%;right:14%;width:clamp(90px,18vw,170px);aspect-ratio:1;border-radius:50%;z-index:-1;
+ background:radial-gradient(circle at 35% 32%,#fff,#e6ecf7 45%,#b9c4e0 100%);box-shadow:0 0 60px 20px rgba(200,220,255,.35),0 0 180px 80px rgba(120,140,255,.22);animation:breathe 7s ease-in-out infinite alternate}
+@keyframes breathe{to{box-shadow:0 0 80px 28px rgba(200,220,255,.45),0 0 220px 100px rgba(120,140,255,.3)}}
+.miles-apart-experience .hills{position:absolute;left:-10%;right:-10%;bottom:0;height:22%;z-index:-1;pointer-events:none;
+ background:radial-gradient(60% 100% at 30% 100%,#02040d 60%,transparent 61%),radial-gradient(70% 90% at 75% 100%,#04081a 60%,transparent 61%)}
+
+/* scene 2 */
+.miles-apart-experience .stage{position:relative;width:min(900px,100%);height:min(46vh,380px);min-height:230px;margin:.4rem 0 .6rem}
+.miles-apart-experience .stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.miles-apart-experience .cline{stroke:url(#mgrad);stroke:var(--ice);stroke-width:1.2;stroke-linecap:round;opacity:.75;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 4px var(--ice))}
+.miles-apart-experience .cline.draw{animation:draw 3.2s ease-out .5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.miles-apart-experience .star{position:absolute;width:76px;height:76px;transform:translate(-50%,-50%);background:none;border:0;padding:0;display:grid;place-items:center;z-index:2}
+.miles-apart-experience .star .core{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0 35%,var(--ice) 70%,transparent 72%);
+ box-shadow:0 0 22px 6px rgba(165,220,255,.7),0 0 60px 18px rgba(130,150,255,.4);animation:pulse 3.4s ease-in-out infinite alternate;transition:transform .5s,box-shadow .5s}
+.miles-apart-experience .star .core::before,.miles-apart-experience .star .core::after{content:"";position:absolute;left:50%;top:50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);width:64px;height:1px;transform:translate(-50%,-50%)}
+.miles-apart-experience .star .core::after{transform:translate(-50%,-50%) rotate(90deg)}
+.miles-apart-experience .star .core{position:relative}
+.miles-apart-experience .star:hover .core,.miles-apart-experience .star.lit .core{transform:scale(1.45);box-shadow:0 0 30px 10px rgba(217,191,140,.8),0 0 90px 30px rgba(217,191,140,.35)}
+.miles-apart-experience .star .nm{position:absolute;top:calc(100% - 6px);left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:1.25rem;letter-spacing:.08em;white-space:nowrap;text-shadow:0 0 12px #000}
+@keyframes pulse{to{filter:brightness(1.25)}}
+.miles-apart-experience .panel{min-height:5.5rem;width:min(560px,100%);padding:1.1rem 1.4rem;border-left:1px solid rgba(217,191,140,.6);border-right:1px solid rgba(217,191,140,.6);
+ background:linear-gradient(90deg,transparent,rgba(10,14,50,.55),transparent);opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+.miles-apart-experience .panel.show{opacity:1;transform:none}
+.miles-apart-experience .panel b{display:block;font-family:var(--serif);font-weight:500;color:var(--gold);letter-spacing:.14em;font-size:1.1rem;margin-bottom:.4rem}
+.miles-apart-experience .panel p{margin:0}
+
+/* scene 3 */
+.miles-apart-experience .s3moon{width:clamp(96px,22vw,150px);aspect-ratio:1;border-radius:50%;border:0;padding:0;margin:0 0 1.4rem;position:relative;
+ background:radial-gradient(circle at 35% 32%,#fff,#dfe7f8 50%,#aab6d8 100%);box-shadow:0 0 50px 14px rgba(200,220,255,.4),0 0 150px 60px rgba(120,140,255,.22);transition:transform .6s,box-shadow .6s}
+.miles-apart-experience .s3moon::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(165,220,255,.4);animation:ring 3s ease-out infinite}
+@keyframes ring{from{transform:scale(.9);opacity:.8}to{transform:scale(1.35);opacity:0}}
+.miles-apart-experience .s3moon[aria-expanded=true]{transform:scale(1.08);box-shadow:0 0 70px 24px rgba(217,191,140,.5),0 0 170px 70px rgba(120,140,255,.3)}
+.miles-apart-experience .s3moon[aria-expanded=true]::after{animation:none;opacity:0}
+.miles-apart-experience .secret{max-height:0;opacity:0;overflow:hidden;transition:max-height .9s ease,opacity .9s ease;width:min(560px,100%)}
+.miles-apart-experience .secret.show{max-height:320px;opacity:1}
+.miles-apart-experience .secret p{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,3.6vw,1.6rem);color:var(--gold);margin:.4rem 0}
+
+/* scene 4 */
+.miles-apart-experience .frame{position:relative;width:clamp(180px,48vw,270px);aspect-ratio:4/5;margin:0 0 1.4rem;border-radius:50% 50% 8px 8px/38% 38% 8px 8px;overflow:hidden;
+ border:1px solid rgba(217,191,140,.6);box-shadow:0 0 60px rgba(130,150,255,.3);background:linear-gradient(180deg,#1b1c5a,#07092a)}
+.miles-apart-experience .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
+.miles-apart-experience .frame img.ok{opacity:1}
+.miles-apart-experience .frame .fb{position:absolute;inset:0;transition:opacity 1s}
+.miles-apart-experience .frame .fb::before{content:"";position:absolute;left:50%;top:30%;width:42%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 35% 32%,#fff,#c9d4ee);box-shadow:0 0 40px 10px rgba(200,220,255,.5)}
+.miles-apart-experience .frame .fb::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28%;background:radial-gradient(70% 100% at 50% 100%,#02040d 60%,transparent 61%)}
+.miles-apart-experience .frame.has .fb{opacity:0}
+.miles-apart-experience .date{font-family:var(--serif);font-size:1.15rem;letter-spacing:.3em;color:var(--gold);margin:0 0 .9rem}
+.miles-apart-experience .memstar{display:inline-flex;align-items:center;gap:.7rem;background:none;border:0;padding:.6rem 1rem;min-height:48px;letter-spacing:.18em;font-size:.76rem;text-transform:uppercase;color:var(--ice)}
+.miles-apart-experience .memstar span{width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px var(--ice);animation:pulse 2.4s ease-in-out infinite alternate}
+.miles-apart-experience .memstar[aria-expanded=true] span{box-shadow:0 0 18px 6px var(--gold);background:var(--gold)}
+.miles-apart-experience .extra{max-height:0;opacity:0;overflow:hidden;transition:max-height .8s,opacity .8s;font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--gold)}
+.miles-apart-experience .extra.show{max-height:260px;opacity:1}
+
+/* scene 5 */
+.miles-apart-experience .cons{width:min(440px,86vw);height:auto;margin:0 0 1rem;overflow:visible}
+.miles-apart-experience .cons polyline{fill:none;stroke:var(--ice);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 4px var(--ice));opacity:.8}
+.miles-apart-experience .cons circle{fill:#fff;filter:drop-shadow(0 0 6px var(--ice));animation:pulse 2.6s ease-in-out infinite alternate}
+.miles-apart-experience #s5.on .cons polyline{animation:draw 4s ease-out .6s forwards}
+.miles-apart-experience .bigglow{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 3s;background:radial-gradient(50% 45% at 50% 40%,rgba(165,220,255,.22),rgba(130,100,230,.12) 50%,transparent 75%)}
+.miles-apart-experience #s5.on .bigglow{opacity:1}
+.miles-apart-experience .sign{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.35rem;margin-top:.4rem}
+
+/* audio + progress */
+.miles-apart-experience .audio{position:absolute;z-index:5;top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;
+ border:1px solid rgba(232,237,248,.4);background:rgba(5,11,31,.5);display:grid;place-items:center;font-size:.62rem;letter-spacing:.08em}
+.miles-apart-experience .dots{position:absolute;z-index:5;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));display:flex;gap:10px;pointer-events:none}
+.miles-apart-experience .dots i{width:5px;height:5px;border-radius:50%;background:rgba(232,237,248,.3);transition:.5s}
+.miles-apart-experience .dots i.on{background:var(--gold);box-shadow:0 0 8px var(--gold);transform:scale(1.4)}
+@media (max-width:600px){.miles-apart-experience .moon{right:8%;top:8%}.miles-apart-experience .star .nm{font-size:1.05rem}.miles-apart-experience .btn{padding:.95rem 1.8rem}}
+@media (max-height:560px){.miles-apart-experience .scene{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){
+ .miles-apart-experience *,.miles-apart-experience *::before,.miles-apart-experience *::after{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}
+ .miles-apart-experience .cline,.miles-apart-experience .cons polyline{stroke-dashoffset:0}
+ .miles-apart-experience .drift{display:none}.miles-apart-experience .scene{filter:none;transform:none}
+}
+</style>
+</head>
+<body style="margin:0;background:#050b1f">
+<main class="miles-apart-experience" id="ma-root" aria-label="Miles Apart, One Link">
+ <div class="sky"></div>
+ <div class="layer" data-d="6" id="L1"></div>
+ <div class="layer" data-d="14" id="L2"></div>
+ <div class="layer" data-d="26" id="L3"></div>
+ <div class="drift" id="drift"></div>
+ <div class="grain"></div>
+ <button class="audio" id="audioBtn" type="button" aria-pressed="false" aria-label="Play ambient music" hidden>Music</button>
+
+ <section class="scene on" id="s1" aria-labelledby="t1">
+  <div class="moon" aria-hidden="true"></div><div class="hills" aria-hidden="true"></div>
+  <p class="eyebrow" data-bind="eyebrow"></p>
+  <h1 id="t1" tabindex="-1" data-bind="title"></h1>
+  <p class="lede" data-bind="subtitle"></p>
+  <button class="btn" type="button" data-next data-bind="btn1"></button>
+ </section>
+
+ <section class="scene" id="s2" aria-labelledby="t2" inert>
+  <p class="eyebrow">Two stars, two people</p>
+  <h2 id="t2" tabindex="-1" data-bind="s2title"></h2>
+  <div class="stage" id="stage">
+   <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line id="cline" class="cline" pathLength="1" vector-effect="non-scaling-stroke" x1="20" y1="35" x2="80" y2="62"/></svg>
+   <button class="star" id="starA" type="button" aria-controls="panel"><span class="core"></span><span class="nm" data-bind="nameA"></span></button>
+   <button class="star" id="starB" type="button" aria-controls="panel"><span class="core"></span><span class="nm" data-bind="nameB"></span></button>
+  </div>
+  <div class="panel" id="panel" role="status" aria-live="polite"><b id="pName"></b><p id="pMsg"></p></div>
+  <p class="hint" id="hint2">Touch both stars to continue</p>
+  <button class="btn" type="button" id="btn2" data-next disabled data-bind="btn2"></button>
+ </section>
+
+ <section class="scene" id="s3" aria-labelledby="t3" inert>
+  <div class="hills" aria-hidden="true"></div>
+  <button class="s3moon" id="moonBtn" type="button" aria-expanded="false" aria-controls="secret" aria-label="Touch the moon to reveal a hidden message"></button>
+  <h2 id="t3" tabindex="-1" data-bind="s3title"></h2>
+  <p data-bind="mainMessage"></p>
+  <div class="secret" id="secret"><p data-bind="moonMessage"></p></div>
+  <p class="hint" id="hint3">Touch the moon</p>
+  <button class="btn" type="button" data-next data-bind="btn3"></button>
+ </section>
+
+ <section class="scene" id="s4" aria-labelledby="t4" inert>
+  <div class="frame" id="frame"><div class="fb" aria-hidden="true"></div></div>
+  <h2 id="t4" tabindex="-1"><span data-bind="nameA"></span> <em>&amp;</em> <span data-bind="nameB"></span></h2>
+  <p class="date" data-bind="date"></p>
+  <p data-bind="memory"></p>
+  <button class="memstar" id="memBtn" type="button" aria-expanded="false" aria-controls="extra"><span></span>A star remembers more</button>
+  <div class="extra" id="extra"><p data-bind="extraMemory" style="color:inherit;font:inherit"></p></div>
+  <button class="btn" type="button" data-next data-bind="btn4"></button>
+ </section>
+
+ <section class="scene" id="s5" aria-labelledby="t5" inert>
+  <div class="bigglow" aria-hidden="true"></div>
+  <svg class="cons" viewBox="0 0 300 150" aria-hidden="true">
+   <polyline pathLength="1" points="20,110 70,60 120,85 170,35 220,70 280,25"/>
+   <circle cx="20" cy="110" r="3"/><circle cx="70" cy="60" r="2.2"/><circle cx="120" cy="85" r="2.6"/><circle cx="170" cy="35" r="4"/><circle cx="220" cy="70" r="2.2"/><circle cx="280" cy="25" r="3.4"/>
+  </svg>
+  <p class="eyebrow">Always connected</p>
+  <h2 id="t5" tabindex="-1" data-bind="s5title"></h2>
+  <p class="lede" data-bind="closing"></p>
+  <p class="sign" data-bind="signoff"></p>
+  <button class="btn" type="button" id="replay" data-bind="btn5"></button>
+ </section>
+
+ <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</main>
+
+<script>
+/* =====================================================
+   PERSONALIZE HERE — edit only this object.
+   Leave any value as "" to hide that element gracefully.
+   photoUrl / audioUrl are optional (leave "" for none).
+   ===================================================== */
+const CONFIG = {
+  nameA: "Aarav",
+  nameB: "Meera",
+  eyebrow: "A little universe for two",
+  title: "Different Places. One Sky. One Heart.",
+  subtitle: "Somewhere between your window and mine, the same moon is keeping watch. Distance has never once changed where my thoughts go first.",
+  btn1: "Discover Our Universe",
+  s2title: "Two stars. One universe.",
+  messageA: "I look up at night and pick the brightest light I can find, and I decide it's you. It makes the long hours between calls feel a little shorter.",
+  messageB: "No matter how far the map stretches us, you are the part of my day I keep reaching toward. Home, for me, has started to sound like your voice.",
+  btn2: "Continue",
+  s3title: "Even miles cannot change this.",
+  mainMessage: "I miss the small things most. Your laugh arriving a second before the joke ends, the way we talk about nothing for hours. I am saving every story for the day I can tell you in person.",
+  moonMessage: "Hidden under the moon: whenever it feels far, look up. I am counting the days until I can see you.",
+  btn3: "Continue",
+  date: "14 · 02 · 2024",
+  memory: "The night we talked until the sky turned pale, and neither of us wanted to hang up. That was when I knew.",
+  extraMemory: "You sent me a photo of the same moon from your balcony and wrote, “See? Same sky.”",
+  btn4: "Continue",
+  s5title: "Always connected.",
+  closing: "Until the day there is no more distance between us, we keep our little universe lit. Two stars, one sky, one heart, and I am yours across every mile.",
+  signoff: "Forever yours",
+  btn5: "Experience Again",
+  photoUrl: "",   // e.g. "https://example.com/us.jpg"
+  audioUrl: ""    // e.g. "https://example.com/ambient.mp3" (off by default)
+};
+
+(function () {
+  "use strict";
+  var root = document.getElementById("ma-root");
+  var $ = function (s) { return root.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timers = [], listeners = [];
+  function later(fn, ms) { var t = setTimeout(function () { timers = timers.filter(function (x) { return x !== t; }); fn(); }, ms); timers.push(t); return t; }
+  function on(el, ev, fn, opt) { if (!el) return; el.addEventListener(ev, fn, opt); listeners.push([el, ev, fn, opt]); }
+  function clean(v) { return (v === undefined || v === null) ? "" : String(v).trim(); }
+
+  /* ---- safe text binding (textContent only) ---- */
+  $$("[data-bind]").forEach(function (el) {
+    var v = clean(CONFIG[el.getAttribute("data-bind")]);
+    el.textContent = v; if (!v) el.hidden = true;
+  });
+  var nameA = clean(CONFIG.nameA) || "One", nameB = clean(CONFIG.nameB) || "Two";
+  $("#starA .nm").textContent = nameA; $("#starB .nm").textContent = nameB;
+  if (!clean(CONFIG.nameA) && !clean(CONFIG.nameB)) $("#t4").hidden = true;
+  if (!clean(CONFIG.extraMemory)) { $("#memBtn").hidden = true; $("#extra").hidden = true; }
+  if (!clean(CONFIG.moonMessage)) { $("#moonBtn").setAttribute("aria-expanded", "false"); $("#hint3").hidden = true; }
+  ["btn1","btn2","btn3","btn4","btn5"].forEach(function (k, i) {
+    var b = $$(".scene")[i].querySelector(".btn");
+    if (!clean(CONFIG[k])) { b.hidden = false; b.textContent = i === 4 ? "Experience Again" : "Continue"; }
+  });
+  if (!clean(CONFIG.title)) { $("#t1").hidden = false; $("#t1").textContent = "Different Places. One Sky. One Heart."; }
+  ["s2title","s3title","s5title"].forEach(function (k, i) {
+    var h = $("#" + ["t2","t3","t5"][i]); if (!clean(CONFIG[k])) { h.hidden = false; h.textContent = "Miles Apart, One Link"; }
+  });
+
+  /* ---- star field ---- */
+  function field(id, n, size, op, tmin) {
+    var c = document.getElementById(id), f = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement("i"), z = size * (0.6 + Math.random() * 0.8);
+      s.style.cssText = "left:" + (Math.random() * 100) + "%;top:" + (Math.random() * 100) + "%;width:" + z + "px;height:" + z + "px;--o:" + (op * (0.5 + Math.random() * 0.5)).toFixed(2) + ";--t:" + (tmin + Math.random() * 3).toFixed(1) + "s;--dl:-" + (Math.random() * 6).toFixed(1) + "s";
+      f.appendChild(s);
+    }
+    c.appendChild(f);
+  }
+  var small = window.innerWidth < 600;
+  field("L1", small ? 50 : 90, 1.2, 0.7, 3); field("L2", small ? 28 : 45, 1.8, 0.85, 4); field("L3", small ? 10 : 18, 2.6, 1, 5);
+  var dr = $("#drift"), df = document.createDocumentFragment();
+  for (var d = 0; d < (small ? 8 : 14); d++) {
+    var p = document.createElement("i");
+    p.style.cssText = "left:" + (Math.random() * 100) + "%;--t:" + (14 + Math.random() * 12).toFixed(1) + "s;--dl:-" + (Math.random() * 20).toFixed(1) + "s;--dx:" + ((Math.random() - .5) * 120).toFixed(0) + "px";
+    df.appendChild(p);
+  }
+  dr.appendChild(df);
+
+  /* ---- parallax (throttled via rAF) ---- */
+  if (!reduce) {
+    var raf = 0, mx = 0, my = 0;
+    on(root, "pointermove", function (e) {
+      mx = (e.clientX / window.innerWidth - .5) * -1; my = (e.clientY / window.innerHeight - .5) * -1;
+      if (raf) return;
+      raf = requestAnimationFrame(function () { raf = 0; root.style.setProperty("--px", mx.toFixed(3)); root.style.setProperty("--py", my.toFixed(3)); });
+    });
+    $$(".layer").forEach(function (l) { l.style.setProperty("--d", l.getAttribute("data-d")); });
+  } else { $$(".layer").forEach(function (l) { l.style.setProperty("--d", 0); }); }
+
+  /* ---- scene state ---- */
+  var scenes = $$(".scene"), dots = $$("#dots i"), cur = 0, locked = false;
+  var visited = { A: false, B: false };
+  function show(n) {
+    scenes.forEach(function (s, i) {
+      var active = i === n; s.classList.toggle("on", active);
+      if (active) s.removeAttribute("inert"); else s.setAttribute("inert", "");
+    });
+    dots.forEach(function (d, i) { d.classList.toggle("on", i === n); });
+    cur = n;
+    if (n === 1) { layoutStars(); $("#cline").classList.add("draw"); }
+    later(function () { var h = scenes[n].querySelector("h1,h2"); if (h && !h.hidden && cur === n) h.focus({ preventScroll: true }); scenes[n].scrollTop = 0; }, reduce ? 20 : 700);
+  }
+  function advance() {
+    if (locked || cur >= scenes.length - 1) return;
+    locked = true; show(cur + 1);
+    later(function () { locked = false; }, reduce ? 50 : 1100);
+  }
+  $$("[data-next]").forEach(function (b) { on(b, "click", advance); });
+
+  /* ---- scene 2: stars, responsive layout, constellation line ---- */
+  var starA = $("#starA"), starB = $("#starB"), line = $("#cline");
+  function layoutStars() {
+    var narrow = window.innerWidth < 600;
+    var a = narrow ? [26, 28] : [20, 35], b = narrow ? [74, 66] : [80, 60];
+    starA.style.left = a[0] + "%"; starA.style.top = a[1] + "%";
+    starB.style.left = b[0] + "%"; starB.style.top = b[1] + "%";
+    line.setAttribute("x1", a[0]); line.setAttribute("y1", a[1]); line.setAttribute("x2", b[0]); line.setAttribute("y2", b[1]);
+  }
+  layoutStars(); on(window, "resize", layoutStars);
+  var panel = $("#panel"), pName = $("#pName"), pMsg = $("#pMsg"), fresh;
+  function openStar(which) {
+    var isA = which === "A", btn = isA ? starA : starB, msg = clean(isA ? CONFIG.messageA : CONFIG.messageB), nm = isA ? nameA : nameB;
+    starA.classList.toggle("active", isA); btn.classList.add("lit"); visited[which] = true;
+    pName.textContent = nm; pMsg.textContent = msg || "You are my star."; pName.hidden = false;
+    panel.classList.remove("show"); clearTimeout(fresh);
+    fresh = later(function () { panel.classList.add("show"); }, 30);
+    if (visited.A && visited.B) { $("#btn2").disabled = false; $("#hint2").textContent = "Both stars are shining. Continue when you are ready."; }
+    else $("#hint2").textContent = "Now the other star";
+  }
+  on(starA, "click", function () { openStar("A"); }); on(starB, "click", function () { openStar("B"); });
+  starA.setAttribute("aria-label", "Open " + nameA + "'s star message"); starB.setAttribute("aria-label", "Open " + nameB + "'s star message");
+
+  /* ---- scene 3: moon reveal ---- */
+  var moon = $("#moonBtn"), secret = $("#secret");
+  moon.setAttribute("aria-label", "Moon. Activate to " + "reveal a hidden message");
+  on(moon, "click", function () {
+    if (!clean(CONFIG.moonMessage)) return;
+    var open = moon.getAttribute("aria-expanded") === "true";
+    moon.setAttribute("aria-expanded", String(!open)); secret.classList.toggle("show", !open);
+    $("#hint3").textContent = open ? "Touch the moon" : "A message, just for you";
+  });
+
+  /* ---- scene 4: photo + memory star ---- */
+  var photo = clean(CONFIG.photoUrl);
+  if (photo) {
+    var img = new Image(); img.alt = nameA + " and " + nameB + " together"; img.decoding = "async";
+    img.onload = function () { img.classList.add("ok"); $("#frame").classList.add("has"); };
+    img.onerror = function () { if (img.parentNode) img.parentNode.removeChild(img); };
+    $("#frame").insertBefore(img, $("#frame").firstChild); img.src = photo;
+  }
+  var memBtn = $("#memBtn"), extra = $("#extra");
+  on(memBtn, "click", function () {
+    var open = memBtn.getAttribute("aria-expanded") === "true";
+    memBtn.setAttribute("aria-expanded", String(!open)); extra.classList.toggle("show", !open);
+  });
+
+  /* ---- optional audio (off by default, user-initiated) ---- */
+  var audio = null, audioBtn = $("#audioBtn"), url = clean(CONFIG.audioUrl);
+  if (url) {
+    audioBtn.hidden = false;
+    on(audioBtn, "click", function () {
+      try {
+        if (!audio) { audio = new Audio(url); audio.loop = true; audio.volume = 0.4; audio.addEventListener("error", function () { audioBtn.hidden = true; }); }
+        if (audio.paused) {
+          var pr = audio.play();
+          if (pr && pr.catch) pr.catch(function () { audioBtn.hidden = true; });
+          audioBtn.setAttribute("aria-pressed", "true"); audioBtn.setAttribute("aria-label", "Pause ambient music"); audioBtn.textContent = "Mute";
+        } else {
+          audio.pause(); audioBtn.setAttribute("aria-pressed", "false"); audioBtn.setAttribute("aria-label", "Play ambient music"); audioBtn.textContent = "Music";
+        }
+      } catch (e) { audioBtn.hidden = true; }
+    });
+  }
+
+  /* ---- replay: reset everything ---- */
+  on($("#replay"), "click", function () {
+    if (locked) return;
+    locked = true;
+    visited.A = visited.B = false;
+    starA.classList.remove("lit"); starB.classList.remove("lit");
+    panel.classList.remove("show"); pName.textContent = ""; pMsg.textContent = "";
+    $("#btn2").disabled = true; $("#hint2").textContent = "Touch both stars to continue";
+    line.classList.remove("draw");
+    moon.setAttribute("aria-expanded", "false"); secret.classList.remove("show"); $("#hint3").textContent = "Touch the moon";
+    memBtn.setAttribute("aria-expanded", "false"); extra.classList.remove("show");
+    show(0);
+    later(function () { locked = false; }, reduce ? 50 : 1100);
+  });
+
+  /* ---- mobile viewport handling ---- */
+  function vh() { root.style.height = window.innerHeight + "px"; }
+  vh(); on(window, "resize", vh);
+
+  /* ---- cleanup on page leave ---- */
+  on(window, "pagehide", function () {
+    timers.forEach(clearTimeout); timers = [];
+    if (audio) { audio.pause(); }
+    listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2], l[3]); }); listeners = [];
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>
