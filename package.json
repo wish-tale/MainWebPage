@@ -1,0 +1,18 @@
+{
+  "name": "wishtale-main-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WishTale celebration website with SMTP-backed enquiry forms",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^10.2.1"
+  }
+}

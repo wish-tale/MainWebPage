@@ -5,9 +5,7 @@ document.documentElement.classList.add("js");
    ===================================================================== */
 const CONFIG = {
   brand: "WishTale",
-  email: "hello@yourdomain.com",   // used for the "Send by Email" buttons
-  phone: "+91 00000 00000",
-  city: "Your City, India",
+  email: "wishtale.in@gmail.com",
   weddingMax: 499,                  // wedding invitations must not exceed this (checked in the console)
   pageSize: 12                      // designs shown before "Show more designs"
 };
@@ -22,7 +20,7 @@ const CATEGORIES = {
   websites: { label: "Personalised Websites" }
 };
 
-/* Colour palettes for the sample designs.
+/* Colour palettes for the catalogue designs.
    a, b = background gradient · i = text on the background
    x = accent on the background · d = deeper accent for light panels */
 const PALETTES = {
@@ -38,9 +36,19 @@ const PALETTES = {
   terracotta: { a: "#C9674F", b: "#8F3F2E", i: "#FFF3EA", x: "#FFDCC8", d: "#8F3F2E" }
 };
 
+const MOTIFS = {
+  wedding: '<svg viewBox="0 0 64 64" focusable="false"><circle cx="25" cy="34" r="16" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="39" cy="34" r="16" fill="none" stroke="currentColor" stroke-width="4"/><path d="m32 9 4 7 8 1-6 6 1 8-7-4-7 4 1-8-6-6 8-1z" fill="currentColor"/></svg>',
+  birthday: '<svg viewBox="0 0 64 64" focusable="false"><path d="M12 34h40v21H12zM8 30h48v8H8z" fill="currentColor"/><path d="M22 29c-7-8 6-9 0-18m20 18c-7-8 6-9 0-18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M18 44h5m9 0h5m9 0h4" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/></svg>',
+  love: '<svg viewBox="0 0 64 64" focusable="false"><path d="M32 55 8 33C-4 19 13 4 25 15l7 7 7-7c12-11 29 4 17 18L32 55Z" fill="currentColor"/><path d="M19 26c3-5 8-6 12-3" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/></svg>',
+  family: '<svg viewBox="0 0 64 64" focusable="false"><path d="m7 29 25-21 25 21v28H7z" fill="currentColor"/><path d="M25 57V39a7 7 0 0 1 14 0v18M15 34h8v8h-8zm26 0h8v8h-8z" fill="#fff" fill-opacity=".78"/></svg>',
+  friends: '<svg viewBox="0 0 64 64" focusable="false"><path d="M32 55V34m0 11L16 33m16 10 16-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><g fill="currentColor"><circle cx="32" cy="20" r="8"/><circle cx="23" cy="24" r="7"/><circle cx="41" cy="24" r="7"/><circle cx="26" cy="32" r="7"/><circle cx="38" cy="32" r="7"/></g><circle cx="32" cy="27" r="5" fill="#fff" fill-opacity=".85"/></svg>',
+  festival: '<svg viewBox="0 0 64 64" focusable="false"><path d="M19 28c0-13 6-20 13-20s13 7 13 20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M14 29h36l-4 23H18z" fill="currentColor"/><path d="M10 29h44l-5 7H15z" fill="#fff" fill-opacity=".8"/><path d="M34 13c-9 9 5 10 0 20-7-6-12 1-7 5 7 6 15 0 14-8-1-6-8-9-7-17Z" fill="#fff" fill-opacity=".8"/></svg>',
+  websites: '<svg viewBox="0 0 64 64" focusable="false"><rect x="7" y="10" width="50" height="44" rx="6" fill="currentColor"/><path d="M7 21h50" stroke="#fff" stroke-opacity=".8" stroke-width="3"/><circle cx="14" cy="16" r="1.5" fill="#fff"/><circle cx="20" cy="16" r="1.5" fill="#fff"/><rect x="13" y="28" width="14" height="18" rx="2" fill="#fff" fill-opacity=".8"/><path d="M33 31h17m-17 7h13m-13 7h16" stroke="#fff" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/></svg>'
+};
+
 const LANG_CODES = { en: "English", hi: "Hindi", bn: "Bengali", ta: "Tamil", te: "Telugu", mr: "Marathi", gu: "Gujarati", pa: "Punjabi", ml: "Malayalam", kn: "Kannada", ur: "Urdu" };
 
-// Sample greeting lines for the preview's language switch (please have them proofread before real use)
+// Greeting lines for the preview's language switch.
 const PHRASES = {
   English:   { invite: "You are warmly invited", love: "With love" },
   Hindi:     { invite: "आप सादर आमंत्रित हैं", love: "प्यार के साथ" },
@@ -67,7 +75,7 @@ const INVITE_CATS = ["wedding", "birthday", "family", "festival"];
    v      layout style: arch floral frame stripe ticket confetti letter polaroid
                         circle timeline heart minimal lantern baby ribbon browser
    p      colour palette name (see PALETTES)
-   m      emoji motif          t, s  main text and small text shown on the design
+   m      decorative motif     t, s  main text and small text shown on the design
    l      optional languages, e.g. "en hi ta" (default: English + Hindi)
    img    optional image path, e.g. "images/w01.jpg" (replaces the CSS design)
    demoUrl optional interactive experience URL, shown in an isolated preview iframe
@@ -99,14 +107,15 @@ const TEMPLATES = [
   { id: "b07", cat: "birthday", occ: "Birthday Page", name: "Birthday Scrapbook", price: 129, offerBadge: "40% OFF", added: "2026-08-08", v: "polaroid", p: "sand", m: "📸", t: "Twenty-One Memories", s: "A year in pictures" },
 
   // ---------- Love ----------
-  { id: "l01", cat: "love", occ: "Anniversary", name: "Anniversary Timeline", price: 199, offerBadge: "40% OFF", added: "2026-09-14", v: "timeline", p: "cream", m: "💑", t: "Our Story So Far", s: "Together since 2019", l: "en hi ta mr", demoUrl: "templetes/anniversarytimeline.html" },
-  { id: "l02", cat: "love", occ: "Proposal", name: "Will You Marry Me", price: 179, offerBadge: "20% OFF", added: "2026-10-01", v: "heart", p: "rose", m: "💍", t: "Will you marry me?", s: "A question for you", l: "en hi pa", demoUrl: "templetes/willyoumarryme.html", description: "Experience eight interactive chapters, from a heartfelt letter to the proposal and celebration. Add your own names, memories, photos and licensed music." },
-  { id: "l03", cat: "love", occ: "Love Letter", name: "Secret Love Letter", price: 99, added: "2026-07-12", v: "letter", p: "peach", m: "💌", t: "To my love,", s: "Open with care", l: "en hi ur bn", demoUrl: "templetes/secretloveletter.html" },
-  { id: "l04", cat: "love", occ: "Romantic Greeting", name: "Rose Garden Greeting", price: 59, added: "2026-06-22", v: "floral", p: "rose", m: "🌹", t: "Forever Yours", s: "Happy Anniversary", demoUrl: "templetes/rosegardengreeting.html" },
-  { id: "l05", cat: "love", occ: "For Her", name: "For My Girlfriend", price: 149, offerBadge: "60% OFF", added: "2026-08-28", v: "polaroid", p: "blush", m: "🎀", t: "My Favourite Person", s: "Made for you", l: "en hi bn", demoUrl: "templetes/formygirlfriend.html" },
-  { id: "l06", cat: "love", occ: "For Him", name: "For My Boyfriend", price: 149, added: "2026-09-21", v: "stripe", p: "honey", m: "🧡", t: "Reasons I Love You", s: "Ten little reasons", demoUrl: "templetes/formyboyfriend.html" },
-  { id: "l07", cat: "love", occ: "Long Distance", name: "Miles Apart, One Link", price: 129, added: "2026-07-26", v: "ticket", p: "cream", m: "✈️", t: "See you soon", s: "12 days to go", demoUrl: "templetes/milesapartonelink.html" },
-  { id: "l08", cat: "love", occ: "Couple Page", name: "Our Couple Page", price: 249, added: "2026-10-14", v: "browser", p: "blush", m: "💞", t: "Aarav + Meera", s: "Our little corner", demoUrl: "templetes/ourcouplepage.html" },
+  { id: "l01", cat: "love", occ: "Anniversary", name: "Anniversary Timeline", price: 199, offerBadge: "40% OFF", added: "2026-09-14", v: "timeline", p: "cream", m: "💑", t: "Our Story So Far", s: "Together since 2019", l: "en hi ta mr", demoUrl: "templetes/love/anniversarytimeline.html" },
+  { id: "l02", cat: "love", occ: "Proposal", name: "Will You Marry Me", price: 179, offerBadge: "20% OFF", added: "2026-10-01", v: "heart", p: "rose", m: "💍", t: "Will you marry me?", s: "A question for you", l: "en hi pa", demoUrl: "templetes/love/willyoumarryme.html", description: "Experience eight interactive chapters, from a heartfelt letter to the proposal and celebration. Add your own names, memories, photos and licensed music." },
+  { id: "l03", cat: "love", occ: "Love Letter", name: "Secret Love Letter", price: 99, added: "2026-07-12", v: "letter", p: "peach", m: "💌", t: "To my love,", s: "Open with care", l: "en hi ur bn", demoUrl: "templetes/love/secretloveletter.html" },
+  { id: "l04", cat: "love", occ: "Romantic Greeting", name: "Rose Garden Greeting", price: 59, added: "2026-06-22", v: "floral", p: "rose", m: "🌹", t: "Forever Yours", s: "Happy Anniversary", demoUrl: "templetes/love/rosegardengreeting.html" },
+  { id: "l05", cat: "love", occ: "For Her", name: "For My Girlfriend", price: 149, offerBadge: "60% OFF", added: "2026-08-28", v: "polaroid", p: "blush", m: "🎀", t: "My Favourite Person", s: "Made for you", l: "en hi bn", demoUrl: "templetes/love/formygirlfriend.html" },
+  { id: "l06", cat: "love", occ: "For Him", name: "For My Boyfriend", price: 149, added: "2026-09-21", v: "stripe", p: "honey", m: "🧡", t: "Reasons I Love You", s: "Ten little reasons", demoUrl: "templetes/love/formyboyfriend.html" },
+  { id: "l07", cat: "love", occ: "Long Distance", name: "Miles Apart, One Link", price: 129, added: "2026-07-26", v: "ticket", p: "cream", m: "✈️", t: "See you soon", s: "12 days to go", demoUrl: "templetes/love/milesapartonelink.html" },
+  { id: "l08", cat: "love", occ: "Couple Page", name: "Our Couple Page", price: 249, added: "2026-10-14", v: "browser", p: "blush", m: "💞", t: "Aarav + Meera", s: "Our little corner", demoUrl: "templetes/love/ourcouplepage.html" },
+  { id: "l09", cat: "love", occ: "Memory Reveal", name: "Our Universe", price: 199, added: "2026-10-20", v: "heart", p: "wine", m: "✦", t: "Written in the stars", s: "A universe made of us", demoUrl: "templetes/love/ouruniverse.html", description: "A cosmic keepsake with editable names, a personal message, a photo reveal and interactive memories." },
 
   // ---------- Family ----------
   { id: "fa01", cat: "family", occ: "Housewarming", name: "Griha Pravesh", price: 149, added: "2026-08-19", v: "arch", p: "honey", m: "🏡", t: "Griha Pravesh", s: "Join us in our new home", l: "en hi mr gu ta te kn ml" },
@@ -150,7 +159,23 @@ const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt
 const byId = (id) => TEMPLATES.find(t => t.id === id);
 const langsOf = (t) => (t.l || "en hi").split(" ").map(c => LANG_CODES[c]);
 const priceText = (t) => (t.from ? "From " : "") + "₹" + t.price.toLocaleString("en-IN");
-const mailto = (subject, body) => `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+const newSubmissionId = () => window.crypto && typeof window.crypto.randomUUID === "function"
+  ? window.crypto.randomUUID()
+  : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+async function sendEnquiry(payload, idempotencyKey) {
+  const response = await fetch("/api/enquiries", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey },
+    body: JSON.stringify(payload)
+  });
+  let result;
+  try { result = await response.json(); } catch (error) {
+    throw new Error("The email service returned an unreadable response. Please try again later.");
+  }
+  if (!response.ok) throw new Error(result.error || "The request could not be sent. Please try again later.");
+  return result;
+}
 
 // Warns in the browser console (F12) if a price breaks the rules
 function validatePrices() {
@@ -161,7 +186,7 @@ function validatePrices() {
 }
 
 /* =====================================================================
-   SAMPLE DESIGN (CSS artwork) used by cards, preview, checkout and hero.
+   TEMPLATE ARTWORK (CSS illustrations) used by cards, preview, checkout and hero.
    If a template has an "img", that image is shown instead.
    ===================================================================== */
 function artHTML(t, o = {}) {
@@ -169,10 +194,11 @@ function artHTML(t, o = {}) {
   const p = PALETTES[t.p] || PALETTES.blush;
   const style = `--a:${p.a};--b:${p.b};--i:${p.i};--x:${p.x};--d:${p.d}`;
   const aria = o.label ? `role="img" aria-label="${esc(t.name)} design preview"` : `aria-hidden="true"`;
-  const corners = t.v === "floral" ? ["tl", "tr", "bl", "br"].map(c => `<span class="cn ${c}">${t.m}</span>`).join("") : "";
+  const motif = MOTIFS[t.cat] || MOTIFS.love;
+  const corners = t.v === "floral" ? ["tl", "tr", "bl", "br"].map(c => `<span class="cn ${c}">${motif}</span>`).join("") : "";
   return `<div class="art v-${esc(t.v)}" style="${style}" ${aria}>${corners}
     <div class="art-c">
-      <span class="art-m">${t.m}</span>
+      <span class="art-m art-m-svg">${MOTIFS[t.cat] || MOTIFS.love}</span>
       <small class="art-k">${esc(t.occ)}</small>
       <strong class="art-t">${esc(o.title || t.t)}</strong>
       <span class="art-s">${esc(t.s)}</span>
@@ -207,6 +233,19 @@ function cardHTML(t) {
 /* ---------- Catalogue: category + search + sort + "show more" ---------- */
 const state = { cat: "all", q: "", sort: "recommended", limit: CONFIG.pageSize };
 const grid = $("#grid");
+const gallery = {
+  position: 0,
+  target: 0,
+  cards: [],
+  frame: 0,
+  lastFrame: 0,
+  lastAnnouncement: -1,
+  hovered: false,
+  inViewport: false,
+  dragging: null,
+  pauseUntil: 0,
+  suppressClick: false
+};
 
 function matchesSearch(t, q) {
   if (!q) return true;
@@ -222,12 +261,107 @@ function sortList(list, mode) {
   return out;
 }
 
-function renderCatalogue() {
+function renderCatalogue(resetGallery = true) {
   const all = sortList(TEMPLATES.filter(t => (state.cat === "all" || t.cat === state.cat) && matchesSearch(t, state.q)), state.sort);
   const shown = all.slice(0, state.limit);
+  const activeCard = gallery.cards.length ? gallery.cards[Math.round(gallery.position) % gallery.cards.length] : null;
+  const activeId = activeCard?.dataset.templateId;
   grid.innerHTML = shown.map(cardHTML).join("");
+  gallery.cards = $$(".card", grid);
+  const retainedIndex = gallery.cards.findIndex(card => card.dataset.templateId === activeId);
+  gallery.position = resetGallery || retainedIndex < 0 ? 0 : retainedIndex;
+  gallery.target = gallery.position;
+  gallery.lastFrame = 0;
+  gallery.lastAnnouncement = -1;
   $("#empty").hidden = all.length > 0;
   $("#more").hidden = all.length <= shown.length;
+  if (!gallery.cards.length && gallery.frame) {
+    cancelAnimationFrame(gallery.frame);
+    gallery.frame = 0;
+  } else {
+    startGallery();
+  }
+}
+
+function wrapGalleryPosition(position) {
+  const total = gallery.cards.length;
+  return total ? ((position % total) + total) % total : 0;
+}
+
+function galleryDistance(index, position, total) {
+  return ((index - position + total / 2) % total + total) % total - total / 2;
+}
+
+function paintGallery(timestamp) {
+  const total = gallery.cards.length;
+  if (!total) {
+    gallery.frame = 0;
+    return;
+  }
+
+  const elapsed = gallery.lastFrame ? Math.min(timestamp - gallery.lastFrame, 50) : 0;
+  gallery.lastFrame = timestamp;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isRunning = !reducedMotion && gallery.inViewport && !document.hidden && !gallery.hovered && !gallery.dragging &&
+    !$$("dialog[open]").length && timestamp >= gallery.pauseUntil;
+
+  if (isRunning) gallery.target = wrapGalleryPosition(gallery.target + elapsed * 0.00012);
+  const difference = gallery.target - gallery.position;
+  const nearestDifference = ((difference + total / 2) % total + total) % total - total / 2;
+  gallery.position = wrapGalleryPosition(gallery.position + nearestDifference * Math.min(1, elapsed * 0.009));
+
+  const stageWidth = grid.clientWidth;
+  const compact = stageWidth <= 600;
+  const spacing = compact ? Math.max(160, stageWidth * .66) : Math.min(292, stageWidth * .265);
+  const visibleRange = compact ? 2.15 : 2.65;
+  const activeIndex = Math.round(gallery.position) % total;
+  const announce = $("#gallery-status");
+  if (activeIndex !== gallery.lastAnnouncement) {
+    gallery.lastAnnouncement = activeIndex;
+    announce.textContent = `Now in focus: ${gallery.cards[activeIndex].querySelector("h3").textContent}`;
+  }
+
+  gallery.cards.forEach((card, index) => {
+    const distance = galleryDistance(index, gallery.position, total);
+    const absoluteDistance = Math.abs(distance);
+    const isHidden = absoluteDistance > visibleRange;
+    const wasHidden = card.getAttribute("aria-hidden") === "true";
+    if (isHidden && wasHidden) return;
+
+    card.inert = isHidden;
+    card.setAttribute("aria-hidden", String(isHidden));
+    if (isHidden) {
+      card.style.opacity = "0";
+      card.classList.remove("is-active");
+      return;
+    }
+
+    const scale = Math.max(compact ? .48 : .43, 1 - absoluteDistance * (compact ? .22 : .19));
+    const rotateY = Math.max(-28, Math.min(28, -distance * 9));
+    const translateX = distance * spacing;
+    const translateZ = -absoluteDistance * (compact ? 45 : 74);
+    card.style.transform = `translate(-50%, -50%) translate3d(${translateX.toFixed(1)}px, 0, ${translateZ.toFixed(1)}px) rotateY(${rotateY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+    card.style.opacity = String(Math.max(.08, 1 - absoluteDistance * (compact ? .37 : .31)));
+    card.style.zIndex = String(100 - Math.round(absoluteDistance * 10));
+    if (card.classList.contains("is-active") !== (index === activeIndex)) card.classList.toggle("is-active", index === activeIndex);
+  });
+
+  gallery.frame = reducedMotion ? 0 : requestAnimationFrame(paintGallery);
+}
+
+function startGallery() {
+  if (!gallery.frame) gallery.frame = requestAnimationFrame(paintGallery);
+}
+
+function goToGalleryIndex(index) {
+  const total = gallery.cards.length;
+  if (!total) return;
+  const current = Math.round(gallery.position);
+  const wrappedIndex = wrapGalleryPosition(index);
+  const difference = ((wrappedIndex - current + total / 2) % total + total) % total - total / 2;
+  gallery.target = wrapGalleryPosition(current + difference);
+  gallery.pauseUntil = performance.now() + 1600;
+  startGallery();
 }
 
 function setCategory(cat) {
@@ -243,7 +377,94 @@ function setCategory(cat) {
 $("#filters").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) setCategory(c.dataset.filter); });
 $("#search").addEventListener("input", e => { state.q = e.target.value.trim(); state.limit = CONFIG.pageSize; renderCatalogue(); });
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; state.limit = CONFIG.pageSize; renderCatalogue(); });
-$("#more").addEventListener("click", () => { state.limit += CONFIG.pageSize; renderCatalogue(); });
+$("#more").addEventListener("click", () => { state.limit += CONFIG.pageSize; renderCatalogue(false); });
+$("#gallery-prev").addEventListener("click", () => goToGalleryIndex(Math.round(gallery.position) - 1));
+$("#gallery-next").addEventListener("click", () => goToGalleryIndex(Math.round(gallery.position) + 1));
+
+grid.addEventListener("pointerenter", event => {
+  if (event.pointerType === "mouse") gallery.hovered = true;
+});
+grid.addEventListener("pointerleave", event => {
+  if (event.pointerType === "mouse") gallery.hovered = false;
+});
+grid.addEventListener("pointerdown", event => {
+  if (event.target.closest("button")) return;
+  gallery.dragging = { pointerId: event.pointerId, startX: event.clientX, startPosition: gallery.position, moved: false };
+  gallery.pauseUntil = performance.now() + 1400;
+  grid.classList.add("is-dragging");
+});
+document.addEventListener("pointermove", event => {
+  if (!gallery.dragging || event.pointerId !== gallery.dragging.pointerId) return;
+  const distance = event.clientX - gallery.dragging.startX;
+  if (Math.abs(distance) > 5) gallery.dragging.moved = true;
+  if (!gallery.dragging.moved) return;
+  const stageWidth = grid.clientWidth;
+  const spacing = stageWidth <= 600 ? Math.max(160, stageWidth * .66) : Math.min(292, stageWidth * .265);
+  gallery.position = wrapGalleryPosition(gallery.dragging.startPosition - distance / spacing);
+  gallery.target = gallery.position;
+  event.preventDefault();
+});
+function finishGalleryDrag(event) {
+  if (!gallery.dragging || event.pointerId !== gallery.dragging.pointerId) return;
+  gallery.suppressClick = gallery.dragging.moved;
+  gallery.pauseUntil = performance.now() + 1600;
+  gallery.dragging = null;
+  grid.classList.remove("is-dragging");
+  if (gallery.suppressClick) setTimeout(() => { gallery.suppressClick = false; }, 0);
+  startGallery();
+}
+document.addEventListener("pointerup", finishGalleryDrag);
+document.addEventListener("pointercancel", finishGalleryDrag);
+grid.addEventListener("click", event => {
+  if (!gallery.suppressClick) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+}, true);
+grid.addEventListener("keydown", event => {
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    event.preventDefault();
+    goToGalleryIndex(Math.round(gallery.position) + (event.key === "ArrowRight" ? 1 : -1));
+  }
+});
+grid.addEventListener("focusin", () => { gallery.pauseUntil = performance.now() + 1800; });
+grid.addEventListener("focusout", () => {
+  setTimeout(() => {
+    if (!grid.contains(document.activeElement)) gallery.pauseUntil = performance.now() + 1200;
+  }, 0);
+});
+document.addEventListener("visibilitychange", () => {
+  gallery.lastFrame = 0;
+  if (document.hidden && gallery.frame) {
+    cancelAnimationFrame(gallery.frame);
+    gallery.frame = 0;
+  } else {
+    startGallery();
+  }
+});
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+reducedMotionQuery.addEventListener("change", () => {
+  gallery.lastFrame = 0;
+  startGallery();
+});
+window.addEventListener("resize", () => {
+  gallery.lastFrame = 0;
+  startGallery();
+});
+if ("IntersectionObserver" in window) {
+  const galleryObserver = new IntersectionObserver(entries => {
+    gallery.inViewport = entries.some(entry => entry.isIntersecting);
+    if (gallery.inViewport) {
+      startGallery();
+    } else if (gallery.frame) {
+      cancelAnimationFrame(gallery.frame);
+      gallery.frame = 0;
+      gallery.lastFrame = 0;
+    }
+  }, { rootMargin: "120px 0px" });
+  galleryObserver.observe(grid);
+} else {
+  gallery.inViewport = true;
+}
 $("#reset-filters").addEventListener("click", () => {
   state.q = ""; state.sort = "recommended";
   $("#search").value = ""; $("#sort").value = "recommended";
@@ -367,6 +588,7 @@ function openPreview(t) {
   $("#pv-lang").innerHTML = langsOf(t).map(l => `<option>${esc(l)}</option>`).join("");
   $("#pv-input").value = "";
   $("#pv-input").placeholder = t.t;
+  $("#pv-frame").title = `${t.name} interactive preview`;
   dialog.classList.toggle("proposal-preview", Boolean(t.demoUrl));
   if (t.demoUrl) $("#pv-frame").src = t.demoUrl;
   else $("#pv-frame").removeAttribute("src");
@@ -382,11 +604,10 @@ $$("[data-device]").forEach(b => b.addEventListener("click", () => { pv.device =
 $("#pv-buy").addEventListener("click", () => { const t = pv.t; dialog.close(); openCheckout(t); });
 
 /* =====================================================================
-   BUY NOW (summary only). No payment is taken and no order is created.
-   FUTURE: replace the step-2 screen with your real checkout or payment call.
+   Order enquiries. No payment is taken and no order is created.
    ===================================================================== */
 const checkout = $("#checkout");
-const co = { t: null, summary: "" };
+const co = { t: null, summary: "", submissionId: "", sending: false };
 
 function clearInvalid(form) { $$(".invalid", form).forEach(el => { el.classList.remove("invalid"); el.removeAttribute("aria-invalid"); }); }
 
@@ -400,6 +621,9 @@ function openCheckout(t) {
   $("#co-step1").hidden = false;
   $("#co-step2").hidden = true;
   $("#co-copy-msg").textContent = "";
+  $("#co-status").textContent = "";
+  co.submissionId = newSubmissionId();
+  co.sending = false;
   $("#co-form").reset();
   clearInvalid($("#co-form"));
   openDialog(checkout);
@@ -416,8 +640,9 @@ function validate(form) {
   return ok;
 }
 
-$("#co-form").addEventListener("submit", e => {
+$("#co-form").addEventListener("submit", async e => {
   e.preventDefault();
+  if (co.sending) return;
   if (!validate(e.target)) return;
   const d = Object.fromEntries(new FormData(e.target).entries());
   co.summary = [
@@ -429,12 +654,37 @@ $("#co-form").addEventListener("submit", e => {
     `Occasion date: ${d.date || "Not set yet"}`,
     `Notes: ${d.notes || "None"}`
   ].join("\n");
-  $("#co-who").textContent = d.name;
-  $("#co-summary").textContent = co.summary;
-  $("#co-mail").href = mailto(`${CONFIG.brand} order: ${co.t.name}`, co.summary);
-  $("#co-step1").hidden = true;
-  $("#co-step2").hidden = false;
-  $("#co-step2 h3").focus?.();
+  const button = e.target.querySelector('[type="submit"]');
+  const status = $("#co-status");
+  co.sending = true;
+  button.disabled = true;
+  status.textContent = "Sending your enquiry…";
+  try {
+    await sendEnquiry({
+      type: "order",
+      name: d.name,
+      contact: d.contact,
+      template: co.t.name,
+      occasion: co.t.occ,
+      price: priceText(co.t),
+      date: d.date,
+      notes: d.notes,
+      website: d.website
+    }, co.submissionId);
+    status.textContent = "";
+    $("#co-who").textContent = d.name;
+    $("#co-summary").textContent = co.summary;
+    $("#co-step1").hidden = true;
+    $("#co-step2").hidden = false;
+    $("#co-step2 h3").focus();
+  } catch (error) {
+    status.textContent = error instanceof TypeError
+      ? "We couldn't connect to the email service. Please try again when your connection is available."
+      : error.message;
+  } finally {
+    co.sending = false;
+    button.disabled = false;
+  }
 });
 $("#co-close").addEventListener("click", () => checkout.close());
 $("#co-back").addEventListener("click", () => { checkout.close(); $("#templates").scrollIntoView(); });
@@ -458,28 +708,55 @@ async function copyWithMessage(text, msgEl) {
 $("#co-copy").addEventListener("click", () => copyWithMessage(co.summary, $("#co-copy-msg")));
 
 /* =====================================================================
-   CUSTOM WEBSITE REQUEST FORM: builds a summary and an email link.
-   FUTURE: send this data to your own backend instead.
+   Custom website enquiries.
    ===================================================================== */
 const reqForm = $("#request-form");
-let reqSummary = "";
-reqForm.addEventListener("submit", e => {
+let reqSummary = "", reqSubmissionId = "", reqSending = false;
+reqForm.addEventListener("submit", async e => {
   e.preventDefault();
+  if (reqSending) return;
   if (!validate(reqForm)) return;
   const d = Object.fromEntries(new FormData(reqForm).entries());
-  reqSummary = [
-    `${CONFIG.brand} custom website request`,
-    `Name: ${d.name}`,
-    `Contact: ${d.contact}`,
-    `Looking for: ${d.type}`,
-    `Occasion date: ${d.date || "Not set yet"}`,
-    `Idea: ${d.details}`
-  ].join("\n");
-  $("#req-summary").textContent = reqSummary;
-  $("#req-mail").href = mailto(`${CONFIG.brand} custom website request`, reqSummary);
-  $("#req-copy-msg").textContent = "";
-  $("#req-out").hidden = false;
-  $("#req-out").scrollIntoView({ block: "nearest" });
+  const button = e.target.querySelector('[type="submit"]');
+  const status = $("#request-status");
+  reqSending = true;
+  reqSubmissionId ||= newSubmissionId();
+  button.disabled = true;
+  $("#req-out").hidden = true;
+  status.textContent = "Sending your request…";
+  try {
+    await sendEnquiry({
+      type: "custom",
+      name: d.name,
+      contact: d.contact,
+      requestType: d.type,
+      date: d.date,
+      details: d.details,
+      website: d.website
+    }, reqSubmissionId);
+    reqSummary = [
+      `${CONFIG.brand} custom website request`,
+      `Name: ${d.name}`,
+      `Contact: ${d.contact}`,
+      `Looking for: ${d.type}`,
+      `Occasion date: ${d.date || "Not set yet"}`,
+      `Idea: ${d.details}`
+    ].join("\n");
+    $("#req-summary").textContent = reqSummary;
+    $("#req-copy-msg").textContent = "";
+    $("#req-out").hidden = false;
+    $("#req-out").scrollIntoView({ block: "nearest" });
+    status.textContent = "Your request was sent to WishTale.";
+    reqForm.reset();
+    reqSubmissionId = "";
+  } catch (error) {
+    status.textContent = error instanceof TypeError
+      ? "We couldn't connect to the email service. Please try again when your connection is available."
+      : error.message;
+  } finally {
+    reqSending = false;
+    button.disabled = false;
+  }
 });
 $("#req-copy").addEventListener("click", () => copyWithMessage(reqSummary, $("#req-copy-msg")));
 
@@ -523,6 +800,6 @@ renderCatalogue();
    FUTURE UPGRADES (not built yet)
    Each template has a unique id: use it for live previews, personalisation,
    uploads, shareable links, accounts, payments, order tracking and RSVP.
-   openCheckout() and the form handlers above are where those would connect.
+   Payments, uploads, and accounts are not part of this static catalogue.
    TEMPLATES can later be loaded from a JSON file or an API.
    ===================================================================== */

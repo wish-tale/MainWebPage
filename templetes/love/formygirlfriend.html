@@ -137,7 +137,7 @@ box-shadow:0 0 0 1px var(--gold) inset,0 0 0 5px var(--cherry) inset,0 0 0 6px v
 <script>
 /* ===== CONFIGURATION — edit this object to personalise everything =====
    Photos: replace "src" with your own image URL or a relative file like "photos/us1.jpg".
-   Sample photos are stock images from Unsplash (hotlinked, not downloaded). Check their licence before commercial use.
+   Gallery photos use stock imagery from Unsplash (hotlinked, not downloaded). Check the licence before commercial use.
    Any empty text field is skipped automatically. */
 const U=id=>"https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w=900&q=70";
 const CONFIG={
@@ -147,13 +147,13 @@ const CONFIG={
   openLabel:"Open Our Story",
   audioUrl:"", // optional: direct URL to an mp3. Leave empty to hide the music button.
   photos:[ // up to 8 photos. title / caption / date are shown in the detail view
-    {src:U("1502602898657-3e91760cbb34"),title:"Sample: City lights",caption:"Sample caption. Write the story of this picture here.",date:"Sample date"},
-    {src:U("1470252649378-9c29740c9fa8"),title:"Sample: Golden hour",caption:"Sample caption. The sky had nothing on you.",date:""},
-    {src:U("1490750967868-88aa4486c946"),title:"Sample: Little flowers",caption:"Sample caption. Something small I remembered you loved.",date:"Sample date"},
-    {src:U("1476514525535-07fb3b4ae5f1"),title:"Sample: The trip",caption:"Sample caption. Let's go back someday.",date:""},
-    {src:U("1507525428034-b723cf961d3e"),title:"Sample: Salt air",caption:"Sample caption. Your laugh over the waves.",date:"Sample date"},
-    {src:U("1518199266791-5375a83190b7"),title:"Sample: Us",caption:"Sample caption. My favourite kind of ordinary day.",date:""},
-    {src:U("1494774157365-9e04c6720e47"),title:"Sample: Soft light",caption:"Sample caption. Quiet mornings with you.",date:"Sample date"}
+    {src:U("1502602898657-3e91760cbb34"),title:"City lights",caption:"The evening blurred into colour as we wandered without a plan.",date:""},
+    {src:U("1470252649378-9c29740c9fa8"),title:"Golden hour",caption:"We stayed until the last light slipped away.",date:""},
+    {src:U("1490750967868-88aa4486c946"),title:"Little flowers",caption:"A small bunch for the table, chosen because you love them.",date:""},
+    {src:U("1476514525535-07fb3b4ae5f1"),title:"The trip",caption:"Let's find our way back here someday.",date:""},
+    {src:U("1507525428034-b723cf961d3e"),title:"Salt air",caption:"The sea was loud; your laugh was louder.",date:""},
+    {src:U("1518199266791-5375a83190b7"),title:"Us",caption:"My favourite kind of ordinary day.",date:""},
+    {src:U("1494774157365-9e04c6720e47"),title:"Soft light",caption:"A quiet morning I wish I could keep.",date:""}
   ],
   notes:[
     "The way you make ordinary days feel special.",
@@ -162,11 +162,11 @@ const CONFIG={
     "The little things about you that stay with me."
   ],
   hiddenLabel:"Tap the seal", hiddenMessage:"And the biggest thing: with you, I feel like I'm exactly where I'm meant to be.",
-  timeline:[ // 3 to 5 milestones. photo = index of a photo above (0 = first) or leave out. Sample content only.
-    {date:"Sample: The beginning",title:"We met",caption:"Replace with how it began.",photo:0},
-    {date:"Sample: The first date",title:"Our first date",caption:"Replace with what you remember most.",photo:2},
-    {date:"Sample: A big day",title:"A favourite trip",caption:"Replace with a memory only you two share.",photo:3},
-    {date:"Sample: Today",title:"Still choosing you",caption:"Replace with where you are now."}
+  timeline:[ // 3 to 5 milestones. photo = index of a photo above (0 = first) or leave out.
+    {date:"The beginning",title:"We met",caption:"A small hello that became the start of our story.",photo:0},
+    {date:"Our first date",title:"Our first date",caption:"We forgot the time because we had so much to say.",photo:2},
+    {date:"A big day",title:"A favourite trip",caption:"A new place, a long walk, and a memory to keep.",photo:3},
+    {date:"Today",title:"Still choosing you",caption:"Every chapter is better with you beside me."}
   ],
   surprise:{hint:"Slide the ribbon away",title:"One more thing",message:"Thank you for being patient with me, laughing at my jokes, and loving me on the quiet days. I'm so grateful it's you.",photo:5, image:""},
   closing:{title:"My favourite person",message:"Whatever comes next, I want to keep making memories with you.",photo:1},

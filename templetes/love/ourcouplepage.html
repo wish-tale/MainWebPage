@@ -91,7 +91,7 @@ body.no-grain::after{display:none}
 .counter b{display:block;font:400 clamp(30px,4.4vw,56px)/1 var(--serif);font-variant-numeric:tabular-nums}
 .counter small{font:500 10px/1.6 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--silver)}
 .counter-note{font:italic 400 20px/1.4 var(--serif);color:var(--silver);max-width:34ch}
-.sample-tag{font:500 10px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ);border:1px solid var(--champ);padding:5px 9px;display:inline-block}
+.personalization-tag{font:500 10px/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ);border:1px solid var(--champ);padding:5px 9px;display:inline-block}
 .cover-curtain{position:absolute;top:0;bottom:0;width:50.5%;background:var(--ink);z-index:5;pointer-events:none;transform:translateX(-101%)}
 .cover-curtain.r{right:0;transform:translateX(101%)}.cover-curtain.l{left:0}
 .cover-curtain::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--champ)}
@@ -444,7 +444,7 @@ footer.foot{padding:30px var(--pad);text-align:center;font-size:12px;color:var(-
         <p class="counter-note" id="counterNote"></p>
       </div>
       <div style="display:grid;gap:12px;justify-items:start">
-        <span class="sample-tag" id="sampleTag" hidden>Sample content — edit CONFIG</span>
+        <span class="personalization-tag" id="personalizationTag" hidden>Personalize the details in CONFIG</span>
         <button class="btn btn-solid" id="enterBtn" type="button">Step inside</button>
       </div>
     </div>
@@ -497,7 +497,7 @@ footer.foot{padding:30px var(--pad);text-align:center;font-size:12px;color:var(-
    CONFIG — THE ONLY PART YOU NEED TO EDIT
    ---------------------------------------------------------------------
    Everything on the site (names, dates, photos, text) is read from here.
-   All content below is SAMPLE content: replace it with your own.
+   Personalize these details in CONFIG before sharing the page.
 
    QUICK GUIDE
    • Photos: put the image file next to index.html and write its name,
@@ -514,29 +514,29 @@ footer.foot{padding:30px var(--pad);text-align:center;font-size:12px;color:var(-
 const CONFIG = {
   siteTitle: "US, IN OUR OWN WORLD",
   tagline: "A little place on the internet that belongs to us.",
-  showSampleBadge: true,            // set to false once you've replaced the sample content
+  showPersonalizationNote: false,   // set to true to show the personalization reminder
   locale: "en-IN",                  // date formatting, e.g. "en-GB", "en-US"
   weekStartsOn: 1,                  // calendar: 0 = Sunday, 1 = Monday
 
   coverPhoto: "",                   // wide, cinematic photo
   coverEdition: "The Private Edition",
   coverLine: "Two different lives. One little universe.",
-  startDate: "2021-03-06T00:00:00", // relationship start (sample). Local time.
+  startDate: "2021-03-06T00:00:00", // relationship start. Local time.
   startLabel: "Together since",     // label before the date on the cover
-  intro: "Sample introduction — write two or three sentences about who you are together, how this little place came to be, and who it is for.",
+  intro: "Somewhere along the way, ordinary days became the ones worth keeping. This is a small home for the places, songs, and words that make your story yours.",
 
   partners: [
     { name: "Alex", nickname: "Lex", photo: "",
-      bio: "Sample bio — a few lines about this person: what they care about, how they move through the world, what makes them laugh.",
-      favourites: [["Comfort food","Sample answer"],["Weekend mood","Sample answer"],["Always packs","Sample answer"]],
-      fact: "Sample playful fact — something small and funny only you two know." },
+      bio: "A thoughtful soul who notices the little things and always makes room for one more story.",
+      favourites: [["Comfort food","A shared bowl of noodles"],["Weekend mood","Slow mornings"],["Always packs","A book and a charger"]],
+      fact: "Can turn a quick coffee stop into a whole afternoon." },
     { name: "Sam", nickname: "Sammy", photo: "",
-      bio: "Sample bio — a few lines about this person: their quirks, their talents, the way they make ordinary days better.",
-      favourites: [["Comfort food","Sample answer"],["Weekend mood","Sample answer"],["Always packs","Sample answer"]],
-      fact: "Sample playful fact — an affectionate detail that makes you smile." }
+      bio: "The person who remembers the route, brings the snacks, and makes every detour feel intentional.",
+      favourites: [["Comfort food","Pancakes on Sundays"],["Weekend mood","A long walk"],["Always packs","A camera"]],
+      fact: "Always knows exactly when it is time for dessert." }
   ],
   worlds: { title: "Why our worlds work together",
-    text: "Sample text — describe the ways you balance each other: what one brings that the other needs, the rhythms you share, and the small rituals that make this a world of your own." },
+    text: "One of us makes the plans; the other finds the scenic route. Somewhere between shared playlists and late-night conversations, we made a rhythm that feels like home." },
 
   /* Section titles / order / visibility. ids must stay the same; text is yours. */
   sections: [
@@ -556,62 +556,62 @@ const CONFIG = {
      ([x,y] percentages 0–100 on the abstract map) are optional. Use a
      general place name ("Old Town café"), never a private address. */
   memories: [
-    { id:"m1", title:"The day we met",           date:"2021-03-06", category:"Beginnings", place:"Sample café",    mapPos:[28,38], photo:"", caption:"Sample caption", story:"Sample story — tell it the way you'd tell a friend: where you were, what you noticed first, and what you remember most." },
-    { id:"m2", title:"A first conversation",      date:"2021-03-20", category:"Beginnings", place:"Sample café",    mapPos:[28,38], photo:"", caption:"Sample caption", story:"Sample story — the first time it felt like time stopped mattering. Replace with your own words." },
-    { id:"m3", title:"Our first outing",          date:"2021-05-02", category:"Adventures", place:"Sample park",    mapPos:[52,26], photo:"", caption:"Sample caption", story:"Sample story — the plan, the detour, and the part nobody planned." },
-    { id:"m4", title:"A celebration to remember", date:"2021-12-18", category:"Celebrations", place:"Sample home",  mapPos:[66,58], photo:"", caption:"Sample caption", story:"Sample story — who was there, what was said, and what still makes you grin." },
-    { id:"m5", title:"The adventure off the map", date:"2022-08-09", category:"Adventures", place:"Sample hills",   mapPos:[80,22], photo:"", caption:"Sample caption", story:"Sample story — the journey, the view, the moment you looked at each other and knew." },
-    { id:"m6", title:"A quiet Sunday",            date:"2023-01-15", category:"Everyday",   place:"Sample home",    mapPos:[66,58], photo:"", caption:"Sample caption", story:"Sample story — the ordinary day that turned out to be a favourite." },
-    { id:"m7", title:"A tradition begins",        date:"2023-10-07", category:"Everyday",   place:"Sample market",  mapPos:[40,66], photo:"", caption:"Sample caption", story:"Sample story — the small ritual that became yours." },
-    { id:"m8", title:"Supporting each other",     date:"2024-06-21", category:"Everyday",   place:"",               photo:"", caption:"Sample caption", story:"Sample story — a time you showed up for each other. Keep it as private or as gentle as you like." },
-    { id:"m9", title:"Somewhere new",             date:"2025-04-12", category:"Adventures", place:"Sample coast",   mapPos:[14,72], photo:"", caption:"Sample caption", story:"Sample story — a new place, a new memory, same two people." },
-    { id:"m10",title:"Today, and still choosing", date:"2026-02-14", category:"Celebrations", place:"Sample home",  mapPos:[66,58], photo:"", caption:"Sample caption", story:"Sample story — what a regular day looks like now, and why it is enough." }
+    { id:"m1", title:"The day we met",           date:"2021-03-06", category:"Beginnings", place:"Old Town café", mapPos:[28,38], photo:"", caption:"A table by the window", story:"The rain kept everyone inside, so we stayed for another cup. One easy conversation turned into the start of everything." },
+    { id:"m2", title:"A first conversation",      date:"2021-03-20", category:"Beginnings", place:"Old Town café", mapPos:[28,38], photo:"", caption:"One more thing to say", story:"We meant to talk for a few minutes. The café closed around us before either of us noticed the time." },
+    { id:"m3", title:"Our first outing",          date:"2021-05-02", category:"Adventures", place:"Riverside park", mapPos:[52,26], photo:"", caption:"A walk without a plan", story:"We took the path that looked interesting, missed the turn, and found the best little view by accident." },
+    { id:"m4", title:"A celebration to remember", date:"2021-12-18", category:"Celebrations", place:"At home", mapPos:[66,58], photo:"", caption:"Warm lights, familiar faces", story:"The evening was full of shared plates, old stories, and the kind of laughter that carries into the next morning." },
+    { id:"m5", title:"The adventure off the map", date:"2022-08-09", category:"Adventures", place:"Hill country", mapPos:[80,22], photo:"", caption:"The view after the climb", story:"The road wound higher than we expected. At the top, the whole valley opened up and neither of us wanted to leave." },
+    { id:"m6", title:"A quiet Sunday",            date:"2023-01-15", category:"Everyday", place:"At home", mapPos:[66,58], photo:"", caption:"A slow morning together", story:"Coffee, a half-finished puzzle, and nowhere else to be. Somehow, this ordinary Sunday became a favourite." },
+    { id:"m7", title:"A tradition begins",        date:"2023-10-07", category:"Everyday", place:"Market square", mapPos:[40,66], photo:"", caption:"The Saturday flower stop", story:"We picked one bright bunch for the table. Now the market walk and the flowers are part of every visit." },
+    { id:"m8", title:"Supporting each other",     date:"2024-06-21", category:"Everyday", place:"", photo:"", caption:"Showing up, quietly", story:"A long week needed no grand gesture. Just a listening ear, a warm meal, and a reminder that we were in it together." },
+    { id:"m9", title:"Somewhere new",             date:"2025-04-12", category:"Adventures", place:"The coast", mapPos:[14,72], photo:"", caption:"Salt air and open skies", story:"We followed the shoreline until the town disappeared behind us. The walk back was slow, sandy, and exactly right." },
+    { id:"m10",title:"Today, and still choosing", date:"2026-02-14", category:"Celebrations", place:"At home", mapPos:[66,58], photo:"", caption:"Another chapter together", story:"No occasion needed. A shared breakfast, a favourite song, and the quiet joy of choosing each other again." }
   ],
 
   /* Scrapbook — at least 6. layout: polaroid | strip | postcard | taped | ticket | torn */
   scrapbook: [
-    { title:"Sample polaroid",  layout:"polaroid", date:"2021-03-06", photo:"", caption:"the first one",     note:"Sample note — a longer thought, scribbled on the back of this memory." },
-    { title:"Sample film strip",layout:"strip",    date:"2021-05-02", photo:"", caption:"frame by frame",    note:"Sample note — what happened just outside the frame." },
-    { title:"Sample postcard",  layout:"postcard", date:"2022-08-09", photo:"", caption:"wish you were here (you were)", note:"Sample note — what you'd write on the back of a postcard to each other." },
-    { title:"Sample taped print",layout:"taped",   date:"2023-01-15", photo:"", caption:"sunday light",      note:"Sample note — the detail you never want to forget." },
-    { title:"Sample ticket",    layout:"ticket",   date:"2023-10-07", photo:"", caption:"admit two",         note:"Sample note — a ticket stub, a receipt, a tiny proof that it happened." },
-    { title:"Sample torn print",layout:"torn",     date:"2024-06-21", photo:"", caption:"we made it",        note:"Sample note — something encouraging you'd say to the two of you." },
-    { title:"Sample second polaroid",layout:"polaroid", date:"2025-04-12", photo:"", caption:"somewhere new",  note:"Sample note — add as many keepsakes as you like." }
+    { title:"Window light",  layout:"polaroid", date:"2021-03-06", photo:"", caption:"the first one", note:"A little proof that the best beginnings can feel effortless." },
+    { title:"The long way home",layout:"strip", date:"2021-05-02", photo:"", caption:"frame by frame", note:"We missed the turn and found our favourite view." },
+    { title:"Wish you were here",layout:"postcard", date:"2022-08-09", photo:"", caption:"wish you were here (you were)", note:"The sort of afternoon you wish you could fold up and keep." },
+    { title:"Sunday light",layout:"taped", date:"2023-01-15", photo:"", caption:"sunday light", note:"Nothing on the calendar. Everything in its right place." },
+    { title:"Admit two",layout:"ticket", date:"2023-10-07", photo:"", caption:"admit two", note:"A tiny ticket to a day we still talk about." },
+    { title:"We made it",layout:"torn", date:"2024-06-21", photo:"", caption:"we made it", note:"Side by side, through the hard part and into the softer days." },
+    { title:"Somewhere new",layout:"polaroid", date:"2025-04-12", photo:"", caption:"somewhere new", note:"A new place, a familiar hand to hold." }
   ],
 
   /* Songs — audioUrl optional. Audio never autoplays. */
   songs: [
-    { title:"Sample Song One",   artist:"Artist name", art:"", audioUrl:"", why:"Sample reason — where you were when you first heard it together." },
-    { title:"Sample Song Two",   artist:"Artist name", art:"", audioUrl:"", why:"Sample reason — the song that plays on long drives." },
-    { title:"Sample Song Three", artist:"Artist name", art:"", audioUrl:"", why:"Sample reason — the one you both know every word of." },
-    { title:"Sample Song Four",  artist:"Artist name", art:"", audioUrl:"", why:"Sample reason — the song for the future." }
+    { title:"Sunday Drive",       artist:"Our playlist", art:"", audioUrl:"", why:"The song for a slow road, open windows, and nowhere urgent to be." },
+    { title:"The Long Way Home",  artist:"Our playlist", art:"", audioUrl:"", why:"A familiar chorus that makes even the longest drive feel short." },
+    { title:"Kitchen Dancing",    artist:"Our playlist", art:"", audioUrl:"", why:"The one that turns dinner into an impromptu dance break." },
+    { title:"A Quiet Tomorrow",   artist:"Our playlist", art:"", audioUrl:"", why:"A little reminder of all the good days still waiting ahead." }
   ],
 
   /* Milestones — at least 8. category is free text. photo optional. date "today" = now. */
   milestones: [
-    { title:"The day we met",         date:"2021-03-06", category:"Beginnings", photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"Our first conversation", date:"2021-03-20", category:"Beginnings", photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"Our first outing",       date:"2021-05-02", category:"Firsts",     photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"A favourite celebration",date:"2021-12-18", category:"Celebrations", photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"A memorable adventure",  date:"2022-08-09", category:"Firsts",     photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"A moment we supported each other", date:"2024-06-21", category:"Together", photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"A tradition we created", date:"2023-10-07", category:"Together",   photo:"", text:"Sample text — describe this milestone in a few lines." },
-    { title:"Today",                  date:"today",      category:"Together",   photo:"", text:"Sample text — and every day after this one." }
+    { title:"The day we met",         date:"2021-03-06", category:"Beginnings", photo:"", text:"A rainy afternoon, a table by the window, and a conversation neither of us wanted to end." },
+    { title:"Our first conversation", date:"2021-03-20", category:"Beginnings", photo:"", text:"We learned the small things first: favourite books, familiar songs, and what makes a day feel complete." },
+    { title:"Our first outing",       date:"2021-05-02", category:"Firsts",     photo:"", text:"A simple walk became an adventure when we chose the path neither of us knew." },
+    { title:"A favourite celebration",date:"2021-12-18", category:"Celebrations", photo:"", text:"A room full of familiar faces, a table full of food, and one more reason to be grateful." },
+    { title:"A memorable adventure",  date:"2022-08-09", category:"Firsts",     photo:"", text:"We reached the lookout just before sunset and stayed until the first stars appeared." },
+    { title:"A moment we supported each other", date:"2024-06-21", category:"Together", photo:"", text:"There was no perfect thing to say. Being there, listening, and staying close was enough." },
+    { title:"A tradition we created", date:"2023-10-07", category:"Together",   photo:"", text:"A Saturday walk, a bunch of flowers, and a small ritual that became ours." },
+    { title:"Today",                  date:"today",      category:"Together",   photo:"", text:"A quiet reminder that the best part of the story is the one we are still writing." }
   ],
 
   /* Bucket list — at least 10. targetDate optional. done = starting state
      (a visitor's ticks are then remembered in their own browser only). */
   bucket: [
-    { id:"b1", title:"Visit a place neither of us has been", description:"Sample description.", targetDate:"2027-01-01", category:"Travel", done:false },
-    { id:"b2", title:"Watch a sunrise somewhere special",    description:"Sample description.", targetDate:"",           category:"Travel", done:false },
-    { id:"b3", title:"Take a long, unplanned road trip",     description:"Sample description.", targetDate:"2027-06-01", category:"Travel", done:false },
-    { id:"b4", title:"Learn something new together",         description:"Sample description.", targetDate:"",           category:"Learn",  done:false },
-    { id:"b5", title:"Take a class — dance, pottery, anything", description:"Sample description.", targetDate:"",        category:"Learn",  done:false },
-    { id:"b6", title:"Cook a dish from scratch",             description:"Sample description.", targetDate:"",           category:"Food",   done:true  },
-    { id:"b7", title:"Host a dinner for people we love",     description:"Sample description.", targetDate:"",           category:"Food",   done:false },
-    { id:"b8", title:"Start a new yearly tradition",         description:"Sample description.", targetDate:"2026-12-31", category:"Home",   done:false },
-    { id:"b9", title:"Build a small project together",       description:"Sample description.", targetDate:"",           category:"Home",   done:false },
-    { id:"b10",title:"Write letters to our future selves",   description:"Sample description.", targetDate:"",           category:"Home",   done:false }
+    { id:"b1", title:"Visit a place neither of us has been", description:"Choose somewhere new, then leave time to wander without a plan.", targetDate:"2027-01-01", category:"Travel", done:false },
+    { id:"b2", title:"Watch a sunrise somewhere special",    description:"Pack something warm and find a quiet place before dawn.", targetDate:"", category:"Travel", done:false },
+    { id:"b3", title:"Take a long, unplanned road trip",     description:"Pick a direction, make a playlist, and stop whenever the view asks.", targetDate:"2027-06-01", category:"Travel", done:false },
+    { id:"b4", title:"Learn something new together",         description:"Choose a skill that is new to both of you and enjoy being beginners.", targetDate:"", category:"Learn", done:false },
+    { id:"b5", title:"Take a class — dance, pottery, anything", description:"Try something hands-on and keep the imperfect first attempt.", targetDate:"", category:"Learn", done:false },
+    { id:"b6", title:"Cook a dish from scratch",             description:"Find a recipe, share the chopping, and make the kitchen your own.", targetDate:"", category:"Food", done:true },
+    { id:"b7", title:"Host a dinner for people we love",     description:"Gather your favourite people around one table for an easy evening.", targetDate:"", category:"Food", done:false },
+    { id:"b8", title:"Start a new yearly tradition",         description:"Choose one small ritual you can look forward to every year.", targetDate:"2026-12-31", category:"Home", done:false },
+    { id:"b9", title:"Build a small project together",       description:"Make something useful, playful, or simply fun to make side by side.", targetDate:"", category:"Home", done:false },
+    { id:"b10",title:"Write letters to our future selves",   description:"Write a note for the next chapter and decide when you will open it.", targetDate:"", category:"Home", done:false }
   ],
 
   /* Quiz — at least 7. answer = index (starting at 0) of the correct option. */
@@ -635,25 +635,25 @@ const CONFIG = {
 
   /* Secrets — at least 5 envelopes, plus one hidden easter egg. */
   secrets: [
-    { label:"Read when you miss me",                 title:"For the days apart",        message:"Sample message — remind them what they can hold on to when you're not in the same room." },
-    { label:"Read when you need a smile",            title:"A small, silly note",       message:"Sample message — an inside joke, a funny memory, something that always works." },
-    { label:"Read when you need encouragement",      title:"You've got this",           message:"Sample message — the kind words you'd say if you were sitting beside them." },
-    { label:"Read when you remember our beginning",  title:"Back where it started",     message:"Sample message — what you felt in the first days, and why you're glad it began." },
-    { label:"Read when you imagine our future",      title:"What I see ahead",          message:"Sample message — a picture of the future you're building, in your own words." }
+    { label:"Read when you miss me",                 title:"For the days apart",        message:"Close your eyes and picture the next time we are in the same room. Until then, you are never far from my thoughts." },
+    { label:"Read when you need a smile",            title:"A small, silly note",       message:"Remember our very serious debate about the best snack? I am still right, and I still saved you the last one." },
+    { label:"Read when you need encouragement",      title:"You've got this",           message:"Take it one small step at a time. I believe in you, and I am right here for every part of the journey." },
+    { label:"Read when you remember our beginning",  title:"Back where it started",     message:"I did not know then how many of my favourite days would have you in them. I am so glad we said hello." },
+    { label:"Read when you imagine our future",      title:"What I see ahead",          message:"More little traditions, more places to discover, and a thousand ordinary evenings I cannot wait to share." }
   ],
-  easterEgg: { title:"You found the tiny star", message:"Sample hidden message — a secret only the curious find. Replace it with something only the two of you would understand.", signature:"— A" },
+  easterEgg: { title:"You found the tiny star", message:"The best parts of my day are still the ones I get to tell you about.", signature:"— A" },
 
   /* Letter */
   letter: {
     date: "2026-02-14",                       // optional; leave "" to hide
     greeting: "My dearest {b},",
     paragraphs: [
-      "Sample paragraph — begin the letter the way you'd begin a conversation. Say what you've been meaning to say.",
-      "Sample paragraph — talk about who you were before, who you are now, and what changed.",
-      "Sample paragraph — thank them for specific things: the small, daily, easily-forgotten ones."
+      "I keep thinking about how many little things have become ours: the song we always play on the way home, the extra cup of tea, and the stories we have heard a dozen times and still love.",
+      "You make room for all of me. You meet the bright days with joy and the difficult ones with patience, and somehow the ordinary in between has become my favourite part.",
+      "Thank you for every kind question, every unhurried evening, and every time you made a new place feel familiar. I would choose this life with you again."
     ],
-    favouriteMemory: { title:"A favourite memory", text:"Sample text — the memory you return to most, and why it still matters." },
-    futureWish:      { title:"A wish for the future", text:"Sample text — what you hope for, for them, for you, for the two of you." },
+    favouriteMemory: { title:"A favourite memory", text:"The long walk after the rain, when the whole city smelled new and we forgot to check the time." },
+    futureWish:      { title:"A wish for the future", text:"More curious mornings, familiar hands to hold, and the courage to keep discovering the world together." },
     closing: "Always yours,",
     signature: "{a}",
     photo: ""                                 // optional
@@ -804,7 +804,7 @@ function buildCover(){
   $('#coverLine').textContent=fill(CONFIG.coverLine||CONFIG.tagline||'');
   $('#coverEdition').textContent=CONFIG.coverEdition||'';
   $('#coverDate').textContent=START?((CONFIG.startLabel||'Since')+' '+fmt(START)):'Add a valid startDate in CONFIG';
-  if(CONFIG.showSampleBadge)$('#sampleTag').hidden=false;
+  if(CONFIG.showPersonalizationNote)$('#personalizationTag').hidden=false;
   $('#enterBtn').addEventListener('click',enter);
   if(!RM&&window.matchMedia('(pointer:fine)').matches)$('#cover').addEventListener('pointermove',e=>{
     const x=(e.clientX/innerWidth-.5)*-18,y=(e.clientY/innerHeight-.5)*-12;bg.style.transform='translate('+x+'px,'+y+'px)'});

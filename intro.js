@@ -34,8 +34,11 @@
 
   const root = document.documentElement;
   const PEND = "wt-intro-pending", MOUNT = "wt-intro-mounted";
+  const SEEN = "wt-intro-seen";
   let host = null, raf = 0, safety = 0, finished = false;
   const undo = [];
+  const inertSiblings = [];
+  let skipButton = null;
   const on = (target, event, fn, options) => {
     target.addEventListener(event, fn, options);
     undo.push(() => target.removeEventListener(event, fn, options));
@@ -47,7 +50,13 @@
     cancelAnimationFrame(raf);
     clearTimeout(safety);
     undo.forEach(removeListener => removeListener());
-    if (document.body) document.body.inert = false;
+    inertSiblings.forEach(([element, wasInert]) => { element.inert = wasInert; });
+    if (skipButton && document.activeElement === skipButton) {
+      document.querySelector(CFG.headerLogoSelector)?.focus({ preventScroll: true });
+    }
+    try { sessionStorage.setItem(SEEN, "1"); } catch (err) {
+      console.warn("[WishTale intro] Could not save intro preference:", err);
+    }
     root.classList.remove(PEND, MOUNT);
     if (host) host.remove();
     window.dispatchEvent(new CustomEvent("wishtale:intro-complete"));
@@ -56,7 +65,11 @@
   function boot() {
     const header = document.querySelector(CFG.headerLogoSelector);
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!header || reduce || !document.body) {
+    let seen = false;
+    try { seen = sessionStorage.getItem(SEEN) === "1"; } catch (err) {
+      console.warn("[WishTale intro] Could not read intro preference:", err);
+    }
+    if (!header || reduce || seen || !document.body) {
       root.classList.remove(PEND, MOUNT);
       return;
     }
@@ -72,7 +85,9 @@
     const makeLetters = (text, cls) => [...text].map(char => `<span class="wt-l ${cls}">${char}</span>`).join("");
     host = document.createElement("div");
     host.id = "wt-intro";
-    host.setAttribute("aria-hidden", "true");
+    host.setAttribute("role", "dialog");
+    host.setAttribute("aria-label", "WishTale introduction");
+    host.setAttribute("aria-modal", "true");
     host.innerHTML =
       '<div class="wt-bg"></div>' +
       '<div class="wt-logo">' +
@@ -81,9 +96,19 @@
         '<svg class="wt-cursor" focusable="false"><defs><clipPath id="wt-band"><rect x="-2000" y="0" width="5000" height="10"/></clipPath></defs>' +
         '<g clip-path="url(#wt-band)"><path d=""/></g></svg>' +
       '</div>';
+    skipButton = document.createElement("button");
+    skipButton.className = "wt-skip";
+    skipButton.type = "button";
+    skipButton.textContent = "Skip intro";
+    host.appendChild(skipButton);
+    on(skipButton, "click", finish);
+    [...document.body.children].forEach(element => {
+      inertSiblings.push([element, element.inert]);
+      element.inert = true;
+    });
     document.body.appendChild(host);
-    document.body.inert = true;
     root.classList.add(MOUNT);
+    skipButton.focus({ preventScroll: true });
     safety = setTimeout(finish, CFG.safetyMs);
 
     const bg = host.querySelector(".wt-bg"), logo = host.querySelector(".wt-logo");
@@ -288,6 +313,12 @@
     on(window, "wheel", stop, { passive: false });
     on(window, "touchmove", stop, { passive: false });
     on(window, "keydown", event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        finish();
+        return;
+      }
+      if (event.key === " " && event.target === skipButton) return;
       if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) event.preventDefault();
     });
     on(window, "resize", measure);
